@@ -23,5 +23,6 @@ export const Container = styled.div`
     background: none;
 
     padding: 1rem;
+    height: 3rem;
   }
 `;
