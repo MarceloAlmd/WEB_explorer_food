@@ -5,7 +5,8 @@ export function Category({ title, children }: CategoryProps) {
   return (
     <Styles.Container>
       <h2>{title}</h2>
-      {children}
+
+      <Styles.Content>{children}</Styles.Content>
     </Styles.Container>
   );
 }

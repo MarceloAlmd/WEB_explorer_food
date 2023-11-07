@@ -5,8 +5,15 @@ import { AiOutlineHeart, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { Button } from "../button/button.comp";
 
 export function Dishes({ title, description, price, ...rest }: DishesProps) {
-  const [counter] = useState(1);
+  const [counter, setCounter] = useState(1);
 
+  function addedMoreCounter() {
+    setCounter((prevState) => prevState + 1);
+  }
+
+  function addedMinusCounter() {
+    setCounter((prevState) => prevState - 1);
+  }
   return (
     <Styles.Container {...rest}>
       <Styles.Favorite>
@@ -22,11 +29,11 @@ export function Dishes({ title, description, price, ...rest }: DishesProps) {
       </Styles.Info>
 
       <Styles.Counter>
-        <button>
+        <button onClick={addedMinusCounter}>
           <AiOutlineMinus />
         </button>
         {`0${counter}`}
-        <button>
+        <button onClick={addedMoreCounter}>
           <AiOutlinePlus />
         </button>
 

@@ -8,3 +8,9 @@ export const Container = styled.div`
     margin-bottom: 2rem;
   }
 `;
+
+export const Content = styled.div`
+  display: flex;
+  gap: 1.688rem;
+  overflow-y: hidden;
+`;

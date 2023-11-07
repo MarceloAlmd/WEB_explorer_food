@@ -20,6 +20,27 @@ export function Home() {
             description="Rabanetes, folhas verdes e molho agridoce salpicados com gergelim"
             price={47.99}
           />
+
+          <Dishes
+            title="Salada Ravanello >"
+            description="Rabanetes, folhas verdes e molho agridoce salpicados com gergelim"
+            price={47.99}
+          />
+        </Category>
+        <Category title="Sobremesas">
+          <Dishes
+            title="Salada Ravanello >"
+            description="Rabanetes, folhas verdes e molho agridoce salpicados com gergelim"
+            price={47.99}
+          />
+        </Category>
+
+        <Category title="Bebidas">
+          <Dishes
+            title="Salada Ravanello >"
+            description="Rabanetes, folhas verdes e molho agridoce salpicados com gergelim"
+            price={47.99}
+          />
         </Category>
       </Styles.Content>
 
