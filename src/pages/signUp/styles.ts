@@ -12,6 +12,10 @@ export const Container = styled.div`
 `;
 
 export const Card = styled.div`
+  > h2 {
+    font-size: 2rem;
+  }
+
   background: ${({ theme }) => theme.colors.primary};
   display: flex;
   flex-direction: column;
@@ -24,7 +28,7 @@ export const Card = styled.div`
   max-height: 37.5rem;
   border-radius: 1rem;
 
-  padding: 4rem;
+  padding: 3rem;
 
   > a {
     font-weight: 500;
