@@ -9,11 +9,9 @@ export function Button({
   ...rest
 }: ButtonProps) {
   return (
-    <Styles.Container>
-      <button type={type} style={{ width: width }} {...rest}>
-        {src && <img src={src} />}
-        {title}
-      </button>
+    <Styles.Container type={type} style={{ width: width }} {...rest}>
+      {src && <img src={src} />}
+      {title}
     </Styles.Container>
   );
 }

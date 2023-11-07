@@ -1,22 +1,18 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-  width: 100%;
+export const Container = styled.button`
   background: ${({ theme }) => theme.colors.secondary};
+  border-radius: 5px;
 
-  > button {
-    height: 3rem;
+  height: 3rem;
 
-    border: none;
-    border-radius: 5px;
+  border: none;
 
-    background: transparent;
-    color: ${({ theme }) => theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    gap: 0.875rem;
-  }
+  gap: 0.875rem;
 `;

@@ -12,6 +12,9 @@ export const Container = styled.div`
 
   border-radius: 5px;
 
+  width: 100%;
+  max-width: 25.625rem;
+
   > input {
     height: 3rem;
     padding: 0 1rem;
