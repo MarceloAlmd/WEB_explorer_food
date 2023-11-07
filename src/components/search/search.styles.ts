@@ -27,7 +27,17 @@ export const Container = styled.div`
     color: ${({ theme }) => theme.colors.text.primary};
   }
 
-  > img {
-    margin-left: 1rem;
+  > label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+      margin-left: 1rem;
+      font-size: 1.5rem;
+
+      color: ${({ theme }) => theme.colors.text.neutral};
+
+      cursor: pointer;
+    }
   }
 `;
