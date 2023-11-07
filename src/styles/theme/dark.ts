@@ -4,8 +4,8 @@ export default {
   colors: {
     primary: "#001119",
     secondary: "#92000E",
-
     body: "#000A0F",
+    search: "#0D1D25",
 
     text: {
       primary: "#FFF",
