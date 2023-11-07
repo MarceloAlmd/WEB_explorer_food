@@ -14,8 +14,8 @@ declare module "styled-components" {
       text: {
         primary: string;
         secondary: string;
-
         neutral: string;
+        price: string;
       };
     };
   }

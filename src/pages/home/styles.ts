@@ -35,5 +35,5 @@ export const Content = styled.main`
   width: 100%;
   margin: 0 auto;
 
-  padding: 0 2rem;
+  padding: 0 2rem 5rem;
 `;

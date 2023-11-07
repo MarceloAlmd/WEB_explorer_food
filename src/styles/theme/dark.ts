@@ -11,8 +11,8 @@ export default {
     text: {
       primary: "#FFF",
       secondary: "#C4C4CC",
-
       neutral: "#7C7C8A",
+      price: "#82F3FF",
     },
   },
 };

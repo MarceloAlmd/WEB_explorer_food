@@ -3,6 +3,7 @@ import { Button } from "../button/button.comp";
 import { ButtonLink } from "../buttonLink/buttonLink.comp";
 import { Search } from "../search/search.comp";
 import * as Styles from "./header.comp.styles";
+import { PiNewspaperClipping } from "react-icons/pi";
 
 export function Header() {
   const [myRequests] = useState(6);
@@ -16,7 +17,7 @@ export function Header() {
       <Search />
 
       <Button
-        src="/my_requests.svg"
+        icon={PiNewspaperClipping}
         width="10%"
         type="button"
         title={`Meu Pedido (${myRequests})`}
