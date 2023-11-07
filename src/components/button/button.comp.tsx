@@ -1,9 +1,9 @@
 import { ButtonProps } from "./button";
 import * as Styles from "./button.styles";
 
-export function Button({ title, type, ...rest }: ButtonProps) {
+export function Button({ width = "100%", title, type, ...rest }: ButtonProps) {
   return (
-    <Styles.Container type={type} {...rest}>
+    <Styles.Container style={{ width: width }} type={type} {...rest}>
       {title}
     </Styles.Container>
   );
