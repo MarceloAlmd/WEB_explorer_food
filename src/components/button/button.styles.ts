@@ -14,5 +14,10 @@ export const Container = styled.button`
   align-items: center;
   justify-content: center;
 
-  gap: 0.875rem;
+  gap: 0.575rem;
+
+  > svg {
+    color: ${({ theme }) => theme.colors.text.primary};
+    font-size: 1.6rem;
+  }
 `;

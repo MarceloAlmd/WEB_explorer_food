@@ -5,12 +5,12 @@ export function Button({
   width = "100%",
   title,
   type,
-  src,
+  icon: Icon,
   ...rest
 }: ButtonProps) {
   return (
     <Styles.Container type={type} style={{ width: width }} {...rest}>
-      {src && <img src={src} />}
+      {Icon && <Icon />}
       {title}
     </Styles.Container>
   );
