@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { BREAK_POINTS } from "../../utils/breakPoints";
 
 export const Container = styled.div`
   width: 100%;
@@ -9,6 +10,14 @@ export const Container = styled.div`
   align-items: center;
 
   padding: 2rem;
+
+  @media (max-width: ${BREAK_POINTS.MD}) {
+    flex-direction: column;
+
+    > img {
+      width: 15rem;
+    }
+  }
 `;
 
 export const Card = styled.div`
@@ -34,5 +43,9 @@ export const Card = styled.div`
     font-weight: 500;
     font-size: 0.875rem;
     color: ${({ theme }) => theme.colors.text.primary};
+  }
+
+  @media (max-width: ${BREAK_POINTS.MD}) {
+    background: transparent;
   }
 `;
