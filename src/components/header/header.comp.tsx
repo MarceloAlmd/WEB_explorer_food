@@ -5,7 +5,7 @@ import { Search } from "../search/search.comp";
 import * as Styles from "./header.comp.styles";
 
 export function Header() {
-  const [myRequests, setMyRequest] = useState(0);
+  const [myRequests] = useState(6);
 
   return (
     <Styles.Container>

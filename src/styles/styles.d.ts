@@ -9,6 +9,7 @@ declare module "styled-components" {
       secondary: string;
       body: string;
       search: string;
+      dishes: string;
 
       text: {
         primary: string;

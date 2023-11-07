@@ -6,6 +6,7 @@ export default {
     secondary: "#92000E",
     body: "#000A0F",
     search: "#0D1D25",
+    dishes: "#00070A",
 
     text: {
       primary: "#FFF",
