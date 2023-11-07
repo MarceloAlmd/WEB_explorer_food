@@ -2,6 +2,7 @@ import * as Styles from "./styles";
 
 import { Button } from "../../components/button/button.comp";
 import { Input } from "../../components/input/input.comp";
+import { ButtonLink } from "../../components/buttonLink/buttonLink.comp";
 
 export function SignUp() {
   return (
@@ -28,7 +29,7 @@ export function SignUp() {
         />
         <Button type="button" title="Criar Conta" />
 
-        <a href="#">Já tenho uma conta</a>
+        <ButtonLink title="Já tenho uma conta" />
       </Styles.Card>
     </Styles.Container>
   );

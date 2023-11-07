@@ -39,12 +39,6 @@ export const Card = styled.div`
 
   padding: 3rem;
 
-  > a {
-    font-weight: 500;
-    font-size: 0.875rem;
-    color: ${({ theme }) => theme.colors.text.primary};
-  }
-
   @media (max-width: ${BREAK_POINTS.MD}) {
     background: transparent;
   }

@@ -2,6 +2,7 @@ import * as Styles from "./styles";
 
 import { Button } from "../../components/button/button.comp";
 import { Input } from "../../components/input/input.comp";
+import { ButtonLink } from "../../components/buttonLink/buttonLink.comp";
 
 export function SignIn() {
   return (
@@ -23,7 +24,7 @@ export function SignIn() {
         />
         <Button type="button" title="Entrar" />
 
-        <a href="#">Criar uma conta</a>
+        <ButtonLink title="Criar uma conta" />
       </Styles.Card>
     </Styles.Container>
   );
