@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-
   display: flex;
   flex-direction: column;
 
@@ -24,5 +23,7 @@ export const Container = styled.div`
 
     padding: 1rem;
     height: 3rem;
+
+    color: ${({ theme }) => theme.colors.text.primary};
   }
 `;
