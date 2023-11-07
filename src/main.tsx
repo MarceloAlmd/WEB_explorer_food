@@ -1,10 +1,15 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { SignUp } from "./pages/signUp";
+import { ThemeProvider } from "styled-components";
+import dark from "./styles/theme/dark";
+import GlobalStyles from "./styles/global.ts";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+    <ThemeProvider theme={dark}>
+      <GlobalStyles />
+      <SignUp />
+    </ThemeProvider>
+  </React.StrictMode>
+);
