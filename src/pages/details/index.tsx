@@ -5,7 +5,6 @@ import { Footer } from "../../components/footer/footer.comp";
 import { Header } from "../../components/header/header.comp";
 import * as Styles from "./styles";
 import { Button } from "../../components/button/button.comp";
-import { BREAK_POINTS } from "../../utils/breakPoints";
 
 export function Details() {
   const [counter, setCounter] = useState(1);

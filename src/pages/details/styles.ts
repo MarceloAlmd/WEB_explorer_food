@@ -26,8 +26,6 @@ export const Content = styled.div`
     height: 389px;
 
     border-radius: 50%;
-
-    align-self: flex-start;
   }
 
   @media (max-width: ${BREAK_POINTS.MD}) {
@@ -38,6 +36,7 @@ export const Content = styled.div`
       height: 189px;
 
       border-radius: 50%;
+      align-self: flex-start;
     }
   }
 `;
