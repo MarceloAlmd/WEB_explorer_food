@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { BREAK_POINTS } from "../../utils/breakPoints";
 
 export const Container = styled.footer`
   grid-area: footer;
@@ -21,5 +22,14 @@ export const Container = styled.footer`
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @media (max-width: ${BREAK_POINTS.MD}) {
+      > img {
+        display: none;
+      }
+
+      align-items: center;
+      justify-content: center;
+    }
   }
 `;
