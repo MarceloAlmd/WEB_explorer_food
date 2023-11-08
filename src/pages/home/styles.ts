@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { BREAK_POINTS } from "../../utils/breakPoints";
 
 export const Container = styled.div`
   width: 100%;
@@ -9,6 +10,11 @@ export const Container = styled.div`
   grid-template-rows: 6.5rem 25rem auto 4.813rem;
 
   grid-template-areas: "header" "banner" "main" "footer";
+
+  @media (max-width: ${BREAK_POINTS.MD}) {
+    grid-template-rows: 6.5rem auto 4.813rem;
+    grid-template-areas: "header" "main" "footer";
+  }
 `;
 
 export const Banner = styled.div`
@@ -25,6 +31,11 @@ export const Banner = styled.div`
     max-width: 66.5rem;
 
     margin-right: 2.5rem;
+  }
+
+  @media (max-width: ${BREAK_POINTS.MD}) {
+    grid-area: none;
+    display: none;
   }
 `;
 

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { BREAK_POINTS } from "../../utils/breakPoints";
 
 export const Container = styled.header`
   grid-area: header;
@@ -19,6 +20,10 @@ export const Container = styled.header`
 export const Logo = styled.img`
   width: 12.313rem;
   height: 1.875rem;
+
+  @media (max-width: ${BREAK_POINTS.MD}) {
+    display: none;
+  }
 `;
 
 export const SignOut = styled.button`
