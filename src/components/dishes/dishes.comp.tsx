@@ -9,13 +9,17 @@ export function Dishes({ title, description, price, ...rest }: DishesProps) {
   const [isFavorite, setIsFavorite] = useState(false);
 
   function addedMoreCounter() {
-    setCounter((prevState) => prevState + 1);
+    if (counter < 10) {
+      setCounter((prevState) => prevState + 1);
+    }
   }
 
   function addedMinusCounter() {
-    setCounter((prevState) => prevState - 1);
+    if (counter > 1) {
+      setCounter((prevState) => prevState - 1);
+    }
   }
-
+  const formattedCounter = counter.toString().padStart(2, "0");
   function toggleFavorite() {
     setIsFavorite((prevState) => !prevState);
   }
@@ -61,7 +65,7 @@ export function Dishes({ title, description, price, ...rest }: DishesProps) {
         <button onClick={addedMinusCounter}>
           <AiOutlineMinus />
         </button>
-        {`0${counter}`}
+        {formattedCounter}
         <button onClick={addedMoreCounter}>
           <AiOutlinePlus />
         </button>

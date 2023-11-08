@@ -16,20 +16,32 @@ export function Home() {
       <Styles.Content>
         <Category title="Pratos principais">
           <Dishes
-            title="Salada Ravanello >"
+            title="Salada Ravanello"
             description="Rabanetes, folhas verdes e molho agridoce salpicados com gergelim"
             price={47.99}
           />
 
           <Dishes
-            title="Salada Ravanello >"
+            title="Torradas de Parma"
+            description="Rabanetes, folhas verdes e molho agridoce salpicados com gergelim"
+            price={47.99}
+          />
+
+          <Dishes
+            title="Salada Ravanellos"
+            description="Rabanetes, folhas verdes e molho agridoce salpicados com gergelim"
+            price={47.99}
+          />
+
+          <Dishes
+            title="Salada Ravanelloz"
             description="Rabanetes, folhas verdes e molho agridoce salpicados com gergelim"
             price={47.99}
           />
         </Category>
         <Category title="Sobremesas">
           <Dishes
-            title="Salada Ravanello >"
+            title="Spaguetti Gambe"
             description="Rabanetes, folhas verdes e molho agridoce salpicados com gergelim"
             price={47.99}
           />
@@ -37,7 +49,7 @@ export function Home() {
 
         <Category title="Bebidas">
           <Dishes
-            title="Salada Ravanello >"
+            title="Salada Ravanello"
             description="Rabanetes, folhas verdes e molho agridoce salpicados com gergelim"
             price={47.99}
           />
