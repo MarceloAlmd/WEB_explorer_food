@@ -4,7 +4,6 @@ import { BREAK_POINTS } from "../../utils/breakPoints";
 export const Container = styled.div`
   width: 100%;
   height: 100vh;
-
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: 6.5rem auto 4.813rem;
@@ -21,23 +20,8 @@ export const Content = styled.div`
 
   padding: 3rem;
 
-  .dish {
-    width: 389px;
-    height: 389px;
-
-    border-radius: 50%;
-  }
-
   @media (max-width: ${BREAK_POINTS.MD}) {
     flex-direction: column;
-
-    .dish {
-      width: 189px;
-      height: 189px;
-
-      border-radius: 50%;
-      align-self: flex-start;
-    }
   }
 `;
 
@@ -73,33 +57,22 @@ export const Details = styled.div`
 
 export const IngredientsContent = styled.div`
   display: flex;
-
   gap: 1.4rem;
 
+  flex-wrap: wrap;
+
   @media (max-width: ${BREAK_POINTS.MD}) {
-    gap: 0.4rem;
-  }
-`;
-export const Ingredients = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-
-  margin-bottom: 3rem;
-
-  img {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
+    gap: 0.6rem;
   }
 `;
 
 export const Counter = styled.footer`
   display: flex;
   align-items: center;
+  height: 20%;
   gap: 1rem;
 
-  margin: 1rem 0;
+  margin: 2rem 0;
   > h2 {
     font-size: 2rem;
     font-weight: 400;
@@ -116,5 +89,11 @@ export const Counter = styled.footer`
   .btn-plus-minus {
     border: none;
     background: none;
+  }
+
+  @media (max-width: ${BREAK_POINTS.MD}) {
+    > h2 {
+      font-size: 1.5rem;
+    }
   }
 `;
