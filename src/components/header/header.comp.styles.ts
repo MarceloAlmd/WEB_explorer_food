@@ -29,7 +29,31 @@ export const Logo = styled.img`
 export const SignOut = styled.button`
   background: none;
   border: none;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${({ theme }) => theme.colors.text.primary};
+`;
 
-  width: 2rem;
-  height: 2rem;
+export const IconButton = styled.a`
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+
+  > span {
+    width: 10px;
+    height: 10px;
+
+    background: ${({ theme }) => theme.colors.secondary};
+    border-radius: 50%;
+
+    position: absolute;
+
+    top: 1px;
+    right: -1px;
+  }
 `;
