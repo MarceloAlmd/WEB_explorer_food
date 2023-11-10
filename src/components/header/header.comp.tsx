@@ -6,8 +6,9 @@ import * as Styles from "./header.comp.styles";
 import { PiNewspaperClipping } from "react-icons/pi";
 import { FiLogOut } from "react-icons/fi";
 import { AiOutlineHeart } from "react-icons/ai";
+import { HeaderProps } from "./header";
 
-export function Header() {
+export function Header({ isSearch = true }: HeaderProps) {
   const [myRequests] = useState(6);
   const [desktop, setDesktop] = useState(true);
   const [mobile, setMobile] = useState(false);
@@ -33,7 +34,9 @@ export function Header() {
   }, []);
   return (
     <Styles.Container>
-      <Styles.Logo src="/logo_explorer.svg" />
+      <a href="/">
+        <Styles.Logo src="/logo_explorer.svg" />
+      </a>
       {desktop && <ButtonLink title="Meus Favoritos" />}
       {mobile && (
         <Styles.IconButton>
@@ -41,8 +44,7 @@ export function Header() {
           <span></span>
         </Styles.IconButton>
       )}
-
-      <Search />
+      {isSearch && <Search />}
 
       {desktop && (
         <Button
