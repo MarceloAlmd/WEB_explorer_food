@@ -13,6 +13,9 @@ export default {
       secondary: "#C4C4CC",
       neutral: "#7C7C8A",
       price: "#82F3FF",
+      pending: "#92000E",
+      preparing: "#FBA94C",
+      delivered: "#04D361",
     },
   },
 };

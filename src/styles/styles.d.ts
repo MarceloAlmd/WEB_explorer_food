@@ -16,6 +16,9 @@ declare module "styled-components" {
         secondary: string;
         neutral: string;
         price: string;
+        pending: string;
+        preparing: string;
+        delivered: string;
       };
     };
   }
