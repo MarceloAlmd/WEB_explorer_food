@@ -12,7 +12,7 @@ export const Container = styled.label`
     border-radius: 50%;
 
     position: relative;
-    left: 1.1rem;
+    left: 0.9rem;
   }
 
   > select {
@@ -23,6 +23,14 @@ export const Container = styled.label`
 
     > option {
       background: ${({ theme }) => theme.colors.body};
+    }
+
+    overflow: auto;
+
+    &:disabled {
+      border: none;
+      appearance: none;
+      margin-left: 0.8rem;
     }
   }
 
