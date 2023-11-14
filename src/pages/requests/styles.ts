@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { BREAK_POINTS } from "../../utils/breakPoints";
 
 export const Container = styled.div`
   width: 100%;
@@ -25,6 +26,16 @@ export const Table = styled.div`
   overflow-x: auto;
   border: 2px solid ${({ theme }) => theme.colors.primary};
 
+  @media (max-width: ${BREAK_POINTS.ST}) {
+    max-width: 47rem;
+  }
+  @media (max-width: ${BREAK_POINTS.SM}) {
+    max-width: 27rem;
+  }
+
+  @media (max-width: ${BREAK_POINTS.EM}) {
+    max-width: 20rem;
+  }
   table {
     width: 100%;
     border-collapse: collapse;
@@ -38,11 +49,12 @@ export const Table = styled.div`
 
   th {
     padding: clamp(10px, 3vw, 20px) clamp(15px, 4vw, 25px);
+    font-size: 0.875rem;
   }
 
   td {
     padding: clamp(10px, 3vw, 30px) clamp(10px, 3vw, 25px);
-    font-size: clamp(14px, 4vw, 16px);
+    font-size: 0.875rem;
   }
 
   thead tr th {

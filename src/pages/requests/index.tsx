@@ -21,34 +21,9 @@ export function Requests() {
               </thead>
               <tbody>
                 <tr>
-                  <td>pendente</td>
-                  <td>000004</td>
                   <td>
-                    1 x Salada Radish, 1 x Torradas de Parma, 1 x Chá de Canela,
-                    1 x Suco de Maracujá
+                    <span className="status">pendente</span>
                   </td>
-                  <td>20/05 às 18h00</td>
-                </tr>
-                <tr>
-                  <td>pendente</td>
-                  <td>000004</td>
-                  <td>
-                    1 x Salada Radish, 1 x Torradas de Parma, 1 x Chá de Canela,
-                    1 x Suco de Maracujá
-                  </td>
-                  <td>20/05 às 18h00</td>
-                </tr>
-                <tr>
-                  <td>pendente</td>
-                  <td>000004</td>
-                  <td>
-                    1 x Salada Radish, 1 x Torradas de Parma, 1 x Chá de Canela,
-                    1 x Suco de Maracujá
-                  </td>
-                  <td>20/05 às 18h00</td>
-                </tr>
-                <tr>
-                  <td>pendente</td>
                   <td>000004</td>
                   <td>
                     1 x Salada Radish, 1 x Torradas de Parma, 1 x Chá de Canela,

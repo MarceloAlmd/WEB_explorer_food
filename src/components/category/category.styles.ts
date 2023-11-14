@@ -7,6 +7,15 @@ export const Container = styled.div`
   > h2 {
     margin-top: 2rem;
     margin-bottom: 2rem;
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: ${BREAK_POINTS.MD}) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
   }
 `;
 
