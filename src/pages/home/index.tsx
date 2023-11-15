@@ -7,7 +7,7 @@ import * as Styles from "./styles";
 export function Home() {
   return (
     <Styles.Container>
-      <Header />
+      <Header isSearch />
 
       <Styles.Banner>
         <img src="/banner.svg" />

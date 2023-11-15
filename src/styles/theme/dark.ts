@@ -7,6 +7,7 @@ export default {
     body: "#000A0F",
     search: "#0D1D25",
     dishes: "#00070A",
+    ingredient: "#192227",
 
     text: {
       primary: "#FFF",
@@ -16,6 +17,7 @@ export default {
       pending: "#92000E",
       preparing: "#FBA94C",
       delivered: "#04D361",
+      buttonText: "#141D22",
     },
   },
 };

@@ -10,6 +10,7 @@ declare module "styled-components" {
       body: string;
       search: string;
       dishes: string;
+      ingredient: string;
 
       text: {
         primary: string;
@@ -19,6 +20,7 @@ declare module "styled-components" {
         pending: string;
         preparing: string;
         delivered: string;
+        buttonText: string;
       };
     };
   }

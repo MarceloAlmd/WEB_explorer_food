@@ -8,7 +8,7 @@ import { FiLogOut } from "react-icons/fi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { HeaderProps } from "./header";
 
-export function Header({ isSearch = true }: HeaderProps) {
+export function Header({ isSearch = false }: HeaderProps) {
   const [myRequests] = useState(6);
   const [desktop, setDesktop] = useState(true);
   const [mobile, setMobile] = useState(false);

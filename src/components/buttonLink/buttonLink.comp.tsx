@@ -1,9 +1,22 @@
 import * as Styles from "./buttonLink.styles";
 import { ButtonLinkProps } from "./buttonLink";
 
-export function ButtonLink({ title, href, ...rest }: ButtonLinkProps) {
+export function ButtonLink({
+  title,
+  href,
+  fontSize,
+  icon: Icon,
+  ...rest
+}: ButtonLinkProps) {
   return (
-    <Styles.Container href={href} {...rest}>
+    <Styles.Container
+      style={{
+        fontSize: fontSize,
+      }}
+      href={href}
+      {...rest}
+    >
+      {Icon && <Icon />}
       {title}
     </Styles.Container>
   );
