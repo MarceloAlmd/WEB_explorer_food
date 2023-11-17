@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { BREAK_POINTS } from "../../utils/breakPoints";
 
 export const Container = styled.label`
   display: flex;
@@ -8,6 +9,10 @@ export const Container = styled.label`
   line-height: 1rem;
   width: 100%;
   max-width: 16.375rem;
+
+  @media (max-width: ${BREAK_POINTS.ST}) {
+    max-width: 320px;
+  }
 
   color: ${({ theme }) => theme.colors.text.secondary};
   > input {

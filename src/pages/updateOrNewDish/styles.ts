@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { BREAK_POINTS } from "../../utils/breakPoints";
 
 export const Container = styled.div`
   width: 100%;
@@ -18,10 +19,15 @@ export const Content = styled.form`
   max-width: 76.25rem;
 
   margin: 1rem auto;
+  padding: 1rem;
 
   display: flex;
   flex-direction: column;
   gap: 2rem;
+
+  @media (max-width: ${BREAK_POINTS.ST}) {
+    max-width: 320px;
+  }
 
   > label {
     display: flex;
@@ -60,6 +66,11 @@ export const Content = styled.form`
     background: ${({ theme }) => theme.colors.text.buttonText};
 
     align-self: flex-end;
+
+    @media (max-width: ${BREAK_POINTS.ST}) {
+      align-self: center;
+      width: 12.313rem;
+    }
   }
 `;
 
@@ -69,6 +80,10 @@ export const FirstWrapper = styled.div`
   align-items: center;
   justify-content: center;
   gap: 2rem;
+
+  @media (max-width: ${BREAK_POINTS.ST}) {
+    flex-direction: column;
+  }
 `;
 
 export const SecondWrapper = styled.div`
