@@ -8,6 +8,7 @@ export default {
     search: "#0D1D25",
     dishes: "#00070A",
     ingredient: "#192227",
+    buttonPayment: "#0d161b",
 
     text: {
       primary: "#FFF",
@@ -18,6 +19,7 @@ export default {
       preparing: "#FBA94C",
       delivered: "#04D361",
       buttonText: "#141D22",
+      buttonTrash: "#AB4D55",
     },
   },
 };

@@ -11,6 +11,7 @@ declare module "styled-components" {
       search: string;
       dishes: string;
       ingredient: string;
+      buttonPayment: string;
 
       text: {
         primary: string;
@@ -21,6 +22,7 @@ declare module "styled-components" {
         preparing: string;
         delivered: string;
         buttonText: string;
+        buttonTrash: string;
       };
     };
   }
