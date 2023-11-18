@@ -5,15 +5,23 @@ import { Header } from "../../components/header/header.comp";
 import { PiNewspaperClipping } from "react-icons/pi";
 import { MdPix } from "react-icons/md";
 import { FaRegCreditCard } from "react-icons/fa6";
-
+import { IoIosArrowBack } from "react-icons/io";
 import * as Styles from "./styles";
 import { useState } from "react";
 import { Input } from "../../components/input/input.comp";
 import { Button } from "../../components/button/button.comp";
+import { ButtonLink } from "../../components/buttonLink/buttonLink.comp";
 
 export function Cart() {
   const [isPixActive, setIsPixActive] = useState(true);
   const [isCreditActive, setIsCreditActive] = useState(false);
+  const [showPayment, setShowPayment] = useState(false);
+  const [showMyRequest, setShowMyRequest] = useState(true);
+  const [input, setInput] = useState("");
+  const [validity, setValidity] = useState("");
+  const [cvc, setCvc] = useState("");
+
+  const disabled = input.length < 16 || validity.length < 5 || cvc.length < 3;
 
   const handlePixButtonClick = () => {
     setIsPixActive(true);
@@ -25,11 +33,21 @@ export function Cart() {
     setIsPixActive(false);
   };
 
+  function handlePayment() {
+    setShowPayment(true);
+    setShowMyRequest(false);
+  }
+
+  function handleShowMyRequest() {
+    setShowPayment(false);
+    setShowMyRequest(true);
+  }
+
   return (
     <Styles.Container>
       <Header isSearch />
       <Styles.Content>
-        <Styles.MyRequests>
+        <Styles.MyRequests data-show-myRequest={showMyRequest}>
           <Styles.Header>Meu Pedido</Styles.Header>
 
           <Styles.ContentMyRequest>
@@ -65,10 +83,27 @@ export function Cart() {
             />
           </Styles.ContentMyRequest>
 
-          <Styles.FooterMyRequest>Total: R$ 103,88</Styles.FooterMyRequest>
+          <Styles.FooterMyRequest>
+            <h2>Total: R$ 103,88</h2>
+            <Button
+              type="button"
+              title="Pagar"
+              icon={PiNewspaperClipping}
+              onClick={handlePayment}
+            />
+          </Styles.FooterMyRequest>
         </Styles.MyRequests>
-        <Styles.Payment>
-          <Styles.Header>Pagamento</Styles.Header>
+
+        <Styles.Payment data-show-payment={showPayment}>
+          <Styles.HeaderPayment>
+            <h2>Pagamento</h2>
+
+            <ButtonLink
+              title="Voltar"
+              icon={IoIosArrowBack}
+              onClick={handleShowMyRequest}
+            />
+          </Styles.HeaderPayment>
           <Styles.PaymentContent>
             <header>
               <ButtonPayment
@@ -86,7 +121,7 @@ export function Cart() {
             </header>
 
             <Styles.PaymentMethod>
-              {isPixActive && <img src="./QRcodePix.svg" />}
+              {isPixActive && <img src="./delivered.svg" />}
 
               {isCreditActive && (
                 <>
@@ -95,14 +130,25 @@ export function Cart() {
                       type="text"
                       label="Número do Cartao"
                       placeholder="0000 0000 0000 0000"
+                      onChange={(e: any) => setInput(e.target.value)}
                     />
                     <div className="validityAndCVC">
-                      <Input type="text" label="Validade" placeholder="04/25" />
-                      <Input type="text" label="CVC" placeholder="777" />
+                      <Input
+                        type="text"
+                        label="Validade"
+                        placeholder="04/25"
+                        onChange={(e: any) => setValidity(e.target.value)}
+                      />
+                      <Input
+                        type="text"
+                        label="CVC"
+                        placeholder="777"
+                        onChange={(e: any) => setCvc(e.target.value)}
+                      />
                     </div>
 
                     <Button
-                      disabled
+                      disabled={disabled}
                       icon={PiNewspaperClipping}
                       type="button"
                       title="Finalizar pagamento"

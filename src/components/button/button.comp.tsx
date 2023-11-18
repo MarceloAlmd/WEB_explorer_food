@@ -7,6 +7,7 @@ export function Button({
   type,
   icon: Icon,
   disabled = false,
+  onClick,
   ...rest
 }: ButtonProps) {
   return (
@@ -14,6 +15,7 @@ export function Button({
       disabled={disabled}
       type={type}
       style={{ width: width }}
+      onClick={onClick}
       {...rest}
     >
       {Icon && <Icon />}

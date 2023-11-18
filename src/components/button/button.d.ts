@@ -4,4 +4,5 @@ export interface ButtonProps {
   width?: string;
   icon?: string;
   disabled?: boolean;
+  onClick?: () => void;
 }

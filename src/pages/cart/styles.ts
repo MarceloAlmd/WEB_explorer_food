@@ -1,4 +1,28 @@
 import styled, { keyframes } from "styled-components";
+import { BREAK_POINTS } from "../../utils/breakPoints";
+
+const slideIn = keyframes`
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+`;
+
+const pulse = keyframes`
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+`;
 
 export const Container = styled.div`
   width: 100%;
@@ -22,9 +46,18 @@ export const MyRequests = styled.aside`
   width: 100%;
   max-width: 27.75rem;
   height: 100%;
-
+  padding: 1rem;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: ${BREAK_POINTS.ST}) {
+    &[data-show-myRequest="false"] {
+      display: none;
+    }
+  }
+
+  animation: ${slideIn} 0.4s ease-in-out forwards;
+  opacity: 0;
 `;
 export const Header = styled.h2`
   margin: 2.125rem 0;
@@ -42,17 +75,58 @@ export const ContentMyRequest = styled.div`
   overflow-y: auto;
 `;
 
-export const FooterMyRequest = styled.h2`
-  margin-top: 2rem;
+export const FooterMyRequest = styled.footer`
+  display: flex;
 
-  font-size: 1.25rem;
-  font-weight: 500;
+  flex-direction: column;
+
+  gap: 1rem;
+
+  > h2 {
+    margin-top: 2rem;
+
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+
+  > button {
+    @media (min-width: ${BREAK_POINTS.ST}) {
+      display: none;
+    }
+  }
 `;
 
 export const Payment = styled.aside`
   width: 100%;
   max-width: 33.125rem;
   height: 100%;
+
+  padding: 1rem;
+
+  @media (max-width: ${BREAK_POINTS.ST}) {
+    display: none;
+
+    &[data-show-payment="true"] {
+      display: block;
+    }
+  }
+`;
+
+export const HeaderPayment = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  > h2 {
+    margin: 2.125rem 0;
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  > a {
+    @media (min-width: ${BREAK_POINTS.ST}) {
+      display: none;
+    }
+  }
 `;
 
 export const PaymentContent = styled.div`
@@ -71,34 +145,11 @@ export const PaymentContent = styled.div`
   }
 `;
 
-const pulse = keyframes`
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
-`;
-
-const slideIn = keyframes`
-  from {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-`;
-
 export const PaymentMethod = styled.div`
   width: 100%;
   max-width: 25.125rem;
   margin: 0 auto;
-
+  padding: 1rem;
   height: 22.75rem;
 
   display: flex;

@@ -6,6 +6,7 @@ export function ButtonLink({
   href,
   fontSize,
   icon: Icon,
+  onClick,
   ...rest
 }: ButtonLinkProps) {
   return (
@@ -14,6 +15,7 @@ export function ButtonLink({
         fontSize: fontSize,
       }}
       href={href}
+      onClick={onClick}
       {...rest}
     >
       {Icon && <Icon />}
