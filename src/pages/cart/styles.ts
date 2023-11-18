@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
@@ -71,12 +71,65 @@ export const PaymentContent = styled.div`
   }
 `;
 
-export const QrCode = styled.div`
+const pulse = keyframes`
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+`;
+
+const slideIn = keyframes`
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+`;
+
+export const PaymentMethod = styled.div`
   width: 100%;
+  max-width: 25.125rem;
+  margin: 0 auto;
 
   height: 22.75rem;
 
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+
+  > img {
+    transform: translate(0);
+    transition: all 0.4s;
+    animation: ${pulse} 1s;
+  }
+
+  .validityAndCVC {
+    width: 100%;
+
+    display: flex;
+    gap: 1rem;
+    margin: 2.313rem 0;
+  }
+
+  .inputContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    overflow: hidden;
+
+    > * {
+      animation: ${slideIn} 0.4s ease-in-out forwards;
+      opacity: 0;
+    }
+  }
 `;

@@ -2,11 +2,14 @@ import { ButtonPayment } from "../../components/buttonPayment/buttonPayment.comp
 import { DishInCart } from "../../components/dishInCart/dishInCart.comp";
 import { Footer } from "../../components/footer/footer.comp";
 import { Header } from "../../components/header/header.comp";
+import { PiNewspaperClipping } from "react-icons/pi";
 import { MdPix } from "react-icons/md";
 import { FaRegCreditCard } from "react-icons/fa6";
 
 import * as Styles from "./styles";
 import { useState } from "react";
+import { Input } from "../../components/input/input.comp";
+import { Button } from "../../components/button/button.comp";
 
 export function Cart() {
   const [isPixActive, setIsPixActive] = useState(true);
@@ -82,9 +85,31 @@ export function Cart() {
               />
             </header>
 
-            <Styles.QrCode>
-              <img src="./QRcodePix.svg" />
-            </Styles.QrCode>
+            <Styles.PaymentMethod>
+              {isPixActive && <img src="./QRcodePix.svg" />}
+
+              {isCreditActive && (
+                <>
+                  <div className="inputContainer ">
+                    <Input
+                      type="text"
+                      label="Número do Cartao"
+                      placeholder="0000 0000 0000 0000"
+                    />
+                    <div className="validityAndCVC">
+                      <Input type="text" label="Validade" placeholder="04/25" />
+                      <Input type="text" label="CVC" placeholder="777" />
+                    </div>
+
+                    <Button
+                      icon={PiNewspaperClipping}
+                      type="button"
+                      title="Finalizar pagamento"
+                    />
+                  </div>
+                </>
+              )}
+            </Styles.PaymentMethod>
           </Styles.PaymentContent>
         </Styles.Payment>
       </Styles.Content>
