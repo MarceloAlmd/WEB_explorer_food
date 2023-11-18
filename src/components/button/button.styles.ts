@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.button`
-  background: ${({ theme }) => theme.colors.secondary};
+  background: ${({ disabled, theme }) =>
+    disabled ? theme.colors.buttonPayment : theme.colors.secondary};
   border-radius: 5px;
 
   height: 3rem;
@@ -9,6 +10,11 @@ export const Container = styled.button`
   border: none;
 
   color: ${({ theme }) => theme.colors.text.primary};
+
+  &:hover {
+    cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+    filter: brightness(1);
+  }
 
   display: flex;
   align-items: center;

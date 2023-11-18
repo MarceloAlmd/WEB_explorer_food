@@ -102,6 +102,7 @@ export function Cart() {
                     </div>
 
                     <Button
+                      disabled
                       icon={PiNewspaperClipping}
                       type="button"
                       title="Finalizar pagamento"

@@ -6,10 +6,16 @@ export function Button({
   title,
   type,
   icon: Icon,
+  disabled = false,
   ...rest
 }: ButtonProps) {
   return (
-    <Styles.Container type={type} style={{ width: width }} {...rest}>
+    <Styles.Container
+      disabled={disabled}
+      type={type}
+      style={{ width: width }}
+      {...rest}
+    >
       {Icon && <Icon />}
       {title}
     </Styles.Container>

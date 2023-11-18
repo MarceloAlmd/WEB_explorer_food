@@ -3,4 +3,5 @@ export interface ButtonProps {
   type: "button" | "submit" | "reset" | undefined;
   width?: string;
   icon?: string;
+  disabled?: boolean;
 }
