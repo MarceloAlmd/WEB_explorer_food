@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { BREAK_POINTS } from "../../utils/breakPoints";
 
 export const Container = styled.div`
@@ -48,3 +49,12 @@ export const Content = styled.main`
 
   padding: 0 2rem 5rem;
 `;
+
+export const SwiperContainer = styled(Swiper)`
+  .swiper-button-prev:after,
+  .swiper-button-next:after {
+    color: ${({ theme }) => theme.colors.secondary};
+  }
+`;
+
+export const SwiperContent = styled(SwiperSlide)``;
