@@ -21,6 +21,15 @@ export function UpdateOrNewDish() {
         <Styles.FirstWrapper>
           <InputImage label="Imagem do prato" />
           <Input type="text" label="Nome" placeholder="Ex.: Salada Ceasar" />
+
+          <div className="selectGroup">
+            <label>Categoria</label>
+            <select placeholder="test">
+              <option value="pratos principais">Prato principal</option>
+              <option value="sobremesas">Sobremesa</option>
+              <option value="sucos">Suco</option>
+            </select>
+          </div>
         </Styles.FirstWrapper>
 
         <Styles.SecondWrapper>

@@ -81,6 +81,28 @@ export const FirstWrapper = styled.div`
   justify-content: center;
   gap: 2rem;
 
+  .selectGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: ${({ theme }) => theme.colors.text.secondary};
+    width: 50%;
+
+    > select {
+      height: 3rem;
+      padding: 0 1rem;
+      border-radius: 5px;
+      color: ${({ theme }) => theme.colors.text.secondary};
+      background: transparent;
+      border: 1px solid ${({ theme }) => theme.colors.text.primary};
+      font-size: 1rem;
+      option {
+        background: ${({ theme }) => theme.colors.body};
+        font-size: 1rem;
+      }
+    }
+  }
+
   @media (max-width: ${BREAK_POINTS.ST}) {
     flex-direction: column;
   }
