@@ -55,6 +55,38 @@ export const SwiperContainer = styled(Swiper)`
   .swiper-button-next:after {
     color: ${({ theme }) => theme.colors.secondary};
   }
+
+  .swiper-pagination-bullet-active {
+    background: ${({ theme }) => theme.colors.secondary};
+  }
+
+  .swiper-pagination-bullet {
+    background: ${({ theme }) => theme.colors.secondary};
+  }
+
+  .swiper-pagination,
+  .swiper-pagination-clickable,
+  .swiper-pagination-bullets,
+  .swiper-pagination-horizontal {
+    position: relative;
+    bottom: 25px;
+  }
+
+  @media (max-width: ${BREAK_POINTS.ST}) {
+    max-width: 300px;
+    .swiper-pagination,
+    .swiper-pagination-clickable,
+    .swiper-pagination-bullets,
+    .swiper-pagination-horizontal {
+      /* background: red; */
+      position: relative;
+      top: -15px;
+    }
+  }
 `;
 
-export const SwiperContent = styled(SwiperSlide)``;
+export const SwiperContent = styled(SwiperSlide)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

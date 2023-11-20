@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Category } from "../../components/category/category.comp";
 import { Dishes } from "../../components/dishes/dishes.comp";
 import { Footer } from "../../components/footer/footer.comp";
@@ -5,6 +6,7 @@ import { Header } from "../../components/header/header.comp";
 import * as Styles from "./styles";
 
 export function Home() {
+  const [slidePerView, setSlidePerView] = useState(3);
   const data = [
     {
       id: "1",
@@ -35,7 +37,21 @@ export function Home() {
       price: 47.99,
     },
   ];
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth < 768) {
+        setSlidePerView(1);
+      }
+    }
 
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <Styles.Container>
       <Header isSearch />
@@ -49,7 +65,46 @@ export function Home() {
           <Styles.SwiperContainer
             pagination={{ clickable: true }}
             navigation
-            slidesPerView={3}
+            slidesPerView={slidePerView}
+            loop={true}
+          >
+            {data.map((item) => (
+              <Styles.SwiperContent key={item.id}>
+                <Dishes
+                  title={item.title}
+                  description={item.description}
+                  price={item.price}
+                />
+              </Styles.SwiperContent>
+            ))}
+          </Styles.SwiperContainer>
+        </Category>
+
+        <Category title="Sobremesas">
+          <Styles.SwiperContainer
+            pagination={{ clickable: true }}
+            navigation
+            slidesPerView={slidePerView}
+            loop={true}
+          >
+            {data.map((item) => (
+              <Styles.SwiperContent key={item.id}>
+                <Dishes
+                  title={item.title}
+                  description={item.description}
+                  price={item.price}
+                />
+              </Styles.SwiperContent>
+            ))}
+          </Styles.SwiperContainer>
+        </Category>
+
+        <Category title="Sucos">
+          <Styles.SwiperContainer
+            pagination={{ clickable: true }}
+            navigation
+            slidesPerView={slidePerView}
+            loop={true}
           >
             {data.map((item) => (
               <Styles.SwiperContent key={item.id}>

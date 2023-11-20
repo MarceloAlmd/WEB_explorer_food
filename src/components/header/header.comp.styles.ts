@@ -15,6 +15,8 @@ export const Container = styled.header`
   gap: 2rem;
 
   padding: 0 1rem;
+
+  z-index: 1000;
 `;
 
 export const Logo = styled.img`
