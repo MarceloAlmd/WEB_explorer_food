@@ -17,6 +17,11 @@ export const Container = styled.header`
   padding: 0 1rem;
 
   z-index: 1000;
+
+  .buttonCart {
+    color: ${({ theme }) => theme.colors.text.primary};
+    font-size: 1.5rem;
+  }
 `;
 
 export const Logo = styled.img`

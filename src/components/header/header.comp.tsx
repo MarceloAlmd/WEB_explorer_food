@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { Button } from "../button/button.comp";
 import { ButtonLink } from "../buttonLink/buttonLink.comp";
+import { IoCartOutline } from "react-icons/io5";
 import { Search } from "../search/search.comp";
 import * as Styles from "./header.comp.styles";
 import { PiNewspaperClipping } from "react-icons/pi";
 import { FiLogOut } from "react-icons/fi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { HeaderProps } from "./header";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export function Header({ isSearch = false }: HeaderProps) {
   const [myRequests] = useState(6);
@@ -44,7 +45,14 @@ export function Header({ isSearch = false }: HeaderProps) {
       <a href="/">
         <Styles.Logo src="/logo_explorer.svg" />
       </a>
-      {desktop && <ButtonLink title="Meus Favoritos" to="/favorite" />}
+      {desktop && (
+        <>
+          <ButtonLink title="Meus Favoritos" to="/favorite" />
+          <Link className="buttonCart" to="/cart">
+            <IoCartOutline />
+          </Link>
+        </>
+      )}
       {mobile && (
         <Styles.IconButton>
           <AiOutlineHeart />

@@ -102,6 +102,7 @@ export function Cart() {
               title="Voltar"
               icon={IoIosArrowBack}
               onClick={handleShowMyRequest}
+              to="/cart"
             />
           </Styles.HeaderPayment>
           <Styles.PaymentContent>
