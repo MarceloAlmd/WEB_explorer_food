@@ -56,9 +56,9 @@ export function Favorite() {
   }, []);
   return (
     <Styles.Container>
-      <Header />
+      <Header isSearch />
       <Styles.Content>
-        <Category title="Pratos principais">
+        <Category title="Meus Favoritos">
           <Styles.SwiperContainer
             pagination={{ clickable: true }}
             navigation
