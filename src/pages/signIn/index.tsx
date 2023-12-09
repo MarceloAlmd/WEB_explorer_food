@@ -24,7 +24,7 @@ export function SignIn() {
         />
         <Button type="button" title="Entrar" />
 
-        <ButtonLink title="Criar uma conta" />
+        <ButtonLink title="Criar uma conta" to="/register" />
       </Styles.Card>
     </Styles.Container>
   );

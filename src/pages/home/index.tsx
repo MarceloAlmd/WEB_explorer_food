@@ -3,10 +3,12 @@ import { Category } from "../../components/category/category.comp";
 import { Dishes } from "../../components/dishes/dishes.comp";
 import { Footer } from "../../components/footer/footer.comp";
 import { Header } from "../../components/header/header.comp";
+import { useNavigate } from "react-router-dom";
 import * as Styles from "./styles";
 
 export function Home() {
   const [slidePerView, setSlidePerView] = useState(3);
+  const navigate = useNavigate();
   const data = [
     {
       id: "1",
@@ -37,6 +39,11 @@ export function Home() {
       price: 47.99,
     },
   ];
+
+  const handleDetailss = (id: string) => {
+    navigate(`/details/${id}`);
+  };
+
   useEffect(() => {
     function handleResize() {
       if (window.innerWidth < 768) {
@@ -112,6 +119,7 @@ export function Home() {
                   title={item.title}
                   description={item.description}
                   price={item.price}
+                  onClick={() => handleDetailss(item.id)}
                 />
               </Styles.SwiperContent>
             ))}

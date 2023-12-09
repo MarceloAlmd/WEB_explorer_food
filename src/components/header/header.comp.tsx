@@ -7,11 +7,18 @@ import { PiNewspaperClipping } from "react-icons/pi";
 import { FiLogOut } from "react-icons/fi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { HeaderProps } from "./header";
+import { useNavigate } from "react-router-dom";
 
 export function Header({ isSearch = false }: HeaderProps) {
   const [myRequests] = useState(6);
   const [desktop, setDesktop] = useState(true);
   const [mobile, setMobile] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleNavigateToRequests = () => {
+    navigate("/requests");
+  };
 
   useEffect(() => {
     function handleResize() {
@@ -37,7 +44,7 @@ export function Header({ isSearch = false }: HeaderProps) {
       <a href="/">
         <Styles.Logo src="/logo_explorer.svg" />
       </a>
-      {desktop && <ButtonLink title="Meus Favoritos" />}
+      {desktop && <ButtonLink title="Meus Favoritos" to="/favorite" />}
       {mobile && (
         <Styles.IconButton>
           <AiOutlineHeart />
@@ -52,6 +59,7 @@ export function Header({ isSearch = false }: HeaderProps) {
           width="10%"
           type="button"
           title={`Meu Pedido (${myRequests})`}
+          onClick={handleNavigateToRequests}
         />
       )}
 

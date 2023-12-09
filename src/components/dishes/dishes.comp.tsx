@@ -4,7 +4,13 @@ import * as Styles from "./dishes.comp.styles";
 import { AiFillHeart, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { Button } from "../button/button.comp";
 
-export function Dishes({ title, description, price, ...rest }: DishesProps) {
+export function Dishes({
+  title,
+  description,
+  price,
+  onClick,
+  ...rest
+}: DishesProps) {
   const [counter, setCounter] = useState(1);
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -48,7 +54,7 @@ export function Dishes({ title, description, price, ...rest }: DishesProps) {
     }
   }, [isFavorite, title]);
   return (
-    <Styles.Container {...rest}>
+    <Styles.Container onClick={onClick} {...rest}>
       <Styles.Favorite onClick={toggleFavorite}>
         <AiFillHeart style={{ color: isFavorite ? "#92000E" : "#7C7C8A" }} />
       </Styles.Favorite>

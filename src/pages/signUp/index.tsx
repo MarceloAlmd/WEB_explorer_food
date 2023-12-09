@@ -29,7 +29,7 @@ export function SignUp() {
         />
         <Button type="button" title="Criar Conta" />
 
-        <ButtonLink title="Já tenho uma conta" />
+        <ButtonLink title="Já tenho uma conta" to="/" />
       </Styles.Card>
     </Styles.Container>
   );

@@ -3,4 +3,5 @@ export interface DishesProps {
   description: string;
   price: string | number;
   isFavorite?: string;
+  onClick?: React.MouseEventHandler<HTMLDivElement> | undefined;
 }

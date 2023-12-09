@@ -17,6 +17,8 @@ export const Container = styled.div`
 
     align-self: flex-end;
   }
+
+  cursor: pointer;
 `;
 
 export const DishImg = styled.img`

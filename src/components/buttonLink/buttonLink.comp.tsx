@@ -3,7 +3,7 @@ import { ButtonLinkProps } from "./buttonLink";
 
 export function ButtonLink({
   title,
-  href,
+  to,
   fontSize,
   icon: Icon,
   onClick,
@@ -14,7 +14,7 @@ export function ButtonLink({
       style={{
         fontSize: fontSize,
       }}
-      href={href}
+      to={to}
       onClick={onClick}
       {...rest}
     >
