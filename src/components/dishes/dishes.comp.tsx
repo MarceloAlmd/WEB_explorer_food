@@ -9,10 +9,11 @@ export function Dishes({
   description,
   price,
   onClick,
+  favorite,
   ...rest
 }: DishesProps) {
   const [counter, setCounter] = useState(1);
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(favorite);
 
   function addedMoreCounter() {
     if (counter < 10) {
