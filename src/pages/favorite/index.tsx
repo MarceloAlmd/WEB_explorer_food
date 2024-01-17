@@ -56,7 +56,7 @@ export function Favorite() {
   }, []);
   return (
     <Styles.Container>
-      <Header isSearch />
+      <Header />
       <Styles.Content>
         <Category title="Meus Favoritos">
           <Styles.SwiperContainer

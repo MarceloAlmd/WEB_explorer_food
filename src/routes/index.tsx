@@ -7,7 +7,7 @@ import { Admin } from "./admin.routes";
 export function Routers() {
   return (
     <BrowserRouter>
-      <Customer />
+      <Public />
     </BrowserRouter>
   );
 }

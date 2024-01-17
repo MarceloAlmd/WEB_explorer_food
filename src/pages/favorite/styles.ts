@@ -50,7 +50,6 @@ export const SwiperContainer = styled(Swiper)`
     .swiper-pagination-clickable,
     .swiper-pagination-bullets,
     .swiper-pagination-horizontal {
-      /* background: red; */
       position: relative;
       top: -15px;
     }
