@@ -1,5 +1,16 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { BREAK_POINTS } from "../../utils/breakPoints";
+
+export const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+`;
 
 export const Container = styled.div`
   width: 100%;
@@ -10,6 +21,8 @@ export const Container = styled.div`
   align-items: center;
 
   padding: 2rem;
+
+  animation: ${fadeIn} 0.5s ease-in-out;
 
   @media (max-width: ${BREAK_POINTS.MD}) {
     flex-direction: column;

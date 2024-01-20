@@ -5,7 +5,7 @@ export const Container = styled.button`
     disabled ? theme.colors.buttonPayment : theme.colors.secondary};
   border-radius: 5px;
 
-  height: 3rem;
+  min-height: 3rem;
 
   border: none;
 
