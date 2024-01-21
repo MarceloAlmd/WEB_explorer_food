@@ -40,7 +40,7 @@ export function Home() {
     },
   ];
 
-  const handleDetailss = (id: string) => {
+  const handleDetails = (id: string) => {
     navigate(`/details/${id}`);
   };
 
@@ -81,6 +81,7 @@ export function Home() {
                   title={item.title}
                   description={item.description}
                   price={item.price}
+                  onClick={() => handleDetails(item.id)}
                 />
               </Styles.SwiperContent>
             ))}
@@ -100,6 +101,7 @@ export function Home() {
                   title={item.title}
                   description={item.description}
                   price={item.price}
+                  onClick={() => handleDetails(item.id)}
                 />
               </Styles.SwiperContent>
             ))}
@@ -119,7 +121,7 @@ export function Home() {
                   title={item.title}
                   description={item.description}
                   price={item.price}
-                  onClick={() => handleDetailss(item.id)}
+                  onClick={() => handleDetails(item.id)}
                 />
               </Styles.SwiperContent>
             ))}

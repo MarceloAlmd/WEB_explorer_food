@@ -1,9 +1,9 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { AuthProps, AuthState, ContextType, LoginProps } from "./auth";
+import { AuthProps, AuthState, LoginProps } from "./auth";
 import { api } from "../api/axios";
 import { Alert } from "../components/alert/alert.comp";
 
-const AuthContext = createContext({} as ContextType);
+const AuthContext = createContext({} as any);
 
 export function AuthProvider({ children }: AuthProps) {
   const [data, setData] = useState<AuthState>({ user: null, token: null });

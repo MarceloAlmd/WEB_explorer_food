@@ -7,12 +7,14 @@ export function ButtonLink({
   fontSize,
   icon: Icon,
   onClick,
+  color,
   ...rest
 }: ButtonLinkProps) {
   return (
     <Styles.Container
       style={{
         fontSize: fontSize,
+        color: color,
       }}
       to={to}
       onClick={onClick}

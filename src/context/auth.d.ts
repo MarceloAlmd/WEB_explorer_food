@@ -23,17 +23,17 @@ interface AuthState {
   token: string | null;
 }
 
-export interface UserProps {
-  created_at: string;
-  email: string;
-  id: string | number;
-  name: string;
-  role: string;
-  updated_at: string;
-}
+// export interface UserProps {
+//   created_at: string;
+//   email: string;
+//   id: string | number;
+//   name: string;
+//   role: string;
+//   updated_at: string;
+// }
 
-export interface ContextType {
-  login: ({ email, password }: LoginProps) => void;
-  user: UserProps | null;
-  logout: () => void;
-}
+// export interface ContextType {
+//   login: ({ email, password }: LoginProps) => void;
+//   user: UserProps | null;
+//   logout: () => void;
+// }
