@@ -1,20 +1,26 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { AuthProps, AuthState, LoginProps } from "./auth";
+import { AuthProps, AuthState, ContextType, LoginProps } from "./auth";
 import { api } from "../api/axios";
 import { Alert } from "../components/alert/alert.comp";
 
-const AuthContext = createContext({} as any);
+const AuthContext = createContext({} as ContextType);
 
 export function AuthProvider({ children }: AuthProps) {
   const [data, setData] = useState<AuthState>({ user: null, token: null });
   const [alert, setAlert] = useState<boolean>(false);
-
+  console.log(data.user);
   const handleShowAlert = () => {
     setAlert(true);
 
     setTimeout(() => {
       setAlert(false);
     }, 2000);
+  };
+
+  const logout = () => {
+    localStorage.removeItem("@exploreFood:user");
+    localStorage.removeItem("@exploreFood:token");
+    setData({ user: null, token: null });
   };
 
   const login = async ({ email, password }: LoginProps) => {
@@ -45,7 +51,7 @@ export function AuthProvider({ children }: AuthProps) {
   }, []);
   return (
     <>
-      <AuthContext.Provider value={{ login, user: data.user }}>
+      <AuthContext.Provider value={{ login, user: data.user, logout }}>
         {children}
       </AuthContext.Provider>
       {alert && <Alert message={`seja bem vindo ${data.user?.name}`} />}

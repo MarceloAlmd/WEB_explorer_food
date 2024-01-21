@@ -20,6 +20,19 @@ export default createGlobalStyle`
     background: ${({ theme }) => theme.colors.body};
     color: ${({ theme }) => theme.colors.text.primary};
     -webkit-font-smoothing: antialiased;
+
+    &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${(props) => props.theme.colors.secondary};
+    border-radius: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
   }
 
   body, input, button, textarea {

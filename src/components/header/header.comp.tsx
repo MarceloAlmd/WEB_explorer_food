@@ -9,17 +9,27 @@ import { FiLogOut } from "react-icons/fi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { HeaderProps } from "./header";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/auth.context";
+import { Modal } from "../modal/modal.comp";
 
 export function Header({ isSearch = false }: HeaderProps) {
+  const { logout } = useAuth();
+
   const [myRequests] = useState(6);
   const [desktop, setDesktop] = useState(true);
   const [mobile, setMobile] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const navigate = useNavigate();
 
   const handleNavigateToRequests = () => {
     navigate("/requests");
   };
+
+  function handleLogout() {
+    navigate("/");
+    logout();
+  }
 
   useEffect(() => {
     function handleResize() {
@@ -78,9 +88,24 @@ export function Header({ isSearch = false }: HeaderProps) {
         </Styles.IconButton>
       )}
 
-      <Styles.SignOut>
+      <Styles.SignOut
+        onClick={() => {
+          setShowModal(true);
+        }}
+      >
         <FiLogOut />
       </Styles.SignOut>
+
+      {showModal && (
+        <Modal
+          cancel={() => setShowModal(false)}
+          onCLose={() => {
+            setShowModal(false);
+          }}
+          confirm={handleLogout}
+          message="deseja sair da aplicação ?"
+        />
+      )}
     </Styles.Container>
   );
 }

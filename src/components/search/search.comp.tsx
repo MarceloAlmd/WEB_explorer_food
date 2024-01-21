@@ -12,6 +12,7 @@ export function Search() {
         type="text"
         placeholder="Busque pelas opções de pratos"
         id="search"
+        list="test"
       />
     </Styles.Container>
   );
