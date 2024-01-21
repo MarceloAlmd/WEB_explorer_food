@@ -10,13 +10,16 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import { AuthProvider } from "./context/auth.context.tsx";
 register();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ThemeProvider theme={dark}>
       <GlobalStyles />
-      <Routers />
+      <AuthProvider>
+        <Routers />
+      </AuthProvider>
     </ThemeProvider>
   </React.StrictMode>
 );
