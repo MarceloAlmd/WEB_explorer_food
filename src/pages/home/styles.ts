@@ -1,6 +1,15 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { BREAK_POINTS } from "../../utils/breakPoints";
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+  `;
 
 export const Container = styled.div`
   width: 100%;
@@ -16,6 +25,8 @@ export const Container = styled.div`
     grid-template-rows: 6.5rem auto 4.813rem;
     grid-template-areas: "header" "main" "footer";
   }
+
+  animation: ${fadeIn} 1.5s ease-in-out;
 `;
 
 export const Banner = styled.div`
@@ -38,6 +49,8 @@ export const Banner = styled.div`
     grid-area: none;
     display: none;
   }
+
+  transition: display 1s ease-in-out;
 `;
 
 export const Content = styled.main`
@@ -48,6 +61,8 @@ export const Content = styled.main`
   margin: 0 auto;
 
   padding: 0 2rem 5rem;
+
+  transition: padding 1s ease-in-out;
 `;
 
 export const SwiperContainer = styled(Swiper)`
@@ -78,7 +93,6 @@ export const SwiperContainer = styled(Swiper)`
     .swiper-pagination-clickable,
     .swiper-pagination-bullets,
     .swiper-pagination-horizontal {
-      /* background: red; */
       position: relative;
       top: -15px;
     }
@@ -89,4 +103,6 @@ export const SwiperContent = styled(SwiperSlide)`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  transition: transform 1s ease-in-out;
 `;
