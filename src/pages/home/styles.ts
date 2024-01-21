@@ -26,7 +26,7 @@ export const Container = styled.div`
     grid-template-areas: "header" "main" "footer";
   }
 
-  animation: ${fadeIn} 1.5s ease-in-out;
+  animation: ${fadeIn} 1s ease-in-out;
 `;
 
 export const Banner = styled.div`

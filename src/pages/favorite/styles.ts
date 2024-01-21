@@ -1,6 +1,15 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { BREAK_POINTS } from "../../utils/breakPoints";
 import { SwiperSlide, Swiper } from "swiper/react";
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
 
 export const Container = styled.div`
   width: 100%;
@@ -18,7 +27,7 @@ export const Content = styled.main`
   max-width: 66.5rem;
   width: 100%;
   margin: 0 auto;
-
+  animation: ${fadeIn} 1s ease-in-out;
   padding: 0 2rem 5rem;
 `;
 
