@@ -5,44 +5,29 @@ import { Footer } from "../../components/footer/footer.comp";
 import { Header } from "../../components/header/header.comp";
 import { useNavigate } from "react-router-dom";
 import * as Styles from "./styles";
+import { api } from "../../api/axios";
+import { DishesDataTypes } from "./home";
 
 export function Home() {
   const [slidePerView, setSlidePerView] = useState(3);
   const navigate = useNavigate();
-  const data = [
-    {
-      id: "1",
-      title: "Salada Ravanello",
-      description:
-        "Rabanetes, folhas verdes e molho agridoce salpicados com gergelim",
-      price: 47.99,
-    },
-    {
-      id: "2",
-      title: "Salada Batata",
-      description:
-        "Rabanetes, folhas verdes e molho agridoce salpicados com gergelim",
-      price: 47.99,
-    },
-    {
-      id: "3",
-      title: "Queijo quente",
-      description:
-        "Rabanetes, folhas verdes e molho agridoce salpicados com gergelim",
-      price: 47.99,
-    },
-    {
-      id: "4",
-      title: "Frango assado",
-      description:
-        "Rabanetes, folhas verdes e molho agridoce salpicados com gergelim",
-      price: 47.99,
-    },
-  ];
 
-  const handleDetails = (id: string) => {
+  const [data, setData] = useState<DishesDataTypes[]>([]);
+
+  const [name, setName] = useState<string>("");
+
+  const handleDetails = (id: number) => {
     navigate(`/details/${id}`);
   };
+
+  useEffect(() => {
+    async function fetchAllDishes() {
+      const response = await api.get(`/dishes?name=${name}`);
+      setData(response.data);
+    }
+
+    fetchAllDishes();
+  }, [name]);
 
   useEffect(() => {
     function handleResize() {
@@ -61,7 +46,7 @@ export function Home() {
   }, []);
   return (
     <Styles.Container>
-      <Header isSearch />
+      <Header isSearch searchDishes={setName} />
 
       <Styles.Banner>
         <img src="/banner.svg" />
@@ -72,19 +57,24 @@ export function Home() {
           <Styles.SwiperContainer
             pagination={{ clickable: true }}
             navigation
-            slidesPerView={slidePerView}
+            slidesPerView={name ? 1 : slidePerView}
             loop={true}
           >
-            {data.map((item) => (
-              <Styles.SwiperContent key={item.id}>
-                <Dishes
-                  title={item.title}
-                  description={item.description}
-                  price={item.price}
-                  onClick={() => handleDetails(item.id)}
-                />
-              </Styles.SwiperContent>
-            ))}
+            {data.map((item) => {
+              if (item.category === "principal ") {
+                return (
+                  <Styles.SwiperContent key={item.id}>
+                    <Dishes
+                      title={item.name}
+                      description={item.description}
+                      price={item.price}
+                      onClick={() => handleDetails(item.id)}
+                      img={item.image}
+                    />
+                  </Styles.SwiperContent>
+                );
+              }
+            })}
           </Styles.SwiperContainer>
         </Category>
 
@@ -92,19 +82,24 @@ export function Home() {
           <Styles.SwiperContainer
             pagination={{ clickable: true }}
             navigation
-            slidesPerView={slidePerView}
+            slidesPerView={name ? 1 : slidePerView}
             loop={true}
           >
-            {data.map((item) => (
-              <Styles.SwiperContent key={item.id}>
-                <Dishes
-                  title={item.title}
-                  description={item.description}
-                  price={item.price}
-                  onClick={() => handleDetails(item.id)}
-                />
-              </Styles.SwiperContent>
-            ))}
+            {data.map((item) => {
+              if (item.category === "Sobremesas") {
+                return (
+                  <Styles.SwiperContent key={item.id}>
+                    <Dishes
+                      title={item.name}
+                      description={item.description}
+                      price={item.price}
+                      onClick={() => handleDetails(item.id)}
+                      img={item.image}
+                    />
+                  </Styles.SwiperContent>
+                );
+              }
+            })}
           </Styles.SwiperContainer>
         </Category>
 
@@ -112,19 +107,24 @@ export function Home() {
           <Styles.SwiperContainer
             pagination={{ clickable: true }}
             navigation
-            slidesPerView={slidePerView}
+            slidesPerView={name ? 1 : slidePerView}
             loop={true}
           >
-            {data.map((item) => (
-              <Styles.SwiperContent key={item.id}>
-                <Dishes
-                  title={item.title}
-                  description={item.description}
-                  price={item.price}
-                  onClick={() => handleDetails(item.id)}
-                />
-              </Styles.SwiperContent>
-            ))}
+            {data.map((item) => {
+              if (item.category === "Bebidas ") {
+                return (
+                  <Styles.SwiperContent key={item.id}>
+                    <Dishes
+                      title={item.name}
+                      description={item.description}
+                      price={item.price}
+                      onClick={() => handleDetails(item.id)}
+                      img={item.image}
+                    />
+                  </Styles.SwiperContent>
+                );
+              }
+            })}
           </Styles.SwiperContainer>
         </Category>
       </Styles.Content>

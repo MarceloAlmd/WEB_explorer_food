@@ -4,4 +4,5 @@ export interface DishesProps {
   price: string | number;
   favorite?: boolean;
   onClick?: React.MouseEventHandler<HTMLDivElement> | undefined;
+  img?: string;
 }

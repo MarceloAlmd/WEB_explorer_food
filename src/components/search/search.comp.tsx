@@ -1,7 +1,8 @@
+import { SearchProps } from "./search";
 import * as Styles from "./search.styles";
 import { AiOutlineSearch } from "react-icons/ai";
 
-export function Search() {
+export function Search({ searchDishes }: SearchProps) {
   return (
     <Styles.Container>
       <label htmlFor="search">
@@ -12,7 +13,7 @@ export function Search() {
         type="text"
         placeholder="Busque pelas opções de pratos"
         id="search"
-        list="test"
+        onChange={(e) => searchDishes(e.target.value)}
       />
     </Styles.Container>
   );

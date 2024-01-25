@@ -50,7 +50,7 @@ export function SignUp() {
         alert();
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
         if (error.response) {
           const message = translation(error.response.data.message);
           setError(message);

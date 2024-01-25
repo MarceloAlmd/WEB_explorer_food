@@ -1,4 +1,3 @@
-export interface HeaderProps {
-  isSearch?: boolean;
+export interface SearchProps {
   searchDishes?: Dispatch<SetStateAction<string>>;
 }

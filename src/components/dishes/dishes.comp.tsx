@@ -3,6 +3,7 @@ import { DishesProps } from "./dishes";
 import * as Styles from "./dishes.comp.styles";
 import { AiFillHeart, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { Button } from "../button/button.comp";
+import { api } from "../../api/axios";
 
 export function Dishes({
   title,
@@ -10,10 +11,13 @@ export function Dishes({
   price,
   onClick,
   favorite,
+  img,
   ...rest
 }: DishesProps) {
   const [counter, setCounter] = useState(1);
   const [isFavorite, setIsFavorite] = useState(favorite);
+
+  const urlImg = `${api.defaults.baseURL}/files/${img}`;
 
   function addedMoreCounter() {
     if (counter < 10) {
@@ -60,7 +64,7 @@ export function Dishes({
         <AiFillHeart style={{ color: isFavorite ? "#92000E" : "#7C7C8A" }} />
       </Styles.Favorite>
 
-      <Styles.DishImg src="https://img.freepik.com/fotos-gratis/closeup-de-carne-assada-com-molho-legumes-e-batatas-fritas-em-um-prato-sobre-a-mesa_181624-35847.jpg?w=1380&t=st=1699386986~exp=1699387586~hmac=27f97018d94f0be7d20da3f23f6358ba5a2707a708484a4824354cc0dd69d919" />
+      <Styles.DishImg src={urlImg} />
 
       <Styles.Info>
         <h2>{title}</h2>

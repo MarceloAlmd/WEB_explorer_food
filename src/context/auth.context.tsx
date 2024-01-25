@@ -8,7 +8,7 @@ const AuthContext = createContext({} as any);
 export function AuthProvider({ children }: AuthProps) {
   const [data, setData] = useState<AuthState>({ user: null, token: null });
   const [alert, setAlert] = useState<boolean>(false);
-  console.log(data.user);
+
   const handleShowAlert = () => {
     setAlert(true);
 
@@ -28,6 +28,8 @@ export function AuthProvider({ children }: AuthProps) {
       const response = await api.post("/sessions", { email, password });
       const { user, token } = response.data;
 
+      api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
       localStorage.setItem("@exploreFood:user", JSON.stringify(user));
       localStorage.setItem("@exploreFood:token", token);
       setData({ user, token });
@@ -43,6 +45,8 @@ export function AuthProvider({ children }: AuthProps) {
     const token = localStorage.getItem("@exploreFood:token");
 
     if (user && token) {
+      api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
       setData({
         user: JSON.parse(user),
         token,

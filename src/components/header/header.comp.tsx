@@ -12,7 +12,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/auth.context";
 import { Modal } from "../modal/modal.comp";
 
-export function Header({ isSearch = false }: HeaderProps) {
+export function Header({ isSearch = false, searchDishes }: HeaderProps) {
   const { logout } = useAuth();
 
   const [myRequests] = useState(6);
@@ -69,7 +69,7 @@ export function Header({ isSearch = false }: HeaderProps) {
           <span></span>
         </Styles.IconButton>
       )}
-      {isSearch && <Search />}
+      {isSearch && <Search searchDishes={searchDishes} />}
 
       {desktop && (
         <Button
