@@ -13,16 +13,7 @@ export const Container = styled.div`
 
 export const Content = styled.div`
   grid-area: content;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2.5rem;
-
-  padding: 3rem;
-
-  @media (max-width: ${BREAK_POINTS.MD}) {
-    flex-direction: column;
-  }
+  margin-top: 2rem;
 `;
 
 export const Details = styled.div`
@@ -95,5 +86,18 @@ export const Counter = styled.footer`
     > h2 {
       font-size: 1.5rem;
     }
+  }
+`;
+
+export const ContentMain = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+
+  padding: 3rem;
+
+  @media (max-width: ${BREAK_POINTS.MD}) {
+    flex-direction: column;
   }
 `;

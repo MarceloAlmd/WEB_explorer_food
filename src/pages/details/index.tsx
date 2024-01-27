@@ -1,15 +1,46 @@
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { PiNewspaperClipping } from "react-icons/pi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Footer } from "../../components/footer/footer.comp";
 import { Header } from "../../components/header/header.comp";
 import * as Styles from "./styles";
 import { Button } from "../../components/button/button.comp";
 import { DishesImg } from "./components/dishesImg/dishesImg.comp";
-import { IngredientsImg } from "./components/ingredientsImg/ingreditentsImg.comp";
+import { IngredientsImg } from "./components/ingredientsImg/ingredientsImg.comp";
+import { useParams } from "react-router-dom";
+import { api } from "../../api/axios";
+import { ButtonLink } from "../../components/buttonLink/buttonLink.comp";
+
+interface ingredientsTypes {
+  created_at: string;
+  dishes_id: number;
+  id: number;
+  image: string;
+  name: string;
+  updated_at: string;
+  user_id: number;
+}
+interface DetailsTypes {
+  category: string;
+  created_at: string;
+  description: string;
+  id: number;
+  image: string;
+  ingredient: ingredientsTypes[];
+  isFavorite: boolean;
+  name: string;
+  price: string;
+  updated_at: string;
+  user_id: number;
+}
 
 export function Details() {
+  const [isMobile, setIsMobile] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(true);
   const [counter, setCounter] = useState(1);
+  const [dishDetails, setDishDetails] = useState<DetailsTypes>();
+  const dishUrlImg = `${api.defaults.baseURL}/files/${dishDetails?.image}`;
+  const params = useParams();
 
   function addedMoreCounter() {
     if (counter < 10) {
@@ -24,79 +55,74 @@ export function Details() {
   }
   const formattedCounter = counter.toString().padStart(2, "0");
 
-  const ingredients = [
-    {
-      id: "1",
-      name: "alface",
-      src: "https://img.freepik.com/fotos-gratis/closeup-de-carne-assada-com-molho-legumes-e-batatas-fritas-em-um-prato-sobre-a-mesa_181624-35847.jpg?w=1380&t=st=1699386986~exp=1699387586~hmac=27f97018d94f0be7d20da3f23f6358ba5a2707a708484a4824354cc0dd69d919",
-    },
-    {
-      id: "2",
-      name: "tomate",
-      src: "https://img.freepik.com/fotos-gratis/closeup-de-carne-assada-com-molho-legumes-e-batatas-fritas-em-um-prato-sobre-a-mesa_181624-35847.jpg?w=1380&t=st=1699386986~exp=1699387586~hmac=27f97018d94f0be7d20da3f23f6358ba5a2707a708484a4824354cc0dd69d919",
-    },
-    {
-      id: "3",
-      name: "repolho",
-      src: "https://img.freepik.com/fotos-gratis/closeup-de-carne-assada-com-molho-legumes-e-batatas-fritas-em-um-prato-sobre-a-mesa_181624-35847.jpg?w=1380&t=st=1699386986~exp=1699387586~hmac=27f97018d94f0be7d20da3f23f6358ba5a2707a708484a4824354cc0dd69d919",
-    },
-    {
-      id: "4",
-      name: "pao",
-      src: "https://img.freepik.com/fotos-gratis/closeup-de-carne-assada-com-molho-legumes-e-batatas-fritas-em-um-prato-sobre-a-mesa_181624-35847.jpg?w=1380&t=st=1699386986~exp=1699387586~hmac=27f97018d94f0be7d20da3f23f6358ba5a2707a708484a4824354cc0dd69d919",
-    },
-    {
-      id: "3",
-      name: "repolho",
-      src: "https://img.freepik.com/fotos-gratis/closeup-de-carne-assada-com-molho-legumes-e-batatas-fritas-em-um-prato-sobre-a-mesa_181624-35847.jpg?w=1380&t=st=1699386986~exp=1699387586~hmac=27f97018d94f0be7d20da3f23f6358ba5a2707a708484a4824354cc0dd69d919",
-    },
-    {
-      id: "4",
-      name: "pao",
-      src: "https://img.freepik.com/fotos-gratis/closeup-de-carne-assada-com-molho-legumes-e-batatas-fritas-em-um-prato-sobre-a-mesa_181624-35847.jpg?w=1380&t=st=1699386986~exp=1699387586~hmac=27f97018d94f0be7d20da3f23f6358ba5a2707a708484a4824354cc0dd69d919",
-    },
-  ];
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth < 768) {
+        setIsMobile(true);
+        setIsDesktop(false);
+      }
+    }
 
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    async function fetchDetailsDishes() {
+      const response = await api.get(`/dishes/${params.id}`);
+      setDishDetails(response.data);
+    }
+
+    fetchDetailsDishes();
+  }, []);
   return (
     <Styles.Container>
       <Header isSearch={false} />
       <Styles.Content>
-        <DishesImg src="https://img.freepik.com/fotos-gratis/closeup-de-carne-assada-com-molho-legumes-e-batatas-fritas-em-um-prato-sobre-a-mesa_181624-35847.jpg?w=1380&t=st=1699386986~exp=1699387586~hmac=27f97018d94f0be7d20da3f23f6358ba5a2707a708484a4824354cc0dd69d919" />
+        {isDesktop && <ButtonLink marginLeft="500px" to="/" title="Voltar" />}
+        {isMobile && <ButtonLink marginLeft="50px" to="/" title="Voltar" />}
 
-        <Styles.Details>
-          <h1>Salada Ravanello</h1>
-          <p>
-            Rabanetes, folhas verdes e molho agridoce salpicados com gergelim.
-          </p>
+        <Styles.ContentMain>
+          <DishesImg src={dishUrlImg} />
 
-          <Styles.IngredientsContent>
-            {ingredients.map((ingredient, index) => (
-              <IngredientsImg
-                key={String(index)}
-                src={ingredient.src}
-                name={ingredient.name}
+          <Styles.Details>
+            <h1>{dishDetails?.name}</h1>
+            <p>{dishDetails?.description}</p>
+
+            <Styles.IngredientsContent>
+              {dishDetails?.ingredient.map((ingredient, index) => (
+                <IngredientsImg
+                  key={String(index)}
+                  src={ingredient.image}
+                  name={ingredient.name}
+                />
+              ))}
+            </Styles.IngredientsContent>
+
+            <Styles.Counter>
+              <h2>R$ {dishDetails?.price}</h2>
+              <button className="btn-plus-minus" onClick={addedMinusCounter}>
+                <AiOutlineMinus />
+              </button>
+              {formattedCounter}
+              <button className="btn-plus-minus" onClick={addedMoreCounter}>
+                <AiOutlinePlus />
+              </button>
+
+              <Button
+                width="5.75rem"
+                type="button"
+                title="incluir"
+                icon={PiNewspaperClipping}
               />
-            ))}
-          </Styles.IngredientsContent>
-
-          <Styles.Counter>
-            <h2>R$ 25,97</h2>
-            <button className="btn-plus-minus" onClick={addedMinusCounter}>
-              <AiOutlineMinus />
-            </button>
-            {formattedCounter}
-            <button className="btn-plus-minus" onClick={addedMoreCounter}>
-              <AiOutlinePlus />
-            </button>
-
-            <Button
-              width="5.75rem"
-              type="button"
-              title="incluir"
-              icon={PiNewspaperClipping}
-            />
-          </Styles.Counter>
-        </Styles.Details>
+            </Styles.Counter>
+          </Styles.Details>
+        </Styles.ContentMain>
       </Styles.Content>
       <Footer />
     </Styles.Container>

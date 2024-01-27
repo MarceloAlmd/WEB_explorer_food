@@ -4,5 +4,6 @@ export interface ButtonLinkProps {
   fontSize?: string;
   icon?: string;
   color?: string;
+  marginLeft?: string;
   onClick?: () => void;
 }

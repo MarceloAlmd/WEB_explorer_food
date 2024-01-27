@@ -8,6 +8,7 @@ export function ButtonLink({
   icon: Icon,
   onClick,
   color,
+  marginLeft,
   ...rest
 }: ButtonLinkProps) {
   return (
@@ -15,6 +16,7 @@ export function ButtonLink({
       style={{
         fontSize: fontSize,
         color: color,
+        marginLeft: marginLeft,
       }}
       to={to}
       onClick={onClick}
