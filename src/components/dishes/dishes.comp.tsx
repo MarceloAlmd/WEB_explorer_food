@@ -2,18 +2,22 @@ import { useState, useEffect } from "react";
 import { DishesProps } from "./dishes";
 import * as Styles from "./dishes.comp.styles";
 import { AiFillHeart, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { CiEdit } from "react-icons/ci";
 import { Button } from "../button/button.comp";
 import { api } from "../../api/axios";
+import { useAuth } from "../../context/auth.context";
 
 export function Dishes({
   title,
   description,
   price,
-  onClick,
+  showDetails,
+  onEdit,
   favorite,
   img,
   ...rest
 }: DishesProps) {
+  const { user } = useAuth();
   const [counter, setCounter] = useState(1);
   const [isFavorite, setIsFavorite] = useState(favorite);
 
@@ -59,18 +63,28 @@ export function Dishes({
     }
   }, [isFavorite, title]);
   return (
-    <Styles.Container onClick={onClick} {...rest}>
-      <Styles.Favorite onClick={toggleFavorite}>
-        <AiFillHeart style={{ color: isFavorite ? "#92000E" : "#7C7C8A" }} />
-      </Styles.Favorite>
+    <Styles.Container {...rest}>
+      {user.role === "customer" && (
+        <Styles.Favorite onClick={toggleFavorite}>
+          <AiFillHeart style={{ color: isFavorite ? "#92000E" : "#7C7C8A" }} />
+        </Styles.Favorite>
+      )}
 
-      <Styles.DishImg src={urlImg} />
+      {user.role === "admin" && (
+        <Styles.EditDish onClick={onEdit}>
+          <CiEdit />
+        </Styles.EditDish>
+      )}
 
-      <Styles.Info>
-        <h2>{title}</h2>
-        <span>{description}</span>
-        <h3>{`R$ ${price}`}</h3>
-      </Styles.Info>
+      <Styles.ShowDetailsCard onClick={showDetails}>
+        <Styles.DishImg src={urlImg} />
+
+        <Styles.Info>
+          <h2>{title}</h2>
+          <span>{description}</span>
+          <h3>{`R$ ${price}`}</h3>
+        </Styles.Info>
+      </Styles.ShowDetailsCard>
 
       <Styles.Counter>
         <button onClick={addedMinusCounter}>

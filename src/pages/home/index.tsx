@@ -20,6 +20,10 @@ export function Home() {
     navigate(`/details/${id}`);
   };
 
+  const handleEdit = (id: number) => {
+    navigate(`/edit/${id}`);
+  };
+
   useEffect(() => {
     async function fetchAllDishes() {
       const response = await api.get(`/dishes?name=${name}`);
@@ -68,7 +72,8 @@ export function Home() {
                       title={item.name}
                       description={item.description}
                       price={item.price}
-                      onClick={() => handleDetails(item.id)}
+                      showDetails={() => handleDetails(item.id)}
+                      onEdit={() => handleEdit(item.id)}
                       img={item.image}
                     />
                   </Styles.SwiperContent>
@@ -93,7 +98,8 @@ export function Home() {
                       title={item.name}
                       description={item.description}
                       price={item.price}
-                      onClick={() => handleDetails(item.id)}
+                      showDetails={() => handleDetails(item.id)}
+                      onEdit={() => handleEdit(item.id)}
                       img={item.image}
                     />
                   </Styles.SwiperContent>
@@ -118,7 +124,8 @@ export function Home() {
                       title={item.name}
                       description={item.description}
                       price={item.price}
-                      onClick={() => handleDetails(item.id)}
+                      showDetails={() => handleDetails(item.id)}
+                      onEdit={() => handleEdit(item.id)}
                       img={item.image}
                     />
                   </Styles.SwiperContent>

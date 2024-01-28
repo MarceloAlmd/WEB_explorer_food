@@ -80,6 +80,8 @@ export const Counter = styled.footer`
 
   margin: 1rem 0;
 
+  z-index: 1000;
+
   gap: 1rem;
   > button:nth-child(1),
   button:nth-child(2) {
@@ -90,5 +92,28 @@ export const Counter = styled.footer`
       color: ${({ theme }) => theme.colors.text.primary};
       font-size: 1.5rem;
     }
+  }
+`;
+
+export const ShowDetailsCard = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`;
+
+export const EditDish = styled.button`
+  background: none;
+  border: none;
+
+  display: flex;
+  align-self: flex-end;
+
+  margin-right: 0.5rem;
+  margin-top: 0.5rem;
+
+  > svg {
+    color: ${({ theme }) => theme.colors.text.primary};
+    font-size: 1.5rem;
   }
 `;

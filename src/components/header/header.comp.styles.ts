@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { BREAK_POINTS } from "../../utils/breakPoints";
+import { Link } from "react-router-dom";
 
 export const Container = styled.header`
   grid-area: header;
   position: fixed;
   width: 100%;
   height: 6.5rem;
-
   background: ${({ theme }) => theme.colors.primary};
 
   display: flex;
@@ -41,26 +41,15 @@ export const SignOut = styled.button`
   align-items: center;
   justify-content: center;
   color: ${({ theme }) => theme.colors.text.primary};
+  line-height: 0;
 `;
 
-export const IconButton = styled.a`
+export const IconButton = styled(Link)`
   font-size: 2rem;
   display: flex;
+  line-height: 0;
   align-items: center;
   justify-content: center;
 
-  position: relative;
-
-  > span {
-    width: 10px;
-    height: 10px;
-
-    background: ${({ theme }) => theme.colors.secondary};
-    border-radius: 50%;
-
-    position: absolute;
-
-    top: 1px;
-    right: -1px;
-  }
+  color: ${({ theme }) => theme.colors.text.primary};
 `;

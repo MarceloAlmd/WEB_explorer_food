@@ -14,7 +14,12 @@ export function UpdateOrNewDish() {
       <Header />
 
       <Styles.Content>
-        <ButtonLink title="Voltar" fontSize="1.5rem" icon={IoIosArrowBack} />
+        <ButtonLink
+          to="/"
+          title="Voltar"
+          fontSize="1.5rem"
+          icon={IoIosArrowBack}
+        />
 
         <Styles.Title>Editar prato</Styles.Title>
 

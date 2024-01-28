@@ -128,3 +128,7 @@ export function Details() {
     </Styles.Container>
   );
 }
+
+// renderizar com base na role
+
+//  remover a categoria ao pesquisar

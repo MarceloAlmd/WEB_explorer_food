@@ -13,7 +13,7 @@ import { useAuth } from "../../context/auth.context";
 import { Modal } from "../modal/modal.comp";
 
 export function Header({ isSearch = false, searchDishes }: HeaderProps) {
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
 
   const [myRequests] = useState(6);
   const [desktop, setDesktop] = useState(true);
@@ -55,7 +55,7 @@ export function Header({ isSearch = false, searchDishes }: HeaderProps) {
       <a href="/">
         <Styles.Logo src="/logo_explorer.svg" />
       </a>
-      {desktop && (
+      {desktop && user.role === " customer" && (
         <>
           <ButtonLink title="Meus Favoritos" to="/favorite" />
           <Link className="buttonCart" to="/cart">
@@ -63,29 +63,24 @@ export function Header({ isSearch = false, searchDishes }: HeaderProps) {
           </Link>
         </>
       )}
-      {mobile && (
-        <Styles.IconButton>
+      {mobile && user.role === " customer" && (
+        <Styles.IconButton to="/">
           <AiOutlineHeart />
-          <span></span>
         </Styles.IconButton>
       )}
       {isSearch && <Search searchDishes={searchDishes} />}
 
-      {desktop && (
-        <Button
-          icon={PiNewspaperClipping}
-          width="10%"
-          type="button"
-          title={`Meu Pedido (${myRequests})`}
-          onClick={handleNavigateToRequests}
-        />
-      )}
-
-      {mobile && (
-        <Styles.IconButton>
-          <PiNewspaperClipping />
-          <span></span>
-        </Styles.IconButton>
+      {desktop && user.role === "admin" && (
+        <>
+          <span>Administrador</span>
+          <Button
+            icon={PiNewspaperClipping}
+            width="10%"
+            type="button"
+            title={`Meu Pedido (${myRequests})`}
+            onClick={handleNavigateToRequests}
+          />
+        </>
       )}
 
       <Styles.SignOut
@@ -95,6 +90,12 @@ export function Header({ isSearch = false, searchDishes }: HeaderProps) {
       >
         <FiLogOut />
       </Styles.SignOut>
+
+      {mobile && (
+        <Styles.IconButton to="/requests">
+          <PiNewspaperClipping />
+        </Styles.IconButton>
+      )}
 
       {showModal && (
         <Modal
