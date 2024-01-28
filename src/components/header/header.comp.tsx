@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { CiSquarePlus } from "react-icons/ci";
 import { Button } from "../button/button.comp";
 import { ButtonLink } from "../buttonLink/buttonLink.comp";
 import { IoCartOutline } from "react-icons/io5";
@@ -55,7 +56,7 @@ export function Header({ isSearch = false, searchDishes }: HeaderProps) {
       <a href="/">
         <Styles.Logo src="/logo_explorer.svg" />
       </a>
-      {desktop && user.role === " customer" && (
+      {desktop && user.role === "customer" && (
         <>
           <ButtonLink title="Meus Favoritos" to="/favorite" />
           <Link className="buttonCart" to="/cart">
@@ -68,19 +69,28 @@ export function Header({ isSearch = false, searchDishes }: HeaderProps) {
           <AiOutlineHeart />
         </Styles.IconButton>
       )}
-      {isSearch && <Search searchDishes={searchDishes} />}
+      {isSearch ? (
+        <Search searchDishes={searchDishes} />
+      ) : (
+        <div className="lineBlock"></div>
+      )}
 
       {desktop && user.role === "admin" && (
         <>
+          <Styles.IconButton to="/create">
+            <CiSquarePlus />
+          </Styles.IconButton>
           <span>Administrador</span>
-          <Button
-            icon={PiNewspaperClipping}
-            width="10%"
-            type="button"
-            title={`Meu Pedido (${myRequests})`}
-            onClick={handleNavigateToRequests}
-          />
         </>
+      )}
+      {desktop && (
+        <Button
+          icon={PiNewspaperClipping}
+          width="10%"
+          type="button"
+          title={`Meu Pedido (${myRequests})`}
+          onClick={handleNavigateToRequests}
+        />
       )}
 
       <Styles.SignOut

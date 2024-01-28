@@ -1,3 +1,5 @@
+import { IoIosArrowBack } from "react-icons/io";
+import { ButtonLink } from "../../components/buttonLink/buttonLink.comp";
 import { Category } from "../../components/category/category.comp";
 import { Footer } from "../../components/footer/footer.comp";
 import { Header } from "../../components/header/header.comp";
@@ -9,6 +11,13 @@ export function Requests() {
     <Styles.Container>
       <Header />
       <Styles.Content>
+        <ButtonLink
+          to="/"
+          title="Voltar"
+          fontSize="1.5rem"
+          icon={IoIosArrowBack}
+          marginLeft="-0.8rem"
+        />
         <Category title="Pedidos">
           <Styles.Table>
             <table>

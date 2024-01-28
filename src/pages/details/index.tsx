@@ -10,6 +10,7 @@ import { IngredientsImg } from "./components/ingredientsImg/ingredientsImg.comp"
 import { useParams } from "react-router-dom";
 import { api } from "../../api/axios";
 import { ButtonLink } from "../../components/buttonLink/buttonLink.comp";
+import { IoIosArrowBack } from "react-icons/io";
 
 interface ingredientsTypes {
   created_at: string;
@@ -84,8 +85,25 @@ export function Details() {
     <Styles.Container>
       <Header isSearch={false} />
       <Styles.Content>
-        {isDesktop && <ButtonLink marginLeft="500px" to="/" title="Voltar" />}
-        {isMobile && <ButtonLink marginLeft="50px" to="/" title="Voltar" />}
+        {isDesktop && (
+          <ButtonLink
+            to="/"
+            title="Voltar"
+            fontSize="1.5rem"
+            icon={IoIosArrowBack}
+            marginLeft="500px"
+          />
+        )}
+
+        {isMobile && (
+          <ButtonLink
+            to="/"
+            title="Voltar"
+            fontSize="1.5rem"
+            icon={IoIosArrowBack}
+            marginLeft="50px"
+          />
+        )}
 
         <Styles.ContentMain>
           <DishesImg src={dishUrlImg} />
@@ -115,7 +133,6 @@ export function Details() {
               </button>
 
               <Button
-                width="5.75rem"
                 type="button"
                 title="incluir"
                 icon={PiNewspaperClipping}
@@ -129,6 +146,4 @@ export function Details() {
   );
 }
 
-// renderizar com base na role
-
-//  remover a categoria ao pesquisar
+//  remover a categoria ao pesquisar fazer amanha

@@ -26,7 +26,7 @@ export const Content = styled.div`
   max-width: 66.5rem;
   width: 100%;
 
-  margin: 0 auto;
+  margin: 1rem auto;
 `;
 
 export const Table = styled.div`

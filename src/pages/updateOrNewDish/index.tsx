@@ -1,4 +1,5 @@
 import { ButtonLink } from "../../components/buttonLink/buttonLink.comp";
+import { useLocation } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { Footer } from "../../components/footer/footer.comp";
 import { Header } from "../../components/header/header.comp";
@@ -9,6 +10,10 @@ import { InputImage } from "../../components/inputImage/inputImage.comp";
 import { Ingredients } from "../../components/ingredients/ingredients.comp";
 
 export function UpdateOrNewDish() {
+  const location = useLocation();
+
+  const title = location.pathname === "/create" ? "Novo Prato" : "Editar prato";
+
   return (
     <Styles.Container>
       <Header />
@@ -21,7 +26,7 @@ export function UpdateOrNewDish() {
           icon={IoIosArrowBack}
         />
 
-        <Styles.Title>Editar prato</Styles.Title>
+        <Styles.Title>{title}</Styles.Title>
 
         <Styles.FirstWrapper>
           <InputImage label="Imagem do prato" />
