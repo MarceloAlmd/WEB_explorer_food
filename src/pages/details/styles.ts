@@ -67,6 +67,8 @@ export const Counter = styled.footer`
   > h2 {
     font-size: 2rem;
     font-weight: 400;
+    display: flex;
+    gap: 0.5rem;
     color: ${({ theme }) => theme.colors.text.price};
   }
 

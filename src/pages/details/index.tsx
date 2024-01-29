@@ -11,6 +11,7 @@ import { useParams } from "react-router-dom";
 import { api } from "../../api/axios";
 import { ButtonLink } from "../../components/buttonLink/buttonLink.comp";
 import { IoIosArrowBack } from "react-icons/io";
+import { useAuth } from "../../context/auth.context";
 
 interface ingredientsTypes {
   created_at: string;
@@ -36,6 +37,7 @@ interface DetailsTypes {
 }
 
 export function Details() {
+  const { user } = useAuth();
   const [isMobile, setIsMobile] = useState(false);
   const [isDesktop, setIsDesktop] = useState(true);
   const [counter, setCounter] = useState(1);
@@ -123,20 +125,31 @@ export function Details() {
             </Styles.IngredientsContent>
 
             <Styles.Counter>
-              <h2>R$ {dishDetails?.price}</h2>
-              <button className="btn-plus-minus" onClick={addedMinusCounter}>
-                <AiOutlineMinus />
-              </button>
-              {formattedCounter}
-              <button className="btn-plus-minus" onClick={addedMoreCounter}>
-                <AiOutlinePlus />
-              </button>
+              <h2>
+                <span>R$</span>
+                {dishDetails?.price}
+              </h2>
 
-              <Button
-                type="button"
-                title="incluir"
-                icon={PiNewspaperClipping}
-              />
+              {user.role === "customer" && (
+                <>
+                  <button
+                    className="btn-plus-minus"
+                    onClick={addedMinusCounter}
+                  >
+                    <AiOutlineMinus />
+                  </button>
+                  {formattedCounter}
+                  <button className="btn-plus-minus" onClick={addedMoreCounter}>
+                    <AiOutlinePlus />
+                  </button>
+
+                  <Button
+                    type="button"
+                    title="incluir"
+                    icon={PiNewspaperClipping}
+                  />
+                </>
+              )}
             </Styles.Counter>
           </Styles.Details>
         </Styles.ContentMain>

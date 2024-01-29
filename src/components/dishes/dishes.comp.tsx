@@ -86,17 +86,21 @@ export function Dishes({
         </Styles.Info>
       </Styles.ShowDetailsCard>
 
-      <Styles.Counter>
-        <button onClick={addedMinusCounter}>
-          <AiOutlineMinus />
-        </button>
-        {formattedCounter}
-        <button onClick={addedMoreCounter}>
-          <AiOutlinePlus />
-        </button>
+      {user.role === "customer" ? (
+        <Styles.Counter>
+          <button onClick={addedMinusCounter}>
+            <AiOutlineMinus />
+          </button>
+          {formattedCounter}
+          <button onClick={addedMoreCounter}>
+            <AiOutlinePlus />
+          </button>
 
-        <Button width="5.75rem" type="button" title="incluir" />
-      </Styles.Counter>
+          <Button width="5.75rem" type="button" title="incluir" />
+        </Styles.Counter>
+      ) : (
+        <Styles.Counter></Styles.Counter>
+      )}
     </Styles.Container>
   );
 }

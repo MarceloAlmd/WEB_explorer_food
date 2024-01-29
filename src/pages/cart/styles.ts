@@ -37,9 +37,10 @@ export const Container = styled.div`
 export const Content = styled.div`
   grid-area: content;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2.5rem;
+  flex-direction: column;
+  max-width: 950px;
+  width: 100%;
+  margin: 1rem auto;
 `;
 
 export const MyRequests = styled.aside`
@@ -183,4 +184,11 @@ export const PaymentMethod = styled.div`
       opacity: 0;
     }
   }
+`;
+
+export const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
 `;

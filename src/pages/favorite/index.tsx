@@ -4,40 +4,23 @@ import { Footer } from "../../components/footer/footer.comp";
 import { Header } from "../../components/header/header.comp";
 import * as Styles from "./styles";
 import { Category } from "../../components/category/category.comp";
+import { api } from "../../api/axios";
+import { DishesDataTypes } from "../home/home";
+import { EmptyFavorites } from "./components/empty/empty.comp";
 
 export function Favorite() {
   const [slidePerView, setSlidePerView] = useState(3);
+  const [data, setData] = useState<DishesDataTypes[]>([]);
 
-  const data = [
-    {
-      id: "1",
-      title: "Salada Ravanello",
-      description:
-        "Rabanetes, folhas verdes e molho agridoce salpicados com gergelim",
-      price: 47.99,
-    },
-    {
-      id: "2",
-      title: "Salada Batata",
-      description:
-        "Rabanetes, folhas verdes e molho agridoce salpicados com gergelim",
-      price: 47.99,
-    },
-    {
-      id: "3",
-      title: "Queijo quente",
-      description:
-        "Rabanetes, folhas verdes e molho agridoce salpicados com gergelim",
-      price: 47.99,
-    },
-    {
-      id: "4",
-      title: "Frango assado",
-      description:
-        "Rabanetes, folhas verdes e molho agridoce salpicados com gergelim",
-      price: 47.99,
-    },
-  ];
+  useEffect(() => {
+    async function fetchFavorites() {
+      const response = await api.get("/favorites");
+
+      setData(response.data);
+    }
+
+    fetchFavorites();
+  }, []);
 
   useEffect(() => {
     function handleResize() {
@@ -58,24 +41,29 @@ export function Favorite() {
     <Styles.Container>
       <Header />
       <Styles.Content>
-        <Category title="Meus Favoritos">
-          <Styles.SwiperContainer
-            pagination={{ clickable: true }}
-            navigation
-            slidesPerView={slidePerView}
-            loop={true}
-          >
-            {data.map((item) => (
-              <Styles.SwiperContent key={String(item.id)}>
-                <Dishes
-                  title={item.title}
-                  description={item.description}
-                  price={item.price}
-                />
-              </Styles.SwiperContent>
-            ))}
-          </Styles.SwiperContainer>
-        </Category>
+        {data.length === 0 ? (
+          <EmptyFavorites />
+        ) : (
+          <Category title="Meus Favoritos">
+            <Styles.SwiperContainer
+              pagination={{ clickable: true }}
+              navigation
+              slidesPerView={slidePerView}
+              loop={true}
+            >
+              {data.map((item) => (
+                <Styles.SwiperContent key={String(item.id)}>
+                  <Dishes
+                    title={item.name}
+                    description={item.description}
+                    price={item.price}
+                    img={item.image}
+                  />
+                </Styles.SwiperContent>
+              ))}
+            </Styles.SwiperContainer>
+          </Category>
+        )}
       </Styles.Content>
       <Footer />
     </Styles.Container>

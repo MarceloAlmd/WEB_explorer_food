@@ -57,15 +57,17 @@ export function Header({ isSearch = false, searchDishes }: HeaderProps) {
         <Styles.Logo src="/logo_explorer.svg" />
       </a>
       {desktop && user.role === "customer" && (
-        <>
-          <ButtonLink title="Meus Favoritos" to="/favorite" />
-          <Link className="buttonCart" to="/cart">
-            <IoCartOutline />
-          </Link>
-        </>
+        <ButtonLink title="Meus Favoritos" to="/favorite" />
       )}
-      {mobile && user.role === " customer" && (
-        <Styles.IconButton to="/">
+
+      {user.role !== "admin" && (
+        <Link className="buttonCart" to="/cart">
+          <IoCartOutline />
+        </Link>
+      )}
+
+      {mobile && user.role === "customer" && (
+        <Styles.IconButton to="/favorite">
           <AiOutlineHeart />
         </Styles.IconButton>
       )}
@@ -93,6 +95,12 @@ export function Header({ isSearch = false, searchDishes }: HeaderProps) {
         />
       )}
 
+      {mobile && (
+        <Styles.IconButton to="/requests">
+          <PiNewspaperClipping />
+        </Styles.IconButton>
+      )}
+
       <Styles.SignOut
         onClick={() => {
           setShowModal(true);
@@ -100,12 +108,6 @@ export function Header({ isSearch = false, searchDishes }: HeaderProps) {
       >
         <FiLogOut />
       </Styles.SignOut>
-
-      {mobile && (
-        <Styles.IconButton to="/requests">
-          <PiNewspaperClipping />
-        </Styles.IconButton>
-      )}
 
       {showModal && (
         <Modal

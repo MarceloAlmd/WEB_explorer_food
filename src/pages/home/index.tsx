@@ -13,7 +13,6 @@ export function Home() {
   const navigate = useNavigate();
 
   const [data, setData] = useState<DishesDataTypes[]>([]);
-
   const [name, setName] = useState<string>("");
 
   const handleDetails = (id: number) => {
@@ -82,7 +81,6 @@ export function Home() {
             })}
           </Styles.SwiperContainer>
         </Category>
-
         <Category title="Sobremesas">
           <Styles.SwiperContainer
             pagination={{ clickable: true }}
@@ -109,7 +107,7 @@ export function Home() {
           </Styles.SwiperContainer>
         </Category>
 
-        <Category title="Sucos">
+        <Category title="Bebidas">
           <Styles.SwiperContainer
             pagination={{ clickable: true }}
             navigation
