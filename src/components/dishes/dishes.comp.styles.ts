@@ -28,7 +28,7 @@ export const DishImg = styled.img`
   margin: 1rem auto;
 `;
 
-export const Favorite = styled.button`
+export const AddFavoriteOrRemoveFavorite = styled.button`
   background: none;
   border: none;
 
