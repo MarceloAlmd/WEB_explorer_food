@@ -10,7 +10,9 @@ import { EmptyFavorites } from "./components/empty/empty.comp";
 
 export function Favorite() {
   const [slidePerView, setSlidePerView] = useState(3);
+  const [dishes, setDishes] = useState([]);
   const [data, setData] = useState<DishesDataTypes[]>([]);
+  console.log(data);
 
   useEffect(() => {
     async function fetchFavorites() {
@@ -20,7 +22,15 @@ export function Favorite() {
     }
 
     fetchFavorites();
-  }, []);
+  }, [dishes]);
+
+  const handleToggleFavorite = async (id: number, isFavorite: boolean) => {
+    const response = await api.patch(`/favorites/favorites/${id}`, {
+      isFavorite: isFavorite ? 1 : 0,
+    });
+
+    setDishes(response.data);
+  };
 
   useEffect(() => {
     function handleResize() {
@@ -48,7 +58,7 @@ export function Favorite() {
             <Styles.SwiperContainer
               pagination={{ clickable: true }}
               navigation
-              slidesPerView={slidePerView}
+              slidesPerView={data.length === 1 || 2 ? 1 : slidePerView}
               loop={true}
             >
               {data.map((item) => (
@@ -58,6 +68,7 @@ export function Favorite() {
                     description={item.description}
                     price={item.price}
                     img={item.image}
+                    removeFavorite={() => handleToggleFavorite(item.id, false)}
                   />
                 </Styles.SwiperContent>
               ))}

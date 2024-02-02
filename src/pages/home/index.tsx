@@ -7,13 +7,15 @@ import { useNavigate } from "react-router-dom";
 import * as Styles from "./styles";
 import { api } from "../../api/axios";
 import { DishesDataTypes } from "./home";
+import { Alert } from "../../components/alert/alert.comp";
 
 export function Home() {
   const [slidePerView, setSlidePerView] = useState(3);
+  const [showAlert, setShowAlert] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const [data, setData] = useState<DishesDataTypes[]>([]);
-  const [dishFavorite, setDishFavorite] = useState<string>();
+
   const [name, setName] = useState<string>("");
 
   const handleDetails = (id: number) => {
@@ -25,11 +27,16 @@ export function Home() {
   };
 
   const handleToggleFavorite = async (id: number, isFavorite: boolean) => {
-    const response = await api.patch(`/favorites/favorites/${id}`, {
+    await api.patch(`/favorites/favorites/${id}`, {
       isFavorite: isFavorite ? 1 : 0,
     });
 
-    setDishFavorite(response.data.isFavorite);
+    if (isFavorite === true) {
+      setShowAlert(true);
+      setInterval(() => {
+        setShowAlert(false);
+      }, 2000);
+    }
   };
 
   useEffect(() => {
@@ -87,7 +94,6 @@ export function Home() {
                       removeFavorite={() =>
                         handleToggleFavorite(item.id, false)
                       }
-                      favorite={dishFavorite}
                     />
                   </Styles.SwiperContent>
                 );
@@ -113,6 +119,10 @@ export function Home() {
                       showDetails={() => handleDetails(item.id)}
                       onEdit={() => handleEdit(item.id)}
                       img={item.image}
+                      addFavorite={() => handleToggleFavorite(item.id, true)}
+                      removeFavorite={() =>
+                        handleToggleFavorite(item.id, false)
+                      }
                     />
                   </Styles.SwiperContent>
                 );
@@ -139,6 +149,10 @@ export function Home() {
                       showDetails={() => handleDetails(item.id)}
                       onEdit={() => handleEdit(item.id)}
                       img={item.image}
+                      addFavorite={() => handleToggleFavorite(item.id, true)}
+                      removeFavorite={() =>
+                        handleToggleFavorite(item.id, false)
+                      }
                     />
                   </Styles.SwiperContent>
                 );
@@ -146,6 +160,7 @@ export function Home() {
             })}
           </Styles.SwiperContainer>
         </Category>
+        {showAlert && <Alert message="O prato foi adicionado aos favoritos" />}
       </Styles.Content>
 
       <Footer />

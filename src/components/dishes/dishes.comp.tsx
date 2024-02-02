@@ -7,6 +7,7 @@ import { CiEdit } from "react-icons/ci";
 import { Button } from "../button/button.comp";
 import { api } from "../../api/axios";
 import { useAuth } from "../../context/auth.context";
+import { useLocation } from "react-router-dom";
 
 export function Dishes({
   title,
@@ -14,7 +15,6 @@ export function Dishes({
   price,
   showDetails,
   onEdit,
-  favorite,
   img,
   addFavorite,
   removeFavorite,
@@ -22,6 +22,8 @@ export function Dishes({
 }: DishesProps) {
   const { user } = useAuth();
   const [counter, setCounter] = useState(1);
+
+  const location = useLocation();
 
   const urlImg = `${api.defaults.baseURL}/files/${img}`;
 
@@ -42,7 +44,7 @@ export function Dishes({
     <Styles.Container {...rest}>
       {user.role === "customer" && (
         <>
-          {favorite === 1 ? (
+          {location.pathname === "/favorite" ? (
             <Styles.AddFavoriteOrRemoveFavorite onClick={removeFavorite}>
               <MdFavorite style={{ color: "#92000E" }} />
             </Styles.AddFavoriteOrRemoveFavorite>
