@@ -7,10 +7,19 @@ import { MdPix } from "react-icons/md";
 import { FaRegCreditCard } from "react-icons/fa6";
 import { IoIosArrowBack } from "react-icons/io";
 import * as Styles from "./styles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "../../components/input/input.comp";
 import { Button } from "../../components/button/button.comp";
 import { ButtonLink } from "../../components/buttonLink/buttonLink.comp";
+import { api } from "../../api/axios";
+import { EmptyCart } from "./components/emptyCart/emptyCart.comp";
+
+interface cartItemsTypes {
+  amount: number;
+  img: string;
+  price: string | number;
+  title: string;
+}
 
 export function Cart() {
   const [isPixActive, setIsPixActive] = useState(true);
@@ -20,6 +29,9 @@ export function Cart() {
   const [input, setInput] = useState("");
   const [validity, setValidity] = useState("");
   const [cvc, setCvc] = useState("");
+  const [cartItems, setCartItems] = useState<cartItemsTypes[]>([]);
+
+  console.log(cartItems);
 
   const disabled = input.length < 16 || validity.length < 5 || cvc.length < 3;
 
@@ -43,6 +55,32 @@ export function Cart() {
     setShowMyRequest(true);
   }
 
+  const paymentItems = () => {
+    localStorage.removeItem("@explore-food:cart");
+    setCartItems([]);
+  };
+
+  function removeFromCart(itemIndex: any) {
+    const cartAtStorage = localStorage.getItem("@explore-food:cart");
+    if (!cartAtStorage) return;
+
+    const cartItems = JSON.parse(cartAtStorage);
+
+    cartItems.splice(itemIndex, 1);
+
+    localStorage.setItem("@explore-food:cart", JSON.stringify(cartItems));
+
+    setCartItems(cartItems);
+  }
+
+  useEffect(() => {
+    const cartAtStorage = localStorage.getItem("@explore-food:cart");
+
+    if (cartAtStorage) {
+      setCartItems(JSON.parse(cartAtStorage));
+    }
+  }, [cartItems]);
+
   return (
     <Styles.Container>
       <Header />
@@ -59,40 +97,28 @@ export function Cart() {
             <Styles.Header>Meu Pedido</Styles.Header>
 
             <Styles.ContentMyRequest>
-              <DishInCart
-                src="https://www.southernliving.com/thmb/pKa7sB3W1hp0r9ElK4NUYLOCXCw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/southern-living-27338_Green_Chile_Mac_And_Cheese_With_Chicken_303-7416f067f07f4bf3b6b8aaeddff4542b.jpg"
-                amount="1"
-                dish="Salad Radish"
-                value={24.98}
-              />
-              <DishInCart
-                src="https://www.southernliving.com/thmb/pKa7sB3W1hp0r9ElK4NUYLOCXCw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/southern-living-27338_Green_Chile_Mac_And_Cheese_With_Chicken_303-7416f067f07f4bf3b6b8aaeddff4542b.jpg"
-                amount="1"
-                dish="Salad Radish"
-                value={24.98}
-              />
-              <DishInCart
-                src="https://www.southernliving.com/thmb/pKa7sB3W1hp0r9ElK4NUYLOCXCw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/southern-living-27338_Green_Chile_Mac_And_Cheese_With_Chicken_303-7416f067f07f4bf3b6b8aaeddff4542b.jpg"
-                amount="1"
-                dish="Salad Radish"
-                value={24.98}
-              />
-              <DishInCart
-                src="https://www.southernliving.com/thmb/pKa7sB3W1hp0r9ElK4NUYLOCXCw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/southern-living-27338_Green_Chile_Mac_And_Cheese_With_Chicken_303-7416f067f07f4bf3b6b8aaeddff4542b.jpg"
-                amount="1"
-                dish="Salad Radish"
-                value={24.98}
-              />
-              <DishInCart
-                src="https://www.southernliving.com/thmb/pKa7sB3W1hp0r9ElK4NUYLOCXCw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/southern-living-27338_Green_Chile_Mac_And_Cheese_With_Chicken_303-7416f067f07f4bf3b6b8aaeddff4542b.jpg"
-                amount="1"
-                dish="Salad Radish"
-                value={24.98}
-              />
+              {cartItems.length === 0 && <EmptyCart />}
+              {cartItems.map((item) => {
+                const urlImg = `${api.defaults.baseURL}/files/${item.img}`;
+                return (
+                  <DishInCart
+                    src={urlImg}
+                    amount={item.amount}
+                    dish={item.title}
+                    value={item.price}
+                    onClick={() => removeFromCart(item.title)}
+                  />
+                );
+              })}
             </Styles.ContentMyRequest>
 
             <Styles.FooterMyRequest>
-              <h2>Total: R$ 103,88</h2>
+              {cartItems.length === 0 ? (
+                <h2>Total: R$ 0,00</h2>
+              ) : (
+                <h2>Total: R$ 103,88</h2>
+              )}
+
               <Button
                 type="button"
                 title="Pagar"
@@ -102,72 +128,77 @@ export function Cart() {
             </Styles.FooterMyRequest>
           </Styles.MyRequests>
 
-          <Styles.Payment data-show-payment={showPayment}>
-            <Styles.HeaderPayment>
-              <h2>Pagamento</h2>
+          {cartItems.length === 0 ? (
+            <div className="emptyCart"></div>
+          ) : (
+            <Styles.Payment data-show-payment={showPayment}>
+              <Styles.HeaderPayment>
+                <h2>Pagamento</h2>
 
-              <ButtonLink
-                title="Voltar"
-                icon={IoIosArrowBack}
-                onClick={handleShowMyRequest}
-                to="/cart"
-              />
-            </Styles.HeaderPayment>
-            <Styles.PaymentContent>
-              <header>
-                <ButtonPayment
-                  icon={MdPix}
-                  title="Pix"
-                  checked={isPixActive}
-                  handleButtonClick={handlePixButtonClick}
+                <ButtonLink
+                  title="Voltar"
+                  icon={IoIosArrowBack}
+                  onClick={handleShowMyRequest}
+                  to="/cart"
                 />
-                <ButtonPayment
-                  icon={FaRegCreditCard}
-                  title="Crédito"
-                  checked={isCreditActive}
-                  handleButtonClick={handleCreditButtonClick}
-                />
-              </header>
+              </Styles.HeaderPayment>
+              <Styles.PaymentContent>
+                <header>
+                  <ButtonPayment
+                    icon={MdPix}
+                    title="Pix"
+                    checked={isPixActive}
+                    handleButtonClick={handlePixButtonClick}
+                  />
+                  <ButtonPayment
+                    icon={FaRegCreditCard}
+                    title="Crédito"
+                    checked={isCreditActive}
+                    handleButtonClick={handleCreditButtonClick}
+                  />
+                </header>
 
-              <Styles.PaymentMethod>
-                {isPixActive && <img src="./delivered.svg" />}
+                <Styles.PaymentMethod>
+                  {isPixActive && <img src="./delivered.svg" />}
 
-                {isCreditActive && (
-                  <>
-                    <div className="inputContainer ">
-                      <Input
-                        type="text"
-                        label="Número do Cartao"
-                        placeholder="0000 0000 0000 0000"
-                        onChange={(e: any) => setInput(e.target.value)}
-                      />
-                      <div className="validityAndCVC">
+                  {isCreditActive && (
+                    <>
+                      <div className="inputContainer ">
                         <Input
                           type="text"
-                          label="Validade"
-                          placeholder="04/25"
-                          onChange={(e: any) => setValidity(e.target.value)}
+                          label="Número do Cartao"
+                          placeholder="0000 0000 0000 0000"
+                          onChange={(e: any) => setInput(e.target.value)}
                         />
-                        <Input
-                          type="text"
-                          label="CVC"
-                          placeholder="777"
-                          onChange={(e: any) => setCvc(e.target.value)}
+                        <div className="validityAndCVC">
+                          <Input
+                            type="text"
+                            label="Validade"
+                            placeholder="04/25"
+                            onChange={(e: any) => setValidity(e.target.value)}
+                          />
+                          <Input
+                            type="text"
+                            label="CVC"
+                            placeholder="777"
+                            onChange={(e: any) => setCvc(e.target.value)}
+                          />
+                        </div>
+
+                        <Button
+                          disabled={disabled}
+                          icon={PiNewspaperClipping}
+                          type="button"
+                          title="Finalizar pagamento"
+                          onClick={paymentItems}
                         />
                       </div>
-
-                      <Button
-                        disabled={disabled}
-                        icon={PiNewspaperClipping}
-                        type="button"
-                        title="Finalizar pagamento"
-                      />
-                    </div>
-                  </>
-                )}
-              </Styles.PaymentMethod>
-            </Styles.PaymentContent>
-          </Styles.Payment>
+                    </>
+                  )}
+                </Styles.PaymentMethod>
+              </Styles.PaymentContent>
+            </Styles.Payment>
+          )}
         </Styles.Wrapper>
       </Styles.Content>
       <Footer />

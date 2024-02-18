@@ -32,6 +32,13 @@ export const Container = styled.div`
   grid-template-rows: 6.5rem auto 4.813rem;
 
   grid-template-areas: "header" "content" "footer";
+
+  .emptyCart {
+    width: 100%;
+
+    height: 580px;
+    max-width: 33.125rem;
+  }
 `;
 
 export const Content = styled.div`

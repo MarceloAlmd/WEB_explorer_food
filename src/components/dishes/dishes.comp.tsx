@@ -8,6 +8,7 @@ import { Button } from "../button/button.comp";
 import { api } from "../../api/axios";
 import { useAuth } from "../../context/auth.context";
 import { useLocation } from "react-router-dom";
+import { Alert } from "../alert/alert.comp";
 
 export function Dishes({
   title,
@@ -21,7 +22,8 @@ export function Dishes({
   ...rest
 }: DishesProps) {
   const { user } = useAuth();
-  const [counter, setCounter] = useState(1);
+  const [counter, setCounter] = useState<number>(1);
+  const [showAlert, setShowAlert] = useState<boolean>(false);
 
   const location = useLocation();
 
@@ -40,6 +42,39 @@ export function Dishes({
   }
   const formattedCounter = counter.toString().padStart(2, "0");
 
+  const handleShowAlert = () => {
+    setShowAlert(true);
+
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 2000);
+  };
+
+  function handleAddCart(
+    img: string | undefined,
+    amount: number,
+    title: string,
+    price: number | string
+  ) {
+    const existingCartItems = localStorage.getItem("@explore-food:cart");
+    let cartItems = [];
+
+    if (existingCartItems) {
+      cartItems = JSON.parse(existingCartItems);
+    }
+
+    const newItemAtCart = {
+      img,
+      amount,
+      price,
+      title,
+    };
+
+    cartItems.push(newItemAtCart);
+
+    localStorage.setItem("@explore-food:cart", JSON.stringify(cartItems));
+    handleShowAlert();
+  }
   return (
     <Styles.Container {...rest}>
       {user.role === "customer" && (
@@ -82,11 +117,18 @@ export function Dishes({
             <AiOutlinePlus />
           </button>
 
-          <Button width="5.75rem" type="button" title="incluir" />
+          <Button
+            width="5.75rem"
+            type="button"
+            title="incluir"
+            onClick={() => handleAddCart(img, counter, title, price)}
+          />
         </Styles.Counter>
       ) : (
         <Styles.Counter></Styles.Counter>
       )}
+
+      {showAlert && <Alert message="adicionado ao carrinho" />}
     </Styles.Container>
   );
 }
