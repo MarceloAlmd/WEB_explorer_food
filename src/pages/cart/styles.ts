@@ -59,7 +59,7 @@ export const MyRequests = styled.aside`
   flex-direction: column;
 
   @media (max-width: ${BREAK_POINTS.ST}) {
-    &[data-show-myRequest="false"] {
+    &[data-show-myrequest="false"] {
       display: none;
     }
   }

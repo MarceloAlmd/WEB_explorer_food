@@ -30,9 +30,7 @@ export function Cart() {
   const [validity, setValidity] = useState("");
   const [cvc, setCvc] = useState("");
   const [cartItems, setCartItems] = useState<cartItemsTypes[]>([]);
-
   console.log(cartItems);
-
   const disabled = input.length < 16 || validity.length < 5 || cvc.length < 3;
 
   const handlePixButtonClick = () => {
@@ -79,7 +77,7 @@ export function Cart() {
     if (cartAtStorage) {
       setCartItems(JSON.parse(cartAtStorage));
     }
-  }, [cartItems]);
+  }, []);
 
   return (
     <Styles.Container>
@@ -93,7 +91,7 @@ export function Cart() {
         />
 
         <Styles.Wrapper>
-          <Styles.MyRequests data-show-myRequest={showMyRequest}>
+          <Styles.MyRequests data-show-myrequest={showMyRequest}>
             <Styles.Header>Meu Pedido</Styles.Header>
 
             <Styles.ContentMyRequest>
@@ -102,6 +100,7 @@ export function Cart() {
                 const urlImg = `${api.defaults.baseURL}/files/${item.img}`;
                 return (
                   <DishInCart
+                    key={item.title}
                     src={urlImg}
                     amount={item.amount}
                     dish={item.title}
@@ -168,20 +167,20 @@ export function Cart() {
                           type="text"
                           label="Número do Cartao"
                           placeholder="0000 0000 0000 0000"
-                          onChange={(e: any) => setInput(e.target.value)}
+                          onChange={(e) => setInput(e.target.value)}
                         />
                         <div className="validityAndCVC">
                           <Input
                             type="text"
                             label="Validade"
                             placeholder="04/25"
-                            onChange={(e: any) => setValidity(e.target.value)}
+                            onChange={(e) => setValidity(e.target.value)}
                           />
                           <Input
                             type="text"
                             label="CVC"
                             placeholder="777"
-                            onChange={(e: any) => setCvc(e.target.value)}
+                            onChange={(e) => setCvc(e.target.value)}
                           />
                         </div>
 

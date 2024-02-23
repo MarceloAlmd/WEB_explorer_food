@@ -77,7 +77,6 @@ export function Home() {
             pagination={{ clickable: true }}
             navigation
             slidesPerView={name ? 1 : slidePerView}
-            loop={true}
           >
             {data.map((item) => {
               if (item.category === "principal ") {
@@ -106,7 +105,6 @@ export function Home() {
             pagination={{ clickable: true }}
             navigation
             slidesPerView={name ? 1 : slidePerView}
-            loop={true}
           >
             {data.map((item) => {
               if (item.category === "Sobremesas") {
@@ -136,7 +134,6 @@ export function Home() {
             pagination={{ clickable: true }}
             navigation
             slidesPerView={name ? 1 : slidePerView}
-            loop={true}
           >
             {data.map((item) => {
               if (item.category === "Bebidas ") {

@@ -12,7 +12,6 @@ export function Favorite() {
   const [slidePerView, setSlidePerView] = useState(3);
   const [dishes, setDishes] = useState([]);
   const [data, setData] = useState<DishesDataTypes[]>([]);
-  console.log(data);
 
   useEffect(() => {
     async function fetchFavorites() {
