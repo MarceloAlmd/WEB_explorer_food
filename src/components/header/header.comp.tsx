@@ -122,7 +122,7 @@ export function Header({ isSearch = false, searchDishes }: HeaderProps) {
           icon={PiNewspaperClipping}
           width="10%"
           type="button"
-          title={`Meu Pedido (${requestsPending.length})`}
+          title={`Meus Pedidos (${requestsPending.length})`}
           onClick={handleNavigateToRequests}
         />
       )}

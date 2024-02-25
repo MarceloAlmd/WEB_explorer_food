@@ -57,7 +57,7 @@ export function Favorite() {
             <Styles.SwiperContainer
               pagination={{ clickable: true }}
               navigation
-              slidesPerView={data.length === 1 || 2 ? 1 : slidePerView}
+              slidesPerView={data.length === 1 ? 1 : slidePerView}
               loop={true}
             >
               {data.map((item) => (
