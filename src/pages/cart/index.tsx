@@ -30,7 +30,6 @@ export function Cart() {
   const [validity, setValidity] = useState("");
   const [cvc, setCvc] = useState("");
   const [cartItems, setCartItems] = useState<cartItemsTypes[]>([]);
-  console.log(cartItems);
   const disabled = input.length < 16 || validity.length < 5 || cvc.length < 3;
   const detailing = cartItems
     .map((item) => `${item.amount}x ${item.title}`)
@@ -57,14 +56,7 @@ export function Cart() {
   }
 
   const paymentItems = () => {
-    api
-      .post("/order", { detailing })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    api.post("/order", { detailing });
 
     localStorage.removeItem("@explore-food:cart");
     setCartItems([]);

@@ -12,11 +12,29 @@ import { HeaderProps } from "./header";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/auth.context";
 import { Modal } from "../modal/modal.comp";
+import { api } from "../../api/axios";
+
+interface Status {
+  pending: string;
+  preparing: string;
+  delivered: string;
+}
+
+interface RequestsTypes {
+  code: string;
+  created_at: string;
+  detailing: string;
+  id: number;
+  status: Status;
+  updated_at: string;
+  user_id: number;
+}
 
 export function Header({ isSearch = false, searchDishes }: HeaderProps) {
   const { logout, user } = useAuth();
 
-  const [myRequests] = useState(6);
+  const [requestsPending, setRequestsPending] = useState<RequestsTypes[]>([]);
+
   const [desktop, setDesktop] = useState(true);
   const [mobile, setMobile] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -31,6 +49,20 @@ export function Header({ isSearch = false, searchDishes }: HeaderProps) {
     navigate("/");
     logout();
   }
+
+  useEffect(() => {
+    async function fetchRequests() {
+      const response = await api.get("/order");
+
+      const status = response.data.map((items: any) => items.status);
+      const pending = status.filter(
+        (itemStatus: any) => itemStatus === "pending"
+      );
+      setRequestsPending(pending);
+    }
+
+    fetchRequests();
+  }, []);
 
   useEffect(() => {
     function handleResize() {
@@ -90,7 +122,7 @@ export function Header({ isSearch = false, searchDishes }: HeaderProps) {
           icon={PiNewspaperClipping}
           width="10%"
           type="button"
-          title={`Meu Pedido (${myRequests})`}
+          title={`Meu Pedido (${requestsPending.length})`}
           onClick={handleNavigateToRequests}
         />
       )}
