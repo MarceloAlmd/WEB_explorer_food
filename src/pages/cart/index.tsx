@@ -35,6 +35,16 @@ export function Cart() {
     .map((item) => `${item.amount}x ${item.title}`)
     .join(", ");
 
+  const totalPrice = cartItems.reduce((total, currentItem) => {
+    const price =
+      typeof currentItem.price === "string"
+        ? parseFloat(currentItem.price.replace(",", "."))
+        : currentItem.price;
+
+    return total + price * currentItem.amount;
+  }, 0);
+
+  console.log("Total:", totalPrice);
   const handlePixButtonClick = () => {
     setIsPixActive(true);
     setIsCreditActive(false);
@@ -119,7 +129,7 @@ export function Cart() {
               {cartItems.length === 0 ? (
                 <h2>Total: R$ 0,00</h2>
               ) : (
-                <h2>Total: R$ 103,88</h2>
+                <h2>Total: R$ {totalPrice}</h2>
               )}
 
               <Button
@@ -162,7 +172,7 @@ export function Cart() {
                 </header>
 
                 <Styles.PaymentMethod>
-                  {isPixActive && <img src="./delivered.svg" />}
+                  {isPixActive && <img src="./QRcodePix.svg" />}
 
                   {isCreditActive && (
                     <>

@@ -14,6 +14,7 @@ import { useAuth } from "../../context/auth.context";
 import { Modal } from "../modal/modal.comp";
 import { api } from "../../api/axios";
 
+type ItemStatusTypes = "pending" | "preparing" | "delivered";
 interface Status {
   pending: string;
   preparing: string;
@@ -34,7 +35,6 @@ export function Header({ isSearch = false, searchDishes }: HeaderProps) {
   const { logout, user } = useAuth();
 
   const [requestsPending, setRequestsPending] = useState<RequestsTypes[]>([]);
-
   const [desktop, setDesktop] = useState(true);
   const [mobile, setMobile] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -54,9 +54,9 @@ export function Header({ isSearch = false, searchDishes }: HeaderProps) {
     async function fetchRequests() {
       const response = await api.get("/order");
 
-      const status = response.data.map((items: any) => items.status);
+      const status = response.data.map((items: RequestsTypes) => items.status);
       const pending = status.filter(
-        (itemStatus: any) => itemStatus === "pending"
+        (itemStatus: ItemStatusTypes) => itemStatus === "pending"
       );
       setRequestsPending(pending);
     }
