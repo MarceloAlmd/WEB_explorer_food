@@ -32,6 +32,9 @@ export function Cart() {
   const [cartItems, setCartItems] = useState<cartItemsTypes[]>([]);
   console.log(cartItems);
   const disabled = input.length < 16 || validity.length < 5 || cvc.length < 3;
+  const detailing = cartItems
+    .map((item) => `${item.amount}x ${item.title}`)
+    .join(", ");
 
   const handlePixButtonClick = () => {
     setIsPixActive(true);
@@ -54,6 +57,15 @@ export function Cart() {
   }
 
   const paymentItems = () => {
+    api
+      .post("/order", { detailing })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
     localStorage.removeItem("@explore-food:cart");
     setCartItems([]);
   };
