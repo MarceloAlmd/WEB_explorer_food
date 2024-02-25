@@ -12,6 +12,7 @@ import { api } from "../../api/axios";
 import { ButtonLink } from "../../components/buttonLink/buttonLink.comp";
 import { IoIosArrowBack } from "react-icons/io";
 import { useAuth } from "../../context/auth.context";
+import { Alert } from "../../components/alert/alert.comp";
 
 interface ingredientsTypes {
   created_at: string;
@@ -38,11 +39,15 @@ interface DetailsTypes {
 
 export function Details() {
   const { user } = useAuth();
+
+  const [showAlert, setShowAlert] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isDesktop, setIsDesktop] = useState(true);
   const [counter, setCounter] = useState(1);
   const [dishDetails, setDishDetails] = useState<DetailsTypes>();
+
   const dishUrlImg = `${api.defaults.baseURL}/files/${dishDetails?.image}`;
+
   const params = useParams();
 
   function addedMoreCounter() {
@@ -57,6 +62,40 @@ export function Details() {
     }
   }
   const formattedCounter = counter.toString().padStart(2, "0");
+
+  const handleShowAlert = () => {
+    setShowAlert(true);
+
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 2000);
+  };
+
+  function handleAddCart(
+    img: string | undefined,
+    amount: number,
+    title: string | undefined,
+    price: number | string | undefined
+  ) {
+    const existingCartItems = localStorage.getItem("@explore-food:cart");
+    let cartItems = [];
+
+    if (existingCartItems) {
+      cartItems = JSON.parse(existingCartItems);
+    }
+
+    const newItemAtCart = {
+      img,
+      amount,
+      price,
+      title,
+    };
+
+    cartItems.push(newItemAtCart);
+
+    localStorage.setItem("@explore-food:cart", JSON.stringify(cartItems));
+    handleShowAlert();
+  }
 
   useEffect(() => {
     function handleResize() {
@@ -147,16 +186,23 @@ export function Details() {
                     type="button"
                     title="incluir"
                     icon={PiNewspaperClipping}
+                    onClick={() =>
+                      handleAddCart(
+                        dishDetails?.image,
+                        counter,
+                        dishDetails?.name,
+                        dishDetails?.price
+                      )
+                    }
                   />
                 </>
               )}
             </Styles.Counter>
           </Styles.Details>
         </Styles.ContentMain>
+        {showAlert && <Alert message="Adicionado ao carrinho" />}
       </Styles.Content>
       <Footer />
     </Styles.Container>
   );
 }
-
-//  remover a categoria ao pesquisar fazer amanha

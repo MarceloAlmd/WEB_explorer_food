@@ -30,6 +30,7 @@ export function Cart() {
   const [validity, setValidity] = useState("");
   const [cvc, setCvc] = useState("");
   const [cartItems, setCartItems] = useState<cartItemsTypes[]>([]);
+  console.log(cartItems);
   const disabled = input.length < 16 || validity.length < 5 || cvc.length < 3;
   const detailing = cartItems
     .map((item) => `${item.amount}x ${item.title}`)
@@ -44,7 +45,11 @@ export function Cart() {
     return total + price * currentItem.amount;
   }, 0);
 
-  console.log("Total:", totalPrice);
+  const formattedPrice = totalPrice.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
+
   const handlePixButtonClick = () => {
     setIsPixActive(true);
     setIsCreditActive(false);
@@ -114,7 +119,7 @@ export function Cart() {
                 const urlImg = `${api.defaults.baseURL}/files/${item.img}`;
                 return (
                   <DishInCart
-                    key={item.title}
+                    key={item.img}
                     src={urlImg}
                     amount={item.amount}
                     dish={item.title}
@@ -129,7 +134,7 @@ export function Cart() {
               {cartItems.length === 0 ? (
                 <h2>Total: R$ 0,00</h2>
               ) : (
-                <h2>Total: R$ {totalPrice}</h2>
+                <h2>Total: R$ {formattedPrice}</h2>
               )}
 
               <Button
