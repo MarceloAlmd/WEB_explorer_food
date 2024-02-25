@@ -5,8 +5,30 @@ import { Footer } from "../../components/footer/footer.comp";
 import { Header } from "../../components/header/header.comp";
 import { Select } from "../../components/select/select.comp";
 import * as Styles from "./styles";
+import { useEffect, useState } from "react";
+import { api } from "../../api/axios";
+
+interface RequestsTypes {
+  code: string;
+  created_at: string;
+  detailing: string;
+  id: number;
+  status: string;
+  updated_at: string;
+  user_id: number;
+}
 
 export function Requests() {
+  const [requests, setRequests] = useState<RequestsTypes[]>([]);
+
+  useEffect(() => {
+    async function fetchRequests() {
+      const response = await api.get("/order");
+      setRequests(response.data);
+    }
+
+    fetchRequests();
+  }, []);
   return (
     <Styles.Container>
       <Header />
@@ -30,17 +52,22 @@ export function Requests() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>
-                    <Select />
-                  </td>
-                  <td>000004</td>
-                  <td>
-                    1 x Salada Radish, 1 x Torradas de Parma, 1 x Chá de Canela,
-                    1 x Suco de Maracujá
-                  </td>
-                  <td>20/05 às 18h00</td>
-                </tr>
+                {requests.map((request) => {
+                  const date = new Date(request.created_at);
+
+                  date.setHours(date.getHours() - 3);
+
+                  return (
+                    <tr key={request.id}>
+                      <td>
+                        <Select status={request.status} id={request.id} />
+                      </td>
+                      <td>{request.code}</td>
+                      <td>{request.detailing}</td>
+                      <td>{date.toLocaleString()}</td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </Styles.Table>
