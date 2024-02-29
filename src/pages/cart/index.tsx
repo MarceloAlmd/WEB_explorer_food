@@ -183,7 +183,7 @@ export function Cart() {
                     <>
                       <div className="inputContainer ">
                         <Input
-                          type="text"
+                          type="number"
                           label="Número do Cartao"
                           placeholder="0000 0000 0000 0000"
                           onChange={(e) => setInput(e.target.value)}
