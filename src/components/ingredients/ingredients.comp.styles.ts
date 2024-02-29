@@ -7,7 +7,7 @@ export const Container = styled.div<IngredientsProps>`
   justify-content: center;
   height: 2rem;
 
-  width: 7.375rem;
+  width: ${({ isNew }) => (isNew ? "2rem" : "7.375rem")};
 
   background: ${({ theme, isNew }) =>
     isNew ? "transparent" : theme.colors.ingredient};
@@ -21,6 +21,12 @@ export const Container = styled.div<IngredientsProps>`
   > button {
     border: none;
     background: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-left: ${({ isNew }) => (isNew ? "-9px" : "0")};
   }
   .button-delete {
     color: ${({ theme }) => theme.colors.text.primary};

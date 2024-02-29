@@ -109,14 +109,15 @@ export function Header({ isSearch = false, searchDishes }: HeaderProps) {
         <div className="lineBlock"></div>
       )}
 
-      {desktop && user.role === "admin" && (
+      {user.role === "admin" && (
         <>
           <Styles.IconButton to="/create">
             <CiSquarePlus />
           </Styles.IconButton>
-          <span>Administrador</span>
+          {desktop && <span>Administrador</span>}
         </>
       )}
+
       {desktop && (
         <Button
           icon={PiNewspaperClipping}

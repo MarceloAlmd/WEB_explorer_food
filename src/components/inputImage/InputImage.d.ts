@@ -1,3 +1,4 @@
 export interface InputImageProps {
-  label: string;
+  label?: string;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }

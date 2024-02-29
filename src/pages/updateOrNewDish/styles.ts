@@ -132,7 +132,149 @@ export const SecondWrapper = styled.div`
   }
 `;
 
+export const Third = styled.div`
+  width: 10%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  > label {
+    font-weight: 400;
+
+    color: ${({ theme }) => theme.colors.text.secondary};
+  }
+
+  @media (max-width: ${BREAK_POINTS.ST}) {
+    width: 40%;
+  }
+`;
+
+export const Wrapper = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 2rem;
+`;
+
 export const Title = styled.h1`
   font-weight: 500;
   font-size: 2rem;
+`;
+
+export const Modal = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.5);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+`;
+
+export const ContentModal = styled.div`
+  background: ${({ theme }) => theme.colors.search};
+  width: 30rem;
+
+  padding: 2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  border-radius: 9px;
+
+  > h1 {
+    color: ${({ theme }) => theme.colors.text.primary};
+    font-weight: 500;
+  }
+
+  .closeModal {
+    border: none;
+    background: transparent;
+
+    align-self: flex-end;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    > svg {
+      font-size: 2rem;
+      color: ${({ theme }) => theme.colors.text.primary};
+    }
+  }
+
+  .fullInput {
+    width: 55%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+
+    gap: 1.5rem;
+
+    > h4 {
+      color: ${({ theme }) => theme.colors.text.secondary};
+      font-weight: 300;
+
+      align-self: flex-start;
+    }
+  }
+
+  .contentButton {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    margin-top: 2rem;
+
+    .addWithImage {
+      border: 0;
+      padding: 8px 26px;
+      border-radius: 4px;
+      background: ${({ theme }) => theme.colors.text.delivered};
+
+      font-weight: 500;
+      color: ${({ theme }) => theme.colors.text.primary};
+    }
+
+    .addWithoutImage {
+      border: 0;
+      padding: 8px 26px;
+      border-radius: 4px;
+      background: ${({ theme }) => theme.colors.text.pending};
+
+      font-weight: 500;
+      color: ${({ theme }) => theme.colors.text.primary};
+    }
+  }
+`;
+
+export const InputImgAndLabel = styled.div`
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  gap: 8px;
+
+  width: 100%;
+
+  > label {
+    align-self: self-start;
+    color: ${({ theme }) => theme.colors.text.secondary};
+  }
 `;
