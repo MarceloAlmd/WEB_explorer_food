@@ -24,11 +24,18 @@ export function Dishes({
   const { user } = useAuth();
   const [counter, setCounter] = useState<number>(1);
   const [showAlert, setShowAlert] = useState<boolean>(false);
-
   const location = useLocation();
 
   const urlImg = `${api.defaults.baseURL}/files/${img}`;
 
+  function formattedPrice(price: string | number) {
+    const priceString = String(price);
+    const priceFloat = parseFloat(priceString);
+    const aroundPrice = priceFloat.toFixed(2);
+    const finallyPrice = aroundPrice.replace(".", ",");
+
+    return finallyPrice;
+  }
   function addedMoreCounter() {
     if (counter < 10) {
       setCounter((prevState) => prevState + 1);
@@ -103,7 +110,7 @@ export function Dishes({
         <Styles.Info>
           <h2>{title}</h2>
           <span>{description}</span>
-          <h3>{`R$ ${price}`}</h3>
+          <h3>{`R$ ${formattedPrice(price)}`}</h3>
         </Styles.Info>
       </Styles.ShowDetailsCard>
 
@@ -121,7 +128,9 @@ export function Dishes({
             width="5.75rem"
             type="button"
             title="incluir"
-            onClick={() => handleAddCart(img, counter, title, price)}
+            onClick={() =>
+              handleAddCart(img, counter, title, formattedPrice(price))
+            }
           />
         </Styles.Counter>
       ) : (

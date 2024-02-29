@@ -6,6 +6,8 @@ export const Container = styled.div`
   max-width: 18.75rem;
   width: 100%;
 
+  height: 100%;
+
   border: 1px solid #000;
   border-radius: 5px;
 
