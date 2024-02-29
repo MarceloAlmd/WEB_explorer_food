@@ -9,7 +9,7 @@ import { DishesDataTypes } from "../home/home";
 import { EmptyFavorites } from "./components/empty/empty.comp";
 
 export function Favorite() {
-  const [slidePerView, setSlidePerView] = useState(3);
+  const [slidePerView, setSlidePerView] = useState(1);
   const [dishes, setDishes] = useState([]);
   const [data, setData] = useState<DishesDataTypes[]>([]);
 
@@ -57,7 +57,7 @@ export function Favorite() {
             <Styles.SwiperContainer
               pagination={{ clickable: true }}
               navigation
-              slidesPerView={1}
+              slidesPerView={slidePerView}
               loop={true}
             >
               {data.map((item) => (
