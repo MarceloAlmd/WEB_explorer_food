@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import { ButtonLink } from "../../components/buttonLink/buttonLink.comp";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { Footer } from "../../components/footer/footer.comp";
 import { Header } from "../../components/header/header.comp";
@@ -30,7 +30,6 @@ export function UpdateOrNewDish() {
   const [showError, setShowError] = useState<boolean>(false);
   const [imageError, setImageError] = useState<boolean>(false);
   const [showAlertSuccess, setShowAlertSuccess] = useState<boolean>(false);
-  // const [ingredientsCreatedId, setIngredientsCreatedId] = useState([]);
 
   const [newIngredientError, setNewIngredientError] = useState<boolean>(false);
 
@@ -40,8 +39,11 @@ export function UpdateOrNewDish() {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const params = useParams();
 
   const title = location.pathname === "/create" ? "Novo Prato" : "Editar prato";
+
+  const isUpdate = location.pathname !== "/create" && true;
 
   function handleAddModal() {
     setShowModal(true);
@@ -133,6 +135,51 @@ export function UpdateOrNewDish() {
       });
 
       const ingredientIds = response.data.ingredientIds.map(
+        (ingredient: { id: number }) => ingredient.id
+      );
+
+      if (imagesIngredients.length > 0) {
+        const uploadPromises = ingredientIds.map(
+          async (ingredientId: number, index: number) => {
+            const imageIngredient = imagesIngredients[index];
+            if (imageIngredient) {
+              const formData = new FormData();
+              formData.append("image_ingredient", imageIngredient);
+
+              try {
+                await api.patch(`/ingredients/${ingredientId}`, formData);
+              } catch (error) {
+                console.error(error);
+              }
+            }
+          }
+        );
+
+        await Promise.all(uploadPromises);
+      }
+
+      showSuccessAlert();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function handleEditDish() {
+    if (!imageDish || !name || !price || ingredients.length === 0) {
+      return showAlertError();
+    }
+
+    try {
+      const response = await api.putForm(`/dishes/${params.id}`, {
+        image_dish: imageDish,
+        name,
+        category,
+        price,
+        description,
+        ingredients,
+      });
+
+      const ingredientIds = response.data.ingredientsIdUpdate.map(
         (ingredient: { id: number }) => ingredient.id
       );
 
@@ -271,9 +318,16 @@ export function UpdateOrNewDish() {
             onChange={(e) => setDescription(e.target.value)}
           />
         </label>
-        <button type="button" onClick={handleCreateNewDish}>
-          Adicionar pedido
-        </button>
+
+        {isUpdate ? (
+          <button type="button" onClick={handleEditDish}>
+            Atualizar Prato
+          </button>
+        ) : (
+          <button type="button" onClick={handleCreateNewDish}>
+            Adicionar pedido
+          </button>
+        )}
       </Styles.Content>
 
       <Footer />
