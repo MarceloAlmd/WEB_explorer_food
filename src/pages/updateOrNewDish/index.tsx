@@ -119,13 +119,19 @@ export function UpdateOrNewDish() {
     }, 3000);
   }
 
-  async function handleCreateNewDish() {
+  async function handleDishAction(action: "create" | "update") {
     if (!imageDish || !name || !price || ingredients.length === 0) {
       return showAlertError();
     }
 
+    const apiMethod = action === "create" ? api.postForm : api.putForm;
+    const apiEndpoint =
+      action === "create" ? "/dishes" : `/dishes/${params.id}`;
+    const ingredientIdKey =
+      action === "create" ? "ingredientIds" : "ingredientsIdUpdate";
+
     try {
-      const response = await api.postForm("/dishes", {
+      const response = await apiMethod(apiEndpoint, {
         image_dish: imageDish,
         name,
         category,
@@ -134,7 +140,7 @@ export function UpdateOrNewDish() {
         ingredients,
       });
 
-      const ingredientIds = response.data.ingredientIds.map(
+      const ingredientIds = response.data[ingredientIdKey].map(
         (ingredient: { id: number }) => ingredient.id
       );
 
@@ -162,53 +168,15 @@ export function UpdateOrNewDish() {
     } catch (error) {
       console.error(error);
     }
+  }
+
+  async function handleCreateNewDish() {
+    await handleDishAction("create");
   }
 
   async function handleEditDish() {
-    if (!imageDish || !name || !price || ingredients.length === 0) {
-      return showAlertError();
-    }
-
-    try {
-      const response = await api.putForm(`/dishes/${params.id}`, {
-        image_dish: imageDish,
-        name,
-        category,
-        price,
-        description,
-        ingredients,
-      });
-
-      const ingredientIds = response.data.ingredientsIdUpdate.map(
-        (ingredient: { id: number }) => ingredient.id
-      );
-
-      if (imagesIngredients.length > 0) {
-        const uploadPromises = ingredientIds.map(
-          async (ingredientId: number, index: number) => {
-            const imageIngredient = imagesIngredients[index];
-            if (imageIngredient) {
-              const formData = new FormData();
-              formData.append("image_ingredient", imageIngredient);
-
-              try {
-                await api.patch(`/ingredients/${ingredientId}`, formData);
-              } catch (error) {
-                console.error(error);
-              }
-            }
-          }
-        );
-
-        await Promise.all(uploadPromises);
-      }
-
-      showSuccessAlert();
-    } catch (error) {
-      console.error(error);
-    }
+    await handleDishAction("update");
   }
-
   return (
     <Styles.Container>
       <Header />
@@ -333,7 +301,15 @@ export function UpdateOrNewDish() {
       <Footer />
 
       {showError && <Alert bgColorRed message="Preencha todos os campos" />}
-      {showAlertSuccess && <Alert message="Prato cadastrado com sucesso" />}
+      {showAlertSuccess && (
+        <Alert
+          message={
+            isUpdate
+              ? "Prato atualizado com sucesso"
+              : "Prato cadastrado com sucesso"
+          }
+        />
+      )}
     </Styles.Container>
   );
 }

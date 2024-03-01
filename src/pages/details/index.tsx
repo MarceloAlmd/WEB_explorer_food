@@ -97,6 +97,15 @@ export function Details() {
     handleShowAlert();
   }
 
+  function formattedPrice(price: string | number | undefined) {
+    const priceString = String(price);
+    const priceFloat = parseFloat(priceString);
+    const aroundPrice = priceFloat.toFixed(2);
+    const finallyPrice = aroundPrice.replace(".", ",");
+
+    return finallyPrice;
+  }
+
   useEffect(() => {
     function handleResize() {
       if (window.innerWidth < 768) {
@@ -166,7 +175,7 @@ export function Details() {
             <Styles.Counter>
               <h2>
                 <span>R$</span>
-                {dishDetails?.price}
+                {formattedPrice(dishDetails?.price)}
               </h2>
 
               {user.role === "customer" && (
