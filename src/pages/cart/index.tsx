@@ -13,6 +13,8 @@ import { Button } from "../../components/button/button.comp";
 import { ButtonLink } from "../../components/buttonLink/buttonLink.comp";
 import { api } from "../../api/axios";
 import { EmptyCart } from "./components/emptyCart/emptyCart.comp";
+import { Alert } from "../../components/alert/alert.comp";
+import { maskCardNumber, maskCvc, maskValidity } from "./utils/maskForm";
 
 interface cartItemsTypes {
   amount: number;
@@ -22,16 +24,20 @@ interface cartItemsTypes {
 }
 
 export function Cart() {
-  const [isPixActive, setIsPixActive] = useState(true);
-  const [isCreditActive, setIsCreditActive] = useState(false);
-  const [showPayment, setShowPayment] = useState(false);
-  const [showMyRequest, setShowMyRequest] = useState(true);
-  const [input, setInput] = useState("");
-  const [validity, setValidity] = useState("");
-  const [cvc, setCvc] = useState("");
+  const [isPixActive, setIsPixActive] = useState<boolean>(true);
+  const [isCreditActive, setIsCreditActive] = useState<boolean>(false);
+  const [showPayment, setShowPayment] = useState<boolean>(false);
+  const [showMyRequest, setShowMyRequest] = useState<boolean>(true);
+
   const [cartItems, setCartItems] = useState<cartItemsTypes[]>([]);
-  console.log(cartItems);
-  const disabled = input.length < 16 || validity.length < 5 || cvc.length < 3;
+  const [showAlert, setShowAlert] = useState<boolean>(false);
+
+  const [cardNumber, setCardNumber] = useState<string>("");
+  const [validity, setValidity] = useState<string>("");
+  const [cvc, setCvc] = useState<string>("");
+
+  const disabled =
+    cardNumber.length < 16 || validity.length < 5 || cvc.length < 3;
   const detailing = cartItems
     .map((item) => `${item.amount}x ${item.title}`)
     .join(", ");
@@ -60,6 +66,13 @@ export function Cart() {
     setIsPixActive(false);
   };
 
+  function handleShowAlert() {
+    setShowAlert(true);
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 3500);
+  }
+
   function handlePayment() {
     setShowPayment(true);
     setShowMyRequest(false);
@@ -75,6 +88,8 @@ export function Cart() {
 
     localStorage.removeItem("@explore-food:cart");
     setCartItems([]);
+
+    handleShowAlert();
   };
 
   function removeFromCart(itemIndex: any) {
@@ -89,6 +104,14 @@ export function Cart() {
 
     setCartItems(cartItems);
   }
+
+  const applyMask = (
+    input: string,
+    maskFunction: (input: string) => string
+  ): void => {
+    input = maskFunction(input);
+    setCardNumber(input);
+  };
 
   useEffect(() => {
     const cartAtStorage = localStorage.getItem("@explore-food:cart");
@@ -183,23 +206,30 @@ export function Cart() {
                     <>
                       <div className="inputContainer ">
                         <Input
-                          type="number"
+                          type="string"
                           label="Número do Cartao"
+                          value={cardNumber}
                           placeholder="0000 0000 0000 0000"
-                          onChange={(e) => setInput(e.target.value)}
+                          onChange={(e) =>
+                            applyMask(e.target.value, maskCardNumber)
+                          }
                         />
                         <div className="validityAndCVC">
                           <Input
                             type="text"
                             label="Validade"
+                            value={validity}
                             placeholder="04/25"
-                            onChange={(e) => setValidity(e.target.value)}
+                            onChange={(e) =>
+                              setValidity(maskValidity(e.target.value))
+                            }
                           />
                           <Input
                             type="text"
                             label="CVC"
+                            value={cvc}
                             placeholder="777"
-                            onChange={(e) => setCvc(e.target.value)}
+                            onChange={(e) => setCvc(maskCvc(e.target.value))}
                           />
                         </div>
 
@@ -220,6 +250,10 @@ export function Cart() {
         </Styles.Wrapper>
       </Styles.Content>
       <Footer />
+
+      {showAlert && (
+        <Alert message="Pedido feito com sucesso, aguarde aprovação do restaurante" />
+      )}
     </Styles.Container>
   );
 }

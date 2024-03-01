@@ -9,10 +9,15 @@ export function Input({
   ...rest
 }: InputProps) {
   return (
-    <Styles.Container {...rest}>
+    <Styles.Container>
       {label && <label>{label}</label>}
 
-      <input style={{ width: width }} placeholder={placeholder} type={type} />
+      <input
+        {...rest}
+        style={{ width: width }}
+        placeholder={placeholder}
+        type={type}
+      />
     </Styles.Container>
   );
 }

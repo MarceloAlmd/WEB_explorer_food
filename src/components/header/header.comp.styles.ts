@@ -31,6 +31,25 @@ export const Container = styled.header`
     color: ${({ theme }) => theme.colors.text.primary};
     font-size: 1.5rem;
   }
+
+  .notification {
+    position: relative;
+    bottom: 15px;
+    right: 5px;
+    color: white;
+
+    font-size: 0.8rem;
+
+    width: 15px;
+    height: 15px;
+    background: red;
+    z-index: 1000;
+    border-radius: 50%;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 export const Logo = styled.img`

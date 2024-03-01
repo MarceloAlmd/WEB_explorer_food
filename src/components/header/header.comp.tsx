@@ -36,6 +36,7 @@ export function Header({ isSearch = false, searchDishes }: HeaderProps) {
 
   const [requestsPending, setRequestsPending] = useState<RequestsTypes[]>([]);
   const [desktop, setDesktop] = useState(true);
+  const [cartNotification, setCartNotification] = useState<string[]>([]);
   const [mobile, setMobile] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
@@ -83,6 +84,13 @@ export function Header({ isSearch = false, searchDishes }: HeaderProps) {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  useEffect(() => {
+    const cartNotification = localStorage.getItem("@explore-food:cart");
+    if (cartNotification) {
+      setCartNotification(JSON.parse(cartNotification));
+    }
+  }, [cartNotification]);
   return (
     <Styles.Container>
       <a href="/">
@@ -95,6 +103,9 @@ export function Header({ isSearch = false, searchDishes }: HeaderProps) {
       {user.role !== "admin" && (
         <Link className="buttonCart" to="/cart">
           <IoCartOutline />
+          {cartNotification.length > 0 && (
+            <span className="notification">{cartNotification.length}</span>
+          )}
         </Link>
       )}
 

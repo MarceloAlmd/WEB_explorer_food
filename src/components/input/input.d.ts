@@ -3,5 +3,6 @@ export interface InputProps {
   placeholder: string;
   type: string;
   width?: string;
-  onChange?: (e: any) => void;
+  value?: string; // Adicionando a propriedade value à interface
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
