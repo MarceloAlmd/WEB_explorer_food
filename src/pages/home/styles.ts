@@ -66,7 +66,7 @@ export const Content = styled.main`
 `;
 
 export const SwiperContainer = styled(Swiper)`
-  .swiper-button-prev:after,
+  /* .swiper-button-prev:after,
   .swiper-button-next:after {
     color: ${({ theme }) => theme.colors.secondary};
   }
@@ -96,7 +96,7 @@ export const SwiperContainer = styled(Swiper)`
       position: relative;
       top: -15px;
     }
-  }
+  } */
 `;
 
 export const SwiperContent = styled(SwiperSlide)`
