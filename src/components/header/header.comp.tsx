@@ -90,7 +90,7 @@ export function Header({ isSearch = false, searchDishes }: HeaderProps) {
     if (cartNotification) {
       setCartNotification(JSON.parse(cartNotification));
     }
-  }, [cartNotification]);
+  }, []);
   return (
     <Styles.Container>
       <a href="/">
