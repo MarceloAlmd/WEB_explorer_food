@@ -33,22 +33,38 @@ export const Container = styled.header`
   }
 
   .notification {
-    position: relative;
-    bottom: 15px;
-    right: 5px;
-    color: white;
+    position: absolute;
+    top: 30px;
+    left: 785px;
+    color: ${({ theme }) => theme.colors.text.primary};
 
     font-size: 0.8rem;
 
     width: 15px;
     height: 15px;
-    background: red;
+    background: ${({ theme }) => theme.colors.text.pending};
     z-index: 1000;
     border-radius: 50%;
 
     display: inline-flex;
     align-items: center;
     justify-content: center;
+  }
+
+  @media (max-width: ${BREAK_POINTS.ST}) {
+    .cartSVG {
+      font-size: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .notification {
+      top: 25px;
+      left: 65px;
+
+      font-size: 0.8rem;
+    }
   }
 `;
 
