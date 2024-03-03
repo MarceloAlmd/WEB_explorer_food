@@ -10,7 +10,7 @@ import { DishesDataTypes } from "./home";
 import { Alert } from "../../components/alert/alert.comp";
 
 export function Home() {
-  const [slidePerView, setSlidePerView] = useState(1);
+  const [slidePerView, setSlidePerView] = useState(3);
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const navigate = useNavigate();
 

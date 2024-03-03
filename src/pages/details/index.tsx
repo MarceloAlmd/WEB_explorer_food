@@ -46,7 +46,7 @@ export function Details() {
   const [counter, setCounter] = useState(1);
   const [dishDetails, setDishDetails] = useState<DetailsTypes>();
 
-  const dishUrlImg = `${api.defaults.baseURL}/files/${dishDetails?.image}`;
+  const dishUrlImg = `${api.defaults.baseURL}/files/dish/${dishDetails?.image}`;
 
   const params = useParams();
 

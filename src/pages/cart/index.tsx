@@ -139,7 +139,7 @@ export function Cart() {
             <Styles.ContentMyRequest>
               {cartItems.length === 0 && <EmptyCart />}
               {cartItems.map((item) => {
-                const urlImg = `${api.defaults.baseURL}/files/${item.img}`;
+                const urlImg = `${api.defaults.baseURL}/files/dish/${item.img}`;
                 return (
                   <DishInCart
                     key={item.img}

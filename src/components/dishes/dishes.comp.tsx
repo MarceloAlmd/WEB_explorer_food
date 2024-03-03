@@ -26,7 +26,7 @@ export function Dishes({
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const location = useLocation();
 
-  const urlImg = `${api.defaults.baseURL}/files/${img}`;
+  const urlImg = `${api.defaults.baseURL}/files/dish/${img}`;
 
   function formattedPrice(price: string | number) {
     const priceString = String(price);
