@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { SwiperProps, SwiperSlide } from "swiper/react";
 import { Category } from "../../components/category/category.comp";
 import { Dishes } from "../../components/dishes/dishes.comp";
 import { Footer } from "../../components/footer/footer.comp";
@@ -8,10 +9,20 @@ import * as Styles from "./styles";
 import { api } from "../../api/axios";
 import { DishesDataTypes } from "./home";
 import { Alert } from "../../components/alert/alert.comp";
+import { Slider } from "../../components/slider/slider.comp";
 
 export function Home() {
   const [slidePerView, setSlidePerView] = useState(3);
   const [showAlert, setShowAlert] = useState<boolean>(false);
+  const settings: SwiperProps = {
+    spaceBetween: 50,
+    slidesPerView: slidePerView,
+    navigation: true,
+    pagination: {
+      clickable: true,
+    },
+  };
+
   const navigate = useNavigate();
 
   const [data, setData] = useState<DishesDataTypes[]>([]);
@@ -73,15 +84,11 @@ export function Home() {
 
       <Styles.Content>
         <Category title="Pratos principais">
-          <Styles.SwiperContainer
-            pagination={{ clickable: true }}
-            navigation
-            slidesPerView={name ? 1 : slidePerView}
-          >
+          <Slider settings={settings}>
             {data.map((item) => {
               if (item.category === "principal ") {
                 return (
-                  <Styles.SwiperContent key={item.id}>
+                  <SwiperSlide key={item.id}>
                     <Dishes
                       title={item.name}
                       description={item.description}
@@ -94,13 +101,14 @@ export function Home() {
                         handleToggleFavorite(item.id, false)
                       }
                     />
-                  </Styles.SwiperContent>
+                  </SwiperSlide>
                 );
               }
             })}
-          </Styles.SwiperContainer>
+          </Slider>
         </Category>
-        <Category title="Sobremesas">
+        <h1>build completed</h1>
+        {/* <Category title="Sobremesas">
           <Styles.SwiperContainer
             pagination={{ clickable: true }}
             navigation
@@ -127,9 +135,9 @@ export function Home() {
               }
             })}
           </Styles.SwiperContainer>
-        </Category>
+        </Category> */}
 
-        <Category title="Bebidas">
+        {/* <Category title="Bebidas">
           <Styles.SwiperContainer
             pagination={{ clickable: true }}
             navigation
@@ -156,7 +164,7 @@ export function Home() {
               }
             })}
           </Styles.SwiperContainer>
-        </Category>
+        </Category> */}
         {showAlert && <Alert message="O prato foi adicionado aos favoritos" />}
       </Styles.Content>
 
