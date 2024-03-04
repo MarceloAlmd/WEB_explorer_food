@@ -100,7 +100,7 @@ export function Home() {
             })}
           </Styles.SwiperContainer>
         </Category>
-        {/* <Category title="Sobremesas">
+        <Category title="Sobremesas">
           <Styles.SwiperContainer
             pagination={{ clickable: true }}
             navigation
@@ -127,9 +127,9 @@ export function Home() {
               }
             })}
           </Styles.SwiperContainer>
-        </Category> */}
+        </Category>
 
-        {/* <Category title="Bebidas">
+        <Category title="Bebidas">
           <Styles.SwiperContainer
             pagination={{ clickable: true }}
             navigation
@@ -156,7 +156,7 @@ export function Home() {
               }
             })}
           </Styles.SwiperContainer>
-        </Category> */}
+        </Category>
         {showAlert && <Alert message="O prato foi adicionado aos favoritos" />}
       </Styles.Content>
 
