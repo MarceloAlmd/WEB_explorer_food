@@ -7,9 +7,19 @@ import { Category } from "../../components/category/category.comp";
 import { api } from "../../api/axios";
 import { DishesDataTypes } from "../home/home";
 import { EmptyFavorites } from "./components/empty/empty.comp";
+import { Slider } from "../../components/slider/slider.comp";
+import { SwiperProps, SwiperSlide } from "swiper/react";
 
 export function Favorite() {
-  const [slidePerView, setSlidePerView] = useState(1);
+  const [slidePerView, setSlidePerView] = useState(3);
+  const settings: SwiperProps = {
+    slidesPerView: slidePerView,
+    navigation: true,
+    pagination: {
+      clickable: true,
+    },
+  };
+
   const [dishes, setDishes] = useState([]);
   const [data, setData] = useState<DishesDataTypes[]>([]);
 
@@ -54,14 +64,17 @@ export function Favorite() {
           <EmptyFavorites />
         ) : (
           <Category title="Meus Favoritos">
-            <Styles.SwiperContainer
-              pagination={{ clickable: true }}
-              navigation
-              slidesPerView={slidePerView}
-              loop={true}
-            >
+            <Slider settings={settings}>
               {data.map((item) => (
-                <Styles.SwiperContent key={String(item.id)}>
+                <SwiperSlide
+                  key={String(item.id)}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexDirection: "column",
+                  }}
+                >
                   <Dishes
                     title={item.name}
                     description={item.description}
@@ -69,9 +82,9 @@ export function Favorite() {
                     img={item.image}
                     removeFavorite={() => handleToggleFavorite(item.id, false)}
                   />
-                </Styles.SwiperContent>
+                </SwiperSlide>
               ))}
-            </Styles.SwiperContainer>
+            </Slider>
           </Category>
         )}
       </Styles.Content>

@@ -1,5 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import { BREAK_POINTS } from "../../utils/breakPoints";
+import { SwiperProps, SwiperSlide } from "swiper/react";
 
 const fadeIn = keyframes`
   from {
@@ -62,36 +63,14 @@ export const Content = styled.main`
   padding: 0 2rem 5rem;
 
   transition: padding 1s ease-in-out;
+`;
 
-  .swiper-button-prev:after,
-  .swiper-button-next:after {
-    color: ${({ theme }) => theme.colors.secondary};
-  }
-
-  .swiper-pagination-bullet-active {
-    background: ${({ theme }) => theme.colors.secondary};
-  }
-
-  .swiper-pagination-bullet {
-    background: ${({ theme }) => theme.colors.secondary};
-  }
-
-  .swiper-pagination,
-  .swiper-pagination-clickable,
-  .swiper-pagination-bullets,
-  .swiper-pagination-horizontal {
-    position: relative;
-    bottom: 25px;
-  }
-
+export const SwiperContent = styled(SwiperSlide)<SwiperProps>`
   @media (max-width: ${BREAK_POINTS.ST}) {
-    max-width: 300px;
-    .swiper-pagination,
-    .swiper-pagination-clickable,
-    .swiper-pagination-bullets,
-    .swiper-pagination-horizontal {
-      position: relative;
-      top: -15px;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    max-width: 200px;
   }
 `;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { SwiperProps, SwiperSlide } from "swiper/react";
+import { SwiperProps } from "swiper/react";
 import { Category } from "../../components/category/category.comp";
 import { Dishes } from "../../components/dishes/dishes.comp";
 import { Footer } from "../../components/footer/footer.comp";
@@ -10,19 +10,24 @@ import { api } from "../../api/axios";
 import { DishesDataTypes } from "./home";
 import { Alert } from "../../components/alert/alert.comp";
 import { Slider } from "../../components/slider/slider.comp";
+import { BREAK_POINTS } from "../../utils/breakPoints";
 
 export function Home() {
-  const [slidePerView, setSlidePerView] = useState(3);
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const settings: SwiperProps = {
-    spaceBetween: 50,
-    slidesPerView: slidePerView,
+    spaceBetween: 20,
+    slidesPerView: 3,
     navigation: true,
+    loop: true,
     pagination: {
       clickable: true,
     },
+    breakpoints: {
+      [BREAK_POINTS.ST]: {
+        slidesPerView: 1,
+      },
+    },
   };
-
   const navigate = useNavigate();
 
   const [data, setData] = useState<DishesDataTypes[]>([]);
@@ -59,21 +64,6 @@ export function Home() {
     fetchAllDishes();
   }, [name]);
 
-  useEffect(() => {
-    function handleResize() {
-      if (window.innerWidth < 768) {
-        setSlidePerView(1);
-      }
-    }
-
-    handleResize();
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      removeEventListener("resize", handleResize);
-    };
-  }, []);
   return (
     <Styles.Container>
       <Header isSearch searchDishes={setName} />
@@ -88,14 +78,7 @@ export function Home() {
             {data.map((item) => {
               if (item.category === "principal ") {
                 return (
-                  <SwiperSlide
-                    key={item.id}
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
+                  <Styles.SwiperContent key={item.id}>
                     <Dishes
                       title={item.name}
                       description={item.description}
@@ -108,7 +91,7 @@ export function Home() {
                         handleToggleFavorite(item.id, false)
                       }
                     />
-                  </SwiperSlide>
+                  </Styles.SwiperContent>
                 );
               }
             })}
@@ -119,14 +102,7 @@ export function Home() {
             {data.map((item) => {
               if (item.category === "Sobremesas") {
                 return (
-                  <SwiperSlide
-                    key={item.id}
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
+                  <Styles.SwiperContent key={item.id}>
                     <Dishes
                       title={item.name}
                       description={item.description}
@@ -139,7 +115,7 @@ export function Home() {
                         handleToggleFavorite(item.id, false)
                       }
                     />
-                  </SwiperSlide>
+                  </Styles.SwiperContent>
                 );
               }
             })}
@@ -151,14 +127,7 @@ export function Home() {
             {data.map((item) => {
               if (item.category === "Bebidas ") {
                 return (
-                  <SwiperSlide
-                    key={item.id}
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
+                  <Styles.SwiperContent key={item.id}>
                     <Dishes
                       title={item.name}
                       description={item.description}
@@ -171,14 +140,14 @@ export function Home() {
                         handleToggleFavorite(item.id, false)
                       }
                     />
-                  </SwiperSlide>
+                  </Styles.SwiperContent>
                 );
               }
             })}
           </Slider>
         </Category>
         {showAlert && <Alert message="O prato foi adicionado aos favoritos" />}
-        <h1>build completed 3</h1>
+        <h1>build completed 4</h1>
       </Styles.Content>
 
       <Footer />

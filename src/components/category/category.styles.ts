@@ -25,10 +25,13 @@ export const Content = styled.div`
   overflow-y: hidden;
 
   @media (max-width: ${BREAK_POINTS.MD}) {
+    max-width: 300px;
     display: flex;
     align-items: center;
     justify-content: center;
 
     flex-direction: column;
+
+    /* background: red; */
   }
 `;
