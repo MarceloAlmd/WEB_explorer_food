@@ -88,7 +88,14 @@ export function Home() {
             {data.map((item) => {
               if (item.category === "principal ") {
                 return (
-                  <SwiperSlide key={item.id}>
+                  <SwiperSlide
+                    key={item.id}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
                     <Dishes
                       title={item.name}
                       description={item.description}
@@ -112,7 +119,14 @@ export function Home() {
             {data.map((item) => {
               if (item.category === "Sobremesas") {
                 return (
-                  <SwiperSlide key={item.id}>
+                  <SwiperSlide
+                    key={item.id}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
                     <Dishes
                       title={item.name}
                       description={item.description}
@@ -137,7 +151,14 @@ export function Home() {
             {data.map((item) => {
               if (item.category === "Bebidas ") {
                 return (
-                  <SwiperSlide key={item.id}>
+                  <SwiperSlide
+                    key={item.id}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
                     <Dishes
                       title={item.name}
                       description={item.description}
@@ -157,7 +178,7 @@ export function Home() {
           </Slider>
         </Category>
         {showAlert && <Alert message="O prato foi adicionado aos favoritos" />}
-        <h1>build completed 2</h1>
+        <h1>build completed 3</h1>
       </Styles.Content>
 
       <Footer />

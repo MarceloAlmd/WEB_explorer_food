@@ -1,5 +1,4 @@
 import styled, { keyframes } from "styled-components";
-import { Swiper, SwiperSlide } from "swiper/react";
 import { BREAK_POINTS } from "../../utils/breakPoints";
 
 const fadeIn = keyframes`
@@ -63,9 +62,7 @@ export const Content = styled.main`
   padding: 0 2rem 5rem;
 
   transition: padding 1s ease-in-out;
-`;
 
-export const SwiperContainer = styled(Swiper)`
   .swiper-button-prev:after,
   .swiper-button-next:after {
     color: ${({ theme }) => theme.colors.secondary};
@@ -97,12 +94,4 @@ export const SwiperContainer = styled(Swiper)`
       top: -15px;
     }
   }
-`;
-
-export const SwiperContent = styled(SwiperSlide)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  transition: transform 1s ease-in-out;
 `;
