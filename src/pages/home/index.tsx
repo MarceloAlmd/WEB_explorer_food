@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { SwiperProps, SwiperSlide } from "swiper/react";
+import { SwiperProps } from "swiper/react";
 import { Category } from "../../components/category/category.comp";
 import { Dishes } from "../../components/dishes/dishes.comp";
 import { Footer } from "../../components/footer/footer.comp";
@@ -88,7 +88,7 @@ export function Home() {
             {data.map((item) => {
               if (item.category === "principal ") {
                 return (
-                  <SwiperSlide key={item.id}>
+                  <Styles.SwiperContent key={item.id}>
                     <Dishes
                       title={item.name}
                       description={item.description}
@@ -101,19 +101,14 @@ export function Home() {
                         handleToggleFavorite(item.id, false)
                       }
                     />
-                  </SwiperSlide>
+                  </Styles.SwiperContent>
                 );
               }
             })}
           </Slider>
         </Category>
-        <h1>build completed</h1>
-        {/* <Category title="Sobremesas">
-          <Styles.SwiperContainer
-            pagination={{ clickable: true }}
-            navigation
-            slidesPerView={name ? 1 : slidePerView}
-          >
+        <Category title="Sobremesas">
+          <Slider settings={settings}>
             {data.map((item) => {
               if (item.category === "Sobremesas") {
                 return (
@@ -134,15 +129,11 @@ export function Home() {
                 );
               }
             })}
-          </Styles.SwiperContainer>
-        </Category> */}
+          </Slider>
+        </Category>
 
-        {/* <Category title="Bebidas">
-          <Styles.SwiperContainer
-            pagination={{ clickable: true }}
-            navigation
-            slidesPerView={name ? 1 : slidePerView}
-          >
+        <Category title="Bebidas">
+          <Slider settings={settings}>
             {data.map((item) => {
               if (item.category === "Bebidas ") {
                 return (
@@ -163,9 +154,10 @@ export function Home() {
                 );
               }
             })}
-          </Styles.SwiperContainer>
-        </Category> */}
+          </Slider>
+        </Category>
         {showAlert && <Alert message="O prato foi adicionado aos favoritos" />}
+        <h1>build completed 2</h1>
       </Styles.Content>
 
       <Footer />
