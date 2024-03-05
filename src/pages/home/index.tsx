@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { SwiperProps } from "swiper/react";
+import { SwiperProps, SwiperSlide } from "swiper/react";
 import { Category } from "../../components/category/category.comp";
 import { Dishes } from "../../components/dishes/dishes.comp";
 import { Footer } from "../../components/footer/footer.comp";
@@ -88,7 +88,7 @@ export function Home() {
             {data.map((item) => {
               if (item.category === "principal ") {
                 return (
-                  <Styles.SwiperContent key={item.id}>
+                  <SwiperSlide key={item.id}>
                     <Dishes
                       title={item.name}
                       description={item.description}
@@ -101,7 +101,7 @@ export function Home() {
                         handleToggleFavorite(item.id, false)
                       }
                     />
-                  </Styles.SwiperContent>
+                  </SwiperSlide>
                 );
               }
             })}
@@ -112,7 +112,7 @@ export function Home() {
             {data.map((item) => {
               if (item.category === "Sobremesas") {
                 return (
-                  <Styles.SwiperContent key={item.id}>
+                  <SwiperSlide key={item.id}>
                     <Dishes
                       title={item.name}
                       description={item.description}
@@ -125,7 +125,7 @@ export function Home() {
                         handleToggleFavorite(item.id, false)
                       }
                     />
-                  </Styles.SwiperContent>
+                  </SwiperSlide>
                 );
               }
             })}
@@ -137,7 +137,7 @@ export function Home() {
             {data.map((item) => {
               if (item.category === "Bebidas ") {
                 return (
-                  <Styles.SwiperContent key={item.id}>
+                  <SwiperSlide key={item.id}>
                     <Dishes
                       title={item.name}
                       description={item.description}
@@ -150,7 +150,7 @@ export function Home() {
                         handleToggleFavorite(item.id, false)
                       }
                     />
-                  </Styles.SwiperContent>
+                  </SwiperSlide>
                 );
               }
             })}
