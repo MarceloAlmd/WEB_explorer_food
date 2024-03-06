@@ -1,6 +1,5 @@
 import styled, { keyframes } from "styled-components";
 import { BREAK_POINTS } from "../../utils/breakPoints";
-import { SwiperProps, SwiperSlide } from "swiper/react";
 
 const fadeIn = keyframes`
   from {
@@ -63,14 +62,4 @@ export const Content = styled.main`
   padding: 0 2rem 5rem;
 
   transition: padding 1s ease-in-out;
-`;
-
-export const SwiperContent = styled(SwiperSlide)<SwiperProps>`
-  @media (max-width: ${BREAK_POINTS.ST}) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    max-width: 200px;
-  }
 `;

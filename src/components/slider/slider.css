@@ -1,14 +1,18 @@
 .swiper {
-  padding: 32px;
-
   display: flex;
-
   justify-content: center;
 }
 
 .swiper-slide {
   display: flex;
-  justify-content: center;
+
+  @media (max-width: 768px) {
+    max-width: 300px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .swiper-pagination-bullet-active {
