@@ -13,7 +13,7 @@ import { SwiperProps, SwiperSlide } from "swiper/react";
 import { Slider } from "../../components/slider/slider.comp";
 
 export function Home() {
-  // const [slidePerView, setSlidePerView] = useState(3);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const navigate = useNavigate();
 
@@ -62,7 +62,9 @@ export function Home() {
   useEffect(() => {
     function handleResize() {
       if (window.innerWidth < 768) {
-        // setSlidePerView(1);
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
       }
     }
 
@@ -82,83 +84,148 @@ export function Home() {
         <img src="/banner.svg" />
       </Styles.Banner>
 
-      <Styles.Content>
-        <Category title="Pratos principais">
-          <Slider settings={settings}>
+      {isMobile ? (
+        <Styles.Content>
+          <Category title="Pratos principais">
             {data.map((item) => {
               if (item.category === "principal ") {
                 return (
-                  <SwiperSlide key={item.id}>
-                    <Dishes
-                      title={item.name}
-                      description={item.description}
-                      price={item.price}
-                      showDetails={() => handleDetails(item.id)}
-                      onEdit={() => handleEdit(item.id)}
-                      img={item.image}
-                      addFavorite={() => handleToggleFavorite(item.id, true)}
-                      removeFavorite={() =>
-                        handleToggleFavorite(item.id, false)
-                      }
-                    />
-                  </SwiperSlide>
+                  <Dishes
+                    key={item.id}
+                    title={item.name}
+                    description={item.description}
+                    price={item.price}
+                    showDetails={() => handleDetails(item.id)}
+                    onEdit={() => handleEdit(item.id)}
+                    img={item.image}
+                    addFavorite={() => handleToggleFavorite(item.id, true)}
+                    removeFavorite={() => handleToggleFavorite(item.id, false)}
+                  />
                 );
               }
             })}
-          </Slider>
-        </Category>
-        <Category title="Sobremesas">
-          <Slider settings={settings}>
+          </Category>
+
+          <Category title="Sobremesas">
             {data.map((item) => {
               if (item.category === "Sobremesas") {
                 return (
-                  <SwiperSlide key={item.id}>
-                    <Dishes
-                      title={item.name}
-                      description={item.description}
-                      price={item.price}
-                      showDetails={() => handleDetails(item.id)}
-                      onEdit={() => handleEdit(item.id)}
-                      img={item.image}
-                      addFavorite={() => handleToggleFavorite(item.id, true)}
-                      removeFavorite={() =>
-                        handleToggleFavorite(item.id, false)
-                      }
-                    />
-                  </SwiperSlide>
+                  <Dishes
+                    key={item.id}
+                    title={item.name}
+                    description={item.description}
+                    price={item.price}
+                    showDetails={() => handleDetails(item.id)}
+                    onEdit={() => handleEdit(item.id)}
+                    img={item.image}
+                    addFavorite={() => handleToggleFavorite(item.id, true)}
+                    removeFavorite={() => handleToggleFavorite(item.id, false)}
+                  />
                 );
               }
             })}
-          </Slider>
-        </Category>
+          </Category>
 
-        <Category title="Bebidas">
-          <Slider settings={settings}>
+          <Category title="Bebidas">
             {data.map((item) => {
               if (item.category === "Bebidas ") {
                 return (
-                  <SwiperSlide key={item.id}>
-                    <Dishes
-                      title={item.name}
-                      description={item.description}
-                      price={item.price}
-                      showDetails={() => handleDetails(item.id)}
-                      onEdit={() => handleEdit(item.id)}
-                      img={item.image}
-                      addFavorite={() => handleToggleFavorite(item.id, true)}
-                      removeFavorite={() =>
-                        handleToggleFavorite(item.id, false)
-                      }
-                    />
-                  </SwiperSlide>
+                  <Dishes
+                    key={item.id}
+                    title={item.name}
+                    description={item.description}
+                    price={item.price}
+                    showDetails={() => handleDetails(item.id)}
+                    onEdit={() => handleEdit(item.id)}
+                    img={item.image}
+                    addFavorite={() => handleToggleFavorite(item.id, true)}
+                    removeFavorite={() => handleToggleFavorite(item.id, false)}
+                  />
                 );
               }
             })}
-          </Slider>
-        </Category>
-        {showAlert && <Alert message="O prato foi adicionado aos favoritos" />}
-        <h1>New build 4</h1>
-      </Styles.Content>
+          </Category>
+        </Styles.Content>
+      ) : (
+        <Styles.Content>
+          <Category title="Pratos principais">
+            <Slider settings={settings}>
+              {data.map((item) => {
+                if (item.category === "principal ") {
+                  return (
+                    <SwiperSlide key={item.id}>
+                      <Dishes
+                        title={item.name}
+                        description={item.description}
+                        price={item.price}
+                        showDetails={() => handleDetails(item.id)}
+                        onEdit={() => handleEdit(item.id)}
+                        img={item.image}
+                        addFavorite={() => handleToggleFavorite(item.id, true)}
+                        removeFavorite={() =>
+                          handleToggleFavorite(item.id, false)
+                        }
+                      />
+                    </SwiperSlide>
+                  );
+                }
+              })}
+            </Slider>
+          </Category>
+          <Category title="Sobremesas">
+            <Slider settings={settings}>
+              {data.map((item) => {
+                if (item.category === "Sobremesas") {
+                  return (
+                    <SwiperSlide key={item.id}>
+                      <Dishes
+                        title={item.name}
+                        description={item.description}
+                        price={item.price}
+                        showDetails={() => handleDetails(item.id)}
+                        onEdit={() => handleEdit(item.id)}
+                        img={item.image}
+                        addFavorite={() => handleToggleFavorite(item.id, true)}
+                        removeFavorite={() =>
+                          handleToggleFavorite(item.id, false)
+                        }
+                      />
+                    </SwiperSlide>
+                  );
+                }
+              })}
+            </Slider>
+          </Category>
+
+          <Category title="Bebidas">
+            <Slider settings={settings}>
+              {data.map((item) => {
+                if (item.category === "Bebidas ") {
+                  return (
+                    <SwiperSlide key={item.id}>
+                      <Dishes
+                        title={item.name}
+                        description={item.description}
+                        price={item.price}
+                        showDetails={() => handleDetails(item.id)}
+                        onEdit={() => handleEdit(item.id)}
+                        img={item.image}
+                        addFavorite={() => handleToggleFavorite(item.id, true)}
+                        removeFavorite={() =>
+                          handleToggleFavorite(item.id, false)
+                        }
+                      />
+                    </SwiperSlide>
+                  );
+                }
+              })}
+            </Slider>
+          </Category>
+          {showAlert && (
+            <Alert message="O prato foi adicionado aos favoritos" />
+          )}
+        </Styles.Content>
+      )}
 
       <Footer />
     </Styles.Container>

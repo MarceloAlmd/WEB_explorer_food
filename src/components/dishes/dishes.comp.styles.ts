@@ -82,7 +82,7 @@ export const Counter = styled.footer`
 
   margin: 1rem 0;
 
-  z-index: 1000;
+  z-index: 999;
 
   gap: 1rem;
   > button:nth-child(1),

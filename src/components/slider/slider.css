@@ -24,10 +24,3 @@
 .swiper-button-prev {
   color: #92000e;
 }
-
-@media (max-width: 768px) {
-  max-width: 300px;
-  .swiper-button-next {
-    margin: -200px;
-  }
-}

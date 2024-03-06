@@ -6,14 +6,13 @@ import * as Styles from "./styles";
 import { Category } from "../../components/category/category.comp";
 import { api } from "../../api/axios";
 import { DishesDataTypes } from "../home/home";
-import { EmptyFavorites } from "./components/empty/empty.comp";
-// import { Slider } from "../../components/slider/slider.comp";
+import { Slider } from "../../components/slider/slider.comp";
 import { SwiperProps, SwiperSlide } from "swiper/react";
 
 export function Favorite() {
-  const [slidePerView, setSlidePerView] = useState(3);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
   const settings: SwiperProps = {
-    slidesPerView: slidePerView,
+    slidesPerView: 3,
     navigation: true,
     pagination: {
       clickable: true,
@@ -44,7 +43,9 @@ export function Favorite() {
   useEffect(() => {
     function handleResize() {
       if (window.innerWidth < 768) {
-        setSlidePerView(1);
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
       }
     }
 
@@ -59,10 +60,24 @@ export function Favorite() {
   return (
     <Styles.Container>
       <Header />
-      {/* <Styles.Content>
-        {data.length === 0 ? (
-          <EmptyFavorites />
-        ) : (
+
+      {isMobile ? (
+        <Styles.Content>
+          <Category title="Meus Favoritos">
+            {data.map((item) => (
+              <Dishes
+                key={item.id}
+                title={item.name}
+                description={item.description}
+                price={item.price}
+                img={item.image}
+                removeFavorite={() => handleToggleFavorite(item.id, false)}
+              />
+            ))}
+          </Category>
+        </Styles.Content>
+      ) : (
+        <Styles.Content>
           <Category title="Meus Favoritos">
             <Slider settings={settings}>
               {data.map((item) => (
@@ -86,8 +101,9 @@ export function Favorite() {
               ))}
             </Slider>
           </Category>
-        )}
-      </Styles.Content> */}
+        </Styles.Content>
+      )}
+
       <Footer />
     </Styles.Container>
   );
