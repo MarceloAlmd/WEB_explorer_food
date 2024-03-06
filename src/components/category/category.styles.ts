@@ -31,7 +31,5 @@ export const Content = styled.div`
     justify-content: center;
 
     flex-direction: column;
-
-    /* background: red; */
   }
 `;

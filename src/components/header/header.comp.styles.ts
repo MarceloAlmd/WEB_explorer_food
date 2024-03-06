@@ -19,7 +19,6 @@ export const Container = styled.header`
   z-index: 1000;
 
   .lineBlock {
-    background: red;
     width: 23%;
 
     @media (max-width: ${BREAK_POINTS.MD}) {

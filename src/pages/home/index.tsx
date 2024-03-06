@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { SwiperProps, SwiperSlide } from "swiper/react";
 import { Category } from "../../components/category/category.comp";
 import { Dishes } from "../../components/dishes/dishes.comp";
 import { Footer } from "../../components/footer/footer.comp";
@@ -9,31 +8,11 @@ import * as Styles from "./styles";
 import { api } from "../../api/axios";
 import { DishesDataTypes } from "./home";
 import { Alert } from "../../components/alert/alert.comp";
-import { Slider } from "../../components/slider/slider.comp";
-// import { BREAK_POINTS } from "../../utils/breakPoints";
-
-import "./../../components/slider/slider.css";
-import { BREAK_POINTS } from "../../utils/breakPoints";
+import { A11y, Navigation, Pagination } from "swiper/modules";
 
 export function Home() {
-  const [slidePerView, setSlidePerView] = useState<number>(3);
+  const [slidePerView, setSlidePerView] = useState(3);
   const [showAlert, setShowAlert] = useState<boolean>(false);
-  const settings: SwiperProps = {
-    slidesPerView: slidePerView,
-    navigation: true,
-    pagination: {
-      clickable: true,
-    },
-    breakpoints: {
-      [BREAK_POINTS.ST]: {
-        slidesPerView: slidePerView,
-        pagination: {
-          clickable: false,
-        },
-        navigation: false,
-      },
-    },
-  };
   const navigate = useNavigate();
 
   const [data, setData] = useState<DishesDataTypes[]>([]);
@@ -85,7 +64,6 @@ export function Home() {
       removeEventListener("resize", handleResize);
     };
   }, []);
-
   return (
     <Styles.Container>
       <Header isSearch searchDishes={setName} />
@@ -96,11 +74,16 @@ export function Home() {
 
       <Styles.Content>
         <Category title="Pratos principais">
-          <Slider settings={settings}>
+          <Styles.SwiperContainer
+            modules={[Navigation, Pagination, A11y]}
+            pagination={{ clickable: true }}
+            navigation
+            slidesPerView={name ? 1 : slidePerView}
+          >
             {data.map((item) => {
               if (item.category === "principal ") {
                 return (
-                  <SwiperSlide key={item.id}>
+                  <Styles.SwiperContent key={item.id}>
                     <Dishes
                       title={item.name}
                       description={item.description}
@@ -113,18 +96,22 @@ export function Home() {
                         handleToggleFavorite(item.id, false)
                       }
                     />
-                  </SwiperSlide>
+                  </Styles.SwiperContent>
                 );
               }
             })}
-          </Slider>
+          </Styles.SwiperContainer>
         </Category>
         <Category title="Sobremesas">
-          <Slider settings={settings}>
+          <Styles.SwiperContainer
+            pagination={{ clickable: true }}
+            navigation
+            slidesPerView={name ? 1 : slidePerView}
+          >
             {data.map((item) => {
               if (item.category === "Sobremesas") {
                 return (
-                  <SwiperSlide key={item.id}>
+                  <Styles.SwiperContent key={item.id}>
                     <Dishes
                       title={item.name}
                       description={item.description}
@@ -137,19 +124,23 @@ export function Home() {
                         handleToggleFavorite(item.id, false)
                       }
                     />
-                  </SwiperSlide>
+                  </Styles.SwiperContent>
                 );
               }
             })}
-          </Slider>
+          </Styles.SwiperContainer>
         </Category>
 
         <Category title="Bebidas">
-          <Slider settings={settings}>
+          <Styles.SwiperContainer
+            pagination={{ clickable: true }}
+            navigation
+            slidesPerView={name ? 1 : slidePerView}
+          >
             {data.map((item) => {
               if (item.category === "Bebidas ") {
                 return (
-                  <SwiperSlide key={item.id}>
+                  <Styles.SwiperContent key={item.id}>
                     <Dishes
                       title={item.name}
                       description={item.description}
@@ -162,14 +153,14 @@ export function Home() {
                         handleToggleFavorite(item.id, false)
                       }
                     />
-                  </SwiperSlide>
+                  </Styles.SwiperContent>
                 );
               }
             })}
-          </Slider>
+          </Styles.SwiperContainer>
         </Category>
         {showAlert && <Alert message="O prato foi adicionado aos favoritos" />}
-        <h1>build completed 5</h1>
+        <h1>New build</h1>
       </Styles.Content>
 
       <Footer />

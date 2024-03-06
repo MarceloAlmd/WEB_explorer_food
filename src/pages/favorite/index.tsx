@@ -7,7 +7,7 @@ import { Category } from "../../components/category/category.comp";
 import { api } from "../../api/axios";
 import { DishesDataTypes } from "../home/home";
 import { EmptyFavorites } from "./components/empty/empty.comp";
-import { Slider } from "../../components/slider/slider.comp";
+// import { Slider } from "../../components/slider/slider.comp";
 import { SwiperProps, SwiperSlide } from "swiper/react";
 
 export function Favorite() {
@@ -59,7 +59,7 @@ export function Favorite() {
   return (
     <Styles.Container>
       <Header />
-      <Styles.Content>
+      {/* <Styles.Content>
         {data.length === 0 ? (
           <EmptyFavorites />
         ) : (
@@ -87,7 +87,7 @@ export function Favorite() {
             </Slider>
           </Category>
         )}
-      </Styles.Content>
+      </Styles.Content> */}
       <Footer />
     </Styles.Container>
   );
