@@ -157,7 +157,7 @@ export function Home() {
           </Slider>
         </Category>
         {showAlert && <Alert message="O prato foi adicionado aos favoritos" />}
-        <h1>New build 3</h1>
+        <h1>New build 4</h1>
       </Styles.Content>
 
       <Footer />
