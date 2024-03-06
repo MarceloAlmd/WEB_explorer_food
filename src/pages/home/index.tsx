@@ -8,18 +8,26 @@ import * as Styles from "./styles";
 import { api } from "../../api/axios";
 import { DishesDataTypes } from "./home";
 import { Alert } from "../../components/alert/alert.comp";
-import { A11y, Navigation, Pagination } from "swiper/modules";
-import "../../components/slider/slider.css";
-import { Swiper, SwiperSlide } from "swiper/react";
+
+import { SwiperProps, SwiperSlide } from "swiper/react";
+import { Slider } from "../../components/slider/slider.comp";
 
 export function Home() {
-  const [slidePerView, setSlidePerView] = useState(3);
+  // const [slidePerView, setSlidePerView] = useState(3);
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const [data, setData] = useState<DishesDataTypes[]>([]);
 
   const [name, setName] = useState<string>("");
+
+  const settings: SwiperProps = {
+    slidesPerView: 3,
+    navigation: true,
+    pagination: {
+      clickable: true,
+    },
+  };
 
   const handleDetails = (id: number) => {
     navigate(`/details/${id}`);
@@ -54,7 +62,7 @@ export function Home() {
   useEffect(() => {
     function handleResize() {
       if (window.innerWidth < 768) {
-        setSlidePerView(1);
+        // setSlidePerView(1);
       }
     }
 
@@ -76,12 +84,7 @@ export function Home() {
 
       <Styles.Content>
         <Category title="Pratos principais">
-          <Swiper
-            modules={[Navigation, Pagination, A11y]}
-            pagination={{ clickable: true }}
-            navigation
-            slidesPerView={name ? 1 : slidePerView}
-          >
+          <Slider settings={settings}>
             {data.map((item) => {
               if (item.category === "principal ") {
                 return (
@@ -102,15 +105,10 @@ export function Home() {
                 );
               }
             })}
-          </Swiper>
+          </Slider>
         </Category>
         <Category title="Sobremesas">
-          <Swiper
-            modules={[Navigation, Pagination, A11y]}
-            pagination={{ clickable: true }}
-            navigation
-            slidesPerView={name ? 1 : slidePerView}
-          >
+          <Slider settings={settings}>
             {data.map((item) => {
               if (item.category === "Sobremesas") {
                 return (
@@ -131,16 +129,11 @@ export function Home() {
                 );
               }
             })}
-          </Swiper>
+          </Slider>
         </Category>
 
         <Category title="Bebidas">
-          <Swiper
-            modules={[Navigation, Pagination, A11y]}
-            pagination={{ clickable: true }}
-            navigation
-            slidesPerView={name ? 1 : slidePerView}
-          >
+          <Slider settings={settings}>
             {data.map((item) => {
               if (item.category === "Bebidas ") {
                 return (
@@ -161,10 +154,10 @@ export function Home() {
                 );
               }
             })}
-          </Swiper>
+          </Slider>
         </Category>
         {showAlert && <Alert message="O prato foi adicionado aos favoritos" />}
-        <h1>New build 2</h1>
+        <h1>New build 3</h1>
       </Styles.Content>
 
       <Footer />
