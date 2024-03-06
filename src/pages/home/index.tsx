@@ -10,22 +10,27 @@ import { api } from "../../api/axios";
 import { DishesDataTypes } from "./home";
 import { Alert } from "../../components/alert/alert.comp";
 import { Slider } from "../../components/slider/slider.comp";
-import { BREAK_POINTS } from "../../utils/breakPoints";
+// import { BREAK_POINTS } from "../../utils/breakPoints";
 
 import "./../../components/slider/slider.css";
+import { BREAK_POINTS } from "../../utils/breakPoints";
 
 export function Home() {
+  const [slidePerView, setSlidePerView] = useState<number>(3);
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const settings: SwiperProps = {
-    slidesPerView: 3,
+    slidesPerView: slidePerView,
     navigation: true,
-
     pagination: {
       clickable: true,
     },
     breakpoints: {
       [BREAK_POINTS.ST]: {
-        slidesPerView: 1,
+        slidesPerView: slidePerView,
+        pagination: {
+          clickable: false,
+        },
+        navigation: false,
       },
     },
   };
@@ -64,6 +69,22 @@ export function Home() {
 
     fetchAllDishes();
   }, [name]);
+
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth < 768) {
+        setSlidePerView(1);
+      }
+    }
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <Styles.Container>
