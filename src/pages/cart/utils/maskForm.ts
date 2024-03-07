@@ -14,14 +14,14 @@ export const maskCardNumber = (input: string): string => {
 };
 
 export const maskValidity = (input: string): string => {
-  input = input.replace(/\D/g, ""); // Remove todos os caracteres que não são números
+  input = input.replace(/\D/g, "");
   let maskedValue = "";
   for (let i = 0; i < input.length; i++) {
     if (i === 2 && input.length > 2 && input.charAt(2) !== "/") {
-      maskedValue += "/"; // Adiciona a barra após os primeiros 2 números se ainda não houver uma barra
+      maskedValue += "/";
     }
     if (i === 4) {
-      break; // Limita o número máximo de caracteres em 4 (MM/YY)
+      break;
     }
     maskedValue += input[i];
   }
