@@ -14,6 +14,8 @@ import { IoIosArrowBack } from "react-icons/io";
 import { useAuth } from "../../context/auth.context";
 import { Alert } from "../../components/alert/alert.comp";
 
+import noImage from "../../../public/no-image.png";
+
 interface ingredientsTypes {
   created_at: string;
   dishes_id: number;
@@ -163,13 +165,18 @@ export function Details() {
             <p>{dishDetails?.description}</p>
 
             <Styles.IngredientsContent>
-              {dishDetails?.ingredient.map((ingredient, index) => (
-                <IngredientsImg
-                  key={String(index)}
-                  src={ingredient.image}
-                  name={ingredient.name}
-                />
-              ))}
+              {dishDetails?.ingredient.map((ingredient, index) => {
+                const imgUrlIngredients = `${api.defaults.baseURL}/files/ingredient/${ingredient.image}`;
+                return (
+                  <IngredientsImg
+                    key={String(index)}
+                    src={
+                      ingredient.image === null ? noImage : imgUrlIngredients
+                    }
+                    name={ingredient.name}
+                  />
+                );
+              })}
             </Styles.IngredientsContent>
 
             <Styles.Counter>

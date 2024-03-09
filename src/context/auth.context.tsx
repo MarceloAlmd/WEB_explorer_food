@@ -9,6 +9,8 @@ export function AuthProvider({ children }: AuthProps) {
   const [data, setData] = useState<AuthState>({ user: null, token: null });
   const [alert, setAlert] = useState<boolean>(false);
 
+  const [loading, setLoading] = useState<boolean>(false);
+
   const handleShowAlert = () => {
     setAlert(true);
 
@@ -25,6 +27,7 @@ export function AuthProvider({ children }: AuthProps) {
 
   const login = async ({ email, password }: LoginProps) => {
     try {
+      setLoading(true);
       const response = await api.post("/sessions", { email, password });
       const { user, token } = response.data;
 
@@ -33,7 +36,7 @@ export function AuthProvider({ children }: AuthProps) {
       localStorage.setItem("@exploreFood:user", JSON.stringify(user));
       localStorage.setItem("@exploreFood:token", token);
       setData({ user, token });
-
+      setLoading(false);
       handleShowAlert();
     } catch (error) {
       throw error;
@@ -55,7 +58,7 @@ export function AuthProvider({ children }: AuthProps) {
   }, []);
   return (
     <>
-      <AuthContext.Provider value={{ login, user: data.user, logout }}>
+      <AuthContext.Provider value={{ login, user: data.user, logout, loading }}>
         {children}
       </AuthContext.Provider>
       {alert && <Alert message={`seja bem vindo ${data.user?.name}`} />}

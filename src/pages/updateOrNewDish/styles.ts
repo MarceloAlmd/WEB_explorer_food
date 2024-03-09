@@ -54,6 +54,11 @@ export const Content = styled.form`
       padding: 1rem;
     }
   }
+  .ButtonRequestAndUpdate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
   > button {
     border: 1px solid ${({ theme }) => theme.colors.text.primary};

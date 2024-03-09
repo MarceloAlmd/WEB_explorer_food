@@ -102,11 +102,9 @@ export function Header({ isSearch = false, searchDishes }: HeaderProps) {
 
       {user.role !== "admin" && (
         <Link className="buttonCart" to="/cart">
+          <IoCartOutline className="cartSVG" />
           {cartNotification.length > 0 && (
-            <>
-              <IoCartOutline className="cartSVG" />
-              <span className="notification">{cartNotification.length}</span>
-            </>
+            <span className="notification">{cartNotification.length}</span>
           )}
         </Link>
       )}

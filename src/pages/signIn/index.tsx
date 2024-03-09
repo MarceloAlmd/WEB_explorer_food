@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useAuth } from "../../context/auth.context";
 import { FormError } from "../../components/formError/formError.comp";
 import { translation } from "../../utils/translation";
+import { PacmanLoader } from "react-spinners";
 
 export function SignIn() {
   const [email, setEmail] = useState<string>("");
@@ -17,7 +18,7 @@ export function SignIn() {
 
   const [error, setError] = useState<string>("");
 
-  const { login } = useAuth();
+  const { login, loading } = useAuth();
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -84,7 +85,16 @@ export function SignIn() {
         />
         {passwordError && <FormError message={passwordError} />}
         {error && <FormError message={error} />}
-        <Button type="button" title="Entrar" onClick={handleLogin} />
+        {loading ? (
+          <PacmanLoader
+            color="#92000E"
+            size={10}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        ) : (
+          <Button type="button" title="Entrar" onClick={handleLogin} />
+        )}
 
         <ButtonLink title="Criar uma conta" to="/register" />
       </Styles.Card>

@@ -13,6 +13,7 @@ import { FormError } from "../../components/formError/formError.comp";
 import { Alert } from "../../components/alert/alert.comp";
 import { api } from "../../api/axios";
 import { useNavigate } from "react-router-dom";
+import { PacmanLoader } from "react-spinners";
 
 export function UpdateOrNewDish() {
   const [name, setName] = useState<string>("");
@@ -30,6 +31,7 @@ export function UpdateOrNewDish() {
   const [showError, setShowError] = useState<boolean>(false);
   const [imageError, setImageError] = useState<boolean>(false);
   const [showAlertSuccess, setShowAlertSuccess] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const [newIngredientError, setNewIngredientError] = useState<boolean>(false);
 
@@ -131,6 +133,7 @@ export function UpdateOrNewDish() {
       action === "create" ? "ingredientIds" : "ingredientsIdUpdate";
 
     try {
+      setLoading(true);
       const response = await apiMethod(apiEndpoint, {
         image_dish: imageDish,
         name,
@@ -163,7 +166,7 @@ export function UpdateOrNewDish() {
 
         await Promise.all(uploadPromises);
       }
-
+      setLoading(false);
       showSuccessAlert();
     } catch (error) {
       console.error(error);
@@ -288,12 +291,38 @@ export function UpdateOrNewDish() {
         </label>
 
         {isUpdate ? (
-          <button type="button" onClick={handleEditDish}>
-            Atualizar Prato
+          <button
+            className="ButtonRequestAndUpdate"
+            type="button"
+            onClick={handleEditDish}
+          >
+            {loading ? (
+              <PacmanLoader
+                color="#92000E"
+                size={10}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
+            ) : (
+              "Atualizar Prato"
+            )}
           </button>
         ) : (
-          <button type="button" onClick={handleCreateNewDish}>
-            Adicionar pedido
+          <button
+            className="ButtonRequestAndUpdate"
+            type="button"
+            onClick={handleCreateNewDish}
+          >
+            {loading ? (
+              <PacmanLoader
+                color="#92000E"
+                size={10}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
+            ) : (
+              "Adicionar Pedido"
+            )}
           </button>
         )}
       </Styles.Content>

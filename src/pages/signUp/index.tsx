@@ -9,11 +9,14 @@ import { FormError } from "../../components/formError/formError.comp";
 import { translation } from "../../utils/translation";
 import { Alert } from "../../components/alert/alert.comp";
 import { useNavigate } from "react-router-dom";
+import { PacmanLoader } from "react-spinners";
 
 export function SignUp() {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
+  const [loading, setLoading] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -44,9 +47,12 @@ export function SignUp() {
       }, 2000);
     }
 
+    setLoading(true);
+
     await api
       .post("/users", { name, email, password })
       .then(() => {
+        setLoading(false);
         alert();
       })
       .catch((error) => {
@@ -101,11 +107,21 @@ export function SignUp() {
         />
         {passwordError && <FormError message={passwordError} />}
         {error && <FormError message={error} />}
-        <Button
-          onClick={handleCreateNewUser}
-          type="button"
-          title="Criar Conta"
-        />
+
+        {loading ? (
+          <PacmanLoader
+            color="#92000E"
+            size={10}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        ) : (
+          <Button
+            onClick={handleCreateNewUser}
+            type="button"
+            title="Criar Conta"
+          />
+        )}
 
         <ButtonLink title="Já tenho uma conta" to="/" />
       </Styles.Card>
