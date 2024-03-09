@@ -3,18 +3,6 @@
   justify-content: center;
 }
 
-.swiper-slide {
-  display: flex;
-
-  @media (max-width: 768px) {
-    max-width: 300px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
 .swiper-pagination-bullet-active,
 .swiper-pagination-bullet {
   background-color: #92000e;

@@ -8,19 +8,21 @@ import { api } from "../../api/axios";
 import { DishesDataTypes } from "../home/home";
 import { Slider } from "../../components/slider/slider.comp";
 import { SwiperProps, SwiperSlide } from "swiper/react";
+import { ButtonLink } from "../../components/buttonLink/buttonLink.comp";
+import { IoIosArrowBack } from "react-icons/io";
 
 export function Favorite() {
   const [isMobile, setIsMobile] = useState<boolean>(false);
-  const settings: SwiperProps = {
-    slidesPerView: 3,
-    navigation: true,
-    pagination: {
-      clickable: true,
-    },
-  };
-
   const [dishes, setDishes] = useState([]);
   const [data, setData] = useState<DishesDataTypes[]>([]);
+
+  const length = data.length;
+
+  const settings: SwiperProps = {
+    slidesPerView: length > 3 ? 3 : length,
+    spaceBetween: 10,
+    navigation: true,
+  };
 
   useEffect(() => {
     async function fetchFavorites() {
@@ -63,6 +65,12 @@ export function Favorite() {
 
       {isMobile ? (
         <Styles.Content>
+          <ButtonLink
+            to="/"
+            title="Voltar"
+            fontSize="1.5rem"
+            icon={IoIosArrowBack}
+          />
           <Category title="Meus Favoritos">
             {data.map((item) => (
               <Dishes

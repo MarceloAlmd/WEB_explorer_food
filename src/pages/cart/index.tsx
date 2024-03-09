@@ -15,6 +15,7 @@ import { api } from "../../api/axios";
 import { EmptyCart } from "./components/emptyCart/emptyCart.comp";
 import { Alert } from "../../components/alert/alert.comp";
 import { maskCardNumber, maskCvc, maskValidity } from "./utils/maskForm";
+import { useNavigate } from "react-router-dom";
 
 interface cartItemsTypes {
   amount: number;
@@ -35,6 +36,8 @@ export function Cart() {
   const [cardNumber, setCardNumber] = useState<string>("");
   const [validity, setValidity] = useState<string>("");
   const [cvc, setCvc] = useState<string>("");
+
+  const navigate = useNavigate();
 
   const disabled =
     cardNumber.length < 16 || validity.length < 5 || cvc.length < 3;
@@ -66,10 +69,11 @@ export function Cart() {
     setIsPixActive(false);
   };
 
-  function handleShowAlert() {
+  async function handleShowAlert() {
     setShowAlert(true);
     setTimeout(() => {
       setShowAlert(false);
+      navigate("/requests");
     }, 3500);
   }
 

@@ -25,7 +25,7 @@ export const Content = styled.main`
 
   max-width: 66.5rem;
   width: 100%;
-  margin: 0 auto;
+  margin: 1rem auto;
   animation: ${fadeIn} 1s ease-in-out;
   padding: 0 2rem 5rem;
 
