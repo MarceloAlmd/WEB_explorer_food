@@ -2,11 +2,7 @@ import { useState } from "react";
 import * as Styles from "./select.styles";
 import { useAuth } from "../../context/auth.context";
 import { api } from "../../api/axios";
-
-interface SelectProps {
-  status: string;
-  id: number;
-}
+import { SelectProps } from "./select";
 
 export function Select({ status, id }: SelectProps) {
   const { user } = useAuth();

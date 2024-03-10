@@ -39,6 +39,7 @@ export function AuthProvider({ children }: AuthProps) {
       setLoading(false);
       handleShowAlert();
     } catch (error) {
+      setLoading(false);
       throw error;
     }
   };

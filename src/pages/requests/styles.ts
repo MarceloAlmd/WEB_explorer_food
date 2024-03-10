@@ -87,4 +87,18 @@ export const Table = styled.div`
   thead tr th:last-child {
     min-width: 140px;
   }
+
+  .emptyRequest {
+    height: 50vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 0.5rem;
+    > h2 {
+      color: ${({ theme }) => theme.colors.text.secondary};
+    }
+  }
 `;

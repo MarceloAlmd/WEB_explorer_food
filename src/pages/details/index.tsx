@@ -15,29 +15,7 @@ import { useAuth } from "../../context/auth.context";
 import { Alert } from "../../components/alert/alert.comp";
 
 import noImage from "../../../public/no-image.png";
-
-interface ingredientsTypes {
-  created_at: string;
-  dishes_id: number;
-  id: number;
-  image: string;
-  name: string;
-  updated_at: string;
-  user_id: number;
-}
-interface DetailsTypes {
-  category: string;
-  created_at: string;
-  description: string;
-  id: number;
-  image: string;
-  ingredient: ingredientsTypes[];
-  isFavorite: boolean;
-  name: string;
-  price: string;
-  updated_at: string;
-  user_id: number;
-}
+import { DetailsTypes } from "./details";
 
 export function Details() {
   const { user } = useAuth();

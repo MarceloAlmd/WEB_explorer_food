@@ -8,28 +8,11 @@ import * as Styles from "./header.comp.styles";
 import { PiNewspaperClipping } from "react-icons/pi";
 import { FiLogOut } from "react-icons/fi";
 import { AiOutlineHeart } from "react-icons/ai";
-import { HeaderProps } from "./header";
+import { HeaderProps, ItemStatusTypes, RequestsTypes } from "./header";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/auth.context";
 import { Modal } from "../modal/modal.comp";
 import { api } from "../../api/axios";
-
-type ItemStatusTypes = "pending" | "preparing" | "delivered";
-interface Status {
-  pending: string;
-  preparing: string;
-  delivered: string;
-}
-
-interface RequestsTypes {
-  code: string;
-  created_at: string;
-  detailing: string;
-  id: number;
-  status: Status;
-  updated_at: string;
-  user_id: number;
-}
 
 export function Header({ isSearch = false, searchDishes }: HeaderProps) {
   const { logout, user } = useAuth();

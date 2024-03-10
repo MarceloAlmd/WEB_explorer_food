@@ -16,13 +16,7 @@ import { EmptyCart } from "./components/emptyCart/emptyCart.comp";
 import { Alert } from "../../components/alert/alert.comp";
 import { maskCardNumber, maskCvc, maskValidity } from "./utils/maskForm";
 import { useNavigate } from "react-router-dom";
-
-interface cartItemsTypes {
-  amount: number;
-  img: string;
-  price: string | number;
-  title: string;
-}
+import { cartItemsTypes } from "./cart";
 
 export function Cart() {
   const [isPixActive, setIsPixActive] = useState<boolean>(true);
