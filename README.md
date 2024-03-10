@@ -35,6 +35,9 @@ Admin (Administrador): {
    Password: 123456
 }
 ```
+<h3>Teste Online (DEPLOY):</h3>
+https://web-explorer-food.netlify.app/
+
 <h3>Crie sua conta</h3>
 Todas as contas criadas tem o padrao customer (Cliente)
 
