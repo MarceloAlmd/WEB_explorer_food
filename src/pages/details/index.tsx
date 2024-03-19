@@ -14,7 +14,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { useAuth } from "../../context/auth.context";
 import { Alert } from "../../components/alert/alert.comp";
 
-import noImage from "../../../public/no-image.png";
+import noImage from "../../assets/no-image.png";
 import { DetailsTypes } from "./details";
 
 export function Details() {

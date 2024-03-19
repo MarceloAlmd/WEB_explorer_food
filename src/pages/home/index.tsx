@@ -20,9 +20,10 @@ export function Home() {
   const [data, setData] = useState<DishesDataTypes[]>([]);
 
   const [name, setName] = useState<string>("");
+  const [slidesPerView, setSlidesPerView] = useState<number>(3);
 
   const settings: SwiperProps = {
-    slidesPerView: 3,
+    slidesPerView,
     navigation: true,
     pagination: {
       clickable: true,
@@ -49,6 +50,14 @@ export function Home() {
       }, 2000);
     }
   };
+
+  useEffect(() => {
+    if (name.trim() !== "") {
+      setSlidesPerView(1);
+    } else {
+      setSlidesPerView(3);
+    }
+  }, [name]);
 
   useEffect(() => {
     async function fetchAllDishes() {
